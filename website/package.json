@@ -10,7 +10,9 @@
   "bugs": {
     "url": "https://github.com/summarena/summarena/issues"
   },
-  "keywords": ["TODO: add relevant keywords for the project"],
+  "keywords": [
+    "TODO: add relevant keywords for the project"
+  ],
   "license": "Apache-2.0",
   "scripts": {
     "dev": "astro dev",
@@ -29,6 +31,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "build:clean": "astro check && astro build",
     "playwright:install": "playwright install chromium webkit"
   },
   "dependencies": {

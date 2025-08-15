@@ -16,11 +16,23 @@ export default defineConfig({
     vue(),
     starlight({
       title: 'Documentation',
-      social: {
-        github: 'https://github.com/summarena/summarena',
-        twitter: 'https://summarena.com/twitter',
-        discord: 'https://summarena.com/discord',
-      },
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/summarena/summarena',
+        },
+        {
+          icon: 'twitter',
+          label: 'Twitter',
+          href: 'https://summarena.com/twitter',
+        },
+        {
+          icon: 'discord',
+          label: 'Discord',
+          href: 'https://summarena.com/discord',
+        },
+      ],
       editLink: {
         baseUrl: 'https://github.com/summarena/summarena/edit/main/website/',
       },
