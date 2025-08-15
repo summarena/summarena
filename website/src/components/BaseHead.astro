@@ -8,6 +8,8 @@ export interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/favicon.svg' } = Astro.props;
+
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 ---
 
 <!-- Global Metadata -->
@@ -41,3 +43,11 @@ const { title, description, image = '/favicon.svg' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Analytics Integration -->
+{
+  websiteId && (
+    <script defer src="/umami.js" data-website-id={websiteId} />
+  )
+}
+{websiteId && <script src="/src/scripts/analytics.ts" />}
