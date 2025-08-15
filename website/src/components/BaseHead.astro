@@ -45,9 +45,5 @@ const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Analytics Integration -->
-{
-  websiteId && (
-    <script defer src="/umami.js" data-website-id={websiteId} />
-  )
-}
+{websiteId && <script defer src="/umami.js" data-website-id={websiteId} />}
 {websiteId && <script src="/src/scripts/analytics.ts" />}
