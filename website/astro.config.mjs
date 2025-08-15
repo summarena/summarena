@@ -16,6 +16,18 @@ export default defineConfig({
     vue(),
     starlight({
       title: 'Documentation',
+      social: {
+        github: 'https://github.com/summarena/summarena',
+        twitter: 'https://summarena.com/twitter',
+        discord: 'https://summarena.com/discord',
+      },
+      editLink: {
+        baseUrl: 'https://github.com/summarena/summarena/edit/main/website/',
+      },
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
       sidebar: [
         {
           label: 'Guides',

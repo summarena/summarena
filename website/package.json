@@ -2,6 +2,16 @@
   "name": "website",
   "type": "module",
   "version": "0.0.1",
+  "homepage": "https://summarena.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/summarena/summarena.git"
+  },
+  "bugs": {
+    "url": "https://github.com/summarena/summarena/issues"
+  },
+  "keywords": ["TODO: add relevant keywords for the project"],
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
