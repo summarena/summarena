@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<html lang="en" class="h-full">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      .prose {
+        @apply max-w-none;
+      }
+      .prose h1 {
+        @apply text-3xl font-bold mb-4;
+      }
+      .prose h2 {
+        @apply text-2xl font-bold mt-8 mb-4;
+      }
+      .prose h3 {
+        @apply text-xl font-bold mt-6 mb-3;
+      }
+      .prose p {
+        @apply mb-4 leading-7;
+      }
+      .prose ul,
+      .prose ol {
+        @apply mb-4 pl-6;
+      }
+      .prose li {
+        @apply mb-2;
+      }
+      .prose a {
+        @apply text-blue-600 hover:text-blue-800 underline;
+      }
+      .prose code {
+        @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+      }
+      .prose pre {
+        @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4;
+      }
+      .prose pre code {
+        @apply bg-transparent p-0;
+      }
+      .prose blockquote {
+        @apply border-l-4 border-gray-300 pl-4 italic text-gray-700 mb-4;
+      }
+    </style>
+  </head>
+
+  <body class="h-full">
+    <Header />
+    <main class="max-w-4xl mx-auto px-4 py-8">
+      <article>
+        {
+          heroImage && (
+            <div class="mb-8">
+              <Image
+                width={800}
+                height={400}
+                src={heroImage}
+                alt=""
+                class="w-full h-64 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          )
+        }
+
+        <header class="mb-8">
+          <div class="text-sm text-gray-500 mb-2">
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <span class="ml-4 italic">
+                  Last updated: <FormattedDate date={updatedDate} />
+                </span>
+              )
+            }
+          </div>
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+          <p class="text-xl text-gray-600">{description}</p>
+          <hr class="mt-6 border-gray-200" />
+        </header>
+
+        <div class="prose prose-lg max-w-none">
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

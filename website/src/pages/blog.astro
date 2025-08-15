@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <BaseHead title="Blog - Summarena" description="Latest blog posts and updates from Summarena" />
+  </head>
+  <body class="h-full bg-gray-50">
+    <Header />
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
+        <p class="text-xl text-gray-600">Latest posts and updates</p>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">No blog posts yet. Check back soon!</p>
+          </div>
+        ) : (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map(post => (
+              <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <a href={`/blog/${post.id}/`}>
+                  {post.data.heroImage && (
+                    <div class="aspect-w-16 aspect-h-9">
+                      <Image
+                        width={400}
+                        height={225}
+                        src={post.data.heroImage}
+                        alt=""
+                        class="w-full h-48 object-cover"
+                      />
+                    </div>
+                  )}
+                  <div class="p-6">
+                    <div class="text-sm text-gray-500 mb-2">
+                      <FormattedDate date={post.data.pubDate} />
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                      {post.data.title}
+                    </h2>
+                    <p class="text-gray-600 line-clamp-3">{post.data.description}</p>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        )
+      }
+    </main>
+    <Footer />
+  </body>
+</html>
