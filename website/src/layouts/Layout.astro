@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+const { title = "SummArena — Your Personal Distiller", description = "Summarena — Your personal AI distiller for everything you follow." } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Alpine for FAQ (optional, since you use x-data/x-collapse) -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  </head>
+  <body class="bg-white text-slate-900 font-body selection:bg-brand-100 selection:text-brand-900">
+    <slot />
+    <!-- Optional: global footer could live here -->
+    <footer class="border-t border-slate-100 bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-sm text-slate-500">
+          <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white font-bold">S</span>
+          <span>© {year} SummArena. All rights reserved.</span>
+        </div>
+        <div class="text-sm text-slate-500 flex items-center gap-4">
+          <a href="#pilot" class="hover:text-slate-900">Join Pilot</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

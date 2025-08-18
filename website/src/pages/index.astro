@@ -1,547 +1,316 @@
 ---
-// SummArena platform landing page
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>SummArena - All-in-one platform</title>
-  </head>
-  <body class="bg-gray-50">
+<Layout title="SummArena — Your Personal Distiller" description="An AI digest you control.">
     <!-- Header -->
-    <header class="bg-gray-50 py-6">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="bg-white rounded-full shadow-lg px-8 py-4 max-w-4xl mx-auto">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center">
-              <a href="/" class="text-xl font-bold text-gray-900"> SummArena </a>
-            </div>
-            <div class="hidden md:flex items-center space-x-8">
-              <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                >Product</a
-              >
-              <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                >Features</a
-              >
-              <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                >Pricing</a
-              >
-              <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                >Resources</a
-              >
-              <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                >Sign in</a
-              >
-              <button
-                class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors font-medium ml-4"
-              >
-                Request a Demo
-              </button>
-            </div>
-          </div>
+    <header class="top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-slate-100">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 group">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white font-bold shadow-soft group-hover:scale-105 transition">S</span>
+          <span class="font-display text-lg font-semibold tracking-tight text-slate-800">SummArena</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#features" class="text-sm font-medium text-slate-600 hover:text-slate-900">Features</a>
+          <!-- <a href="#trust" class="text-sm font-medium text-slate-600 hover:text-slate-900">Why us</a> -->
+          <a href="#pilot" class="text-sm font-medium text-slate-600 hover:text-slate-900">Pilot</a>
         </nav>
+        <div class="flex items-center gap-3">
+          <a href="#pilot" class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">Get started for free</a>
+        </div>
       </div>
     </header>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="relative bg-gray-50 py-24 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center">
-            <h1 class="text-6xl font-bold text-gray-900 mb-6">
-              All-in-one<br />platform
-            </h1>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              SummArena is a modern, all-in-one platform designed to perfectly fit your business
-              needs
-            </p>
-            <button
-              class="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-            >
-              Request a Demo
-            </button>
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-cozy/60">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-cozy/80 to-transparent"></div>
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-16 lg:pt-12 lg:pb-20 grid lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-7">
+          <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+            Your Personal Distiller for Information
+          </h1>
+          <p class="mt-5 text-lg text-slate-700 max-w-xl">
+            Get a daily AI digest of the content you care about. Define the signal to surface what matters.
+          </p>
+          <p class="mt-2 text-sm text-slate-500">arXiv • Newsletters • RSS • Youtube • 30+ platforms</p>
+
+          <div class="mt-8" id="cta">
+            <a href="#pilot" class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+              Get your personal digest for free
+            </a>
+<p class="mt-2 text-sm text-slate-600">
+    Built for researchers and professionals drowning in information.
+  </p>
           </div>
+</div>
 
-          <!-- Floating Elements -->
-          <div class="absolute top-20 left-1/4 transform -translate-x-1/2">
-            <div
-              class="w-16 h-16 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg"
-            >
-              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                ></path>
-              </svg>
-            </div>
-          </div>
 
-          <div class="absolute top-32 right-1/4 transform translate-x-1/2">
-            <div
-              class="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg"
-            >
-              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z"
-                ></path>
-              </svg>
-            </div>
-          </div>
+<img
+  src="/hero.png"
+  alt="Abstract digest"
+  class="lg:col-span-5 w-full max-w-[36rem] rounded-2xl
+         lg:self-center lg:mt-6"
+/>
+      </div>
+    </section>
 
-          <div class="absolute top-40 left-1/6">
-            <div class="w-20 h-20 bg-white rounded-full shadow-lg overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500"></div>
-            </div>
-          </div>
-
-          <div class="absolute top-16 right-1/6">
-            <div class="w-20 h-20 bg-white rounded-full shadow-lg overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-br from-green-400 to-blue-500"></div>
-            </div>
-          </div>
-
-          <div class="absolute bottom-20 left-1/3">
-            <div
-              class="w-16 h-16 bg-cyan-400 rounded-xl flex items-center justify-center shadow-lg"
-            >
-              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-
-          <div class="absolute bottom-32 right-1/3">
-            <div class="w-20 h-20 bg-white rounded-full shadow-lg overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-br from-pink-400 to-red-500"></div>
-            </div>
-          </div>
-
-          <!-- Central Check Icon -->
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div
-              class="w-24 h-24 bg-purple-600 rounded-2xl flex items-center justify-center shadow-xl"
-            >
-              <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Core HR Solutions Section -->
-      <section class="bg-white py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gray-900 mb-6">
-              Core<br />solutions
-            </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Streamline processes in one centralized platform, enhancing team transparency.
-            </p>
-            <button
-              class="mt-8 bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-            >
-              Learn more
-            </button>
-          </div>
-
-          <!-- Employee Photos Grid -->
-          <div class="relative">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              <div class="space-y-4">
-                <div class="w-full h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl">
-                </div>
-                <div class="w-full h-40 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl">
-                </div>
-              </div>
-              <div class="space-y-4 mt-8">
-                <div class="w-full h-40 bg-gradient-to-br from-pink-400 to-red-500 rounded-2xl">
-                </div>
-                <div
-                  class="w-full h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl"
-                >
-                </div>
-              </div>
-              <div class="space-y-4">
-                <div class="w-full h-32 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl">
-                </div>
-                <div
-                  class="w-full h-40 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-2xl"
-                >
-                </div>
-              </div>
-              <div class="space-y-4 mt-8">
-                <div class="w-full h-40 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl">
-                </div>
-                <div
-                  class="w-full h-32 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl"
-                >
-                </div>
-              </div>
-            </div>
-
-            <!-- Central User Icon -->
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div
-                class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-xl"
-              >
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Built for Everyone Section -->
-      <section class="bg-gray-50 py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gray-900 mb-6">Built for everyone</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Thousands of businesses, from startups to enterprises, use SummArena to handle
-              payments.
-            </p>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8">
-            <!-- HR Professionals -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm">
-              <div class="mb-8">
-                <div class="w-full h-64 bg-gray-100 rounded-2xl mb-6 relative overflow-hidden">
-                  <div
-                    class="absolute inset-0 bg-gradient-to-br from-red-400 to-orange-500 opacity-20"
-                  >
-                  </div>
-                  <div class="absolute bottom-4 left-4 right-4">
-                    <div class="bg-white rounded-lg p-4">
-                      <div class="text-sm font-semibold">Attendance Report</div>
-                      <div class="text-xs text-gray-600 mt-1">Monthly</div>
-                      <div class="mt-3 flex space-x-1">
-                        <div class="w-8 h-12 bg-red-400 rounded"></div>
-                        <div class="w-8 h-16 bg-orange-400 rounded"></div>
-                        <div class="w-8 h-20 bg-purple-400 rounded"></div>
-                        <div class="w-8 h-14 bg-red-400 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">For professionals</h3>
-              <p class="text-gray-600">
-                Use a single cloud system for your employees, candidates and HR processes info.
-              </p>
-            </div>
-
-            <!-- Managers & Leaders -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm">
-              <div class="mb-8">
-                <div class="w-full h-64 bg-gray-100 rounded-2xl mb-6 relative overflow-hidden">
-                  <div
-                    class="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-500 opacity-20"
-                  >
-                  </div>
-                  <div
-                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                  >
-                    <div class="w-16 h-16 bg-cyan-500 rounded-xl flex items-center justify-center">
-                      <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                      </svg>
-                    </div>
-                    <div class="text-center mt-4 text-gray-600 font-semibold">
-                      Access Real-Time Insights
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">For managers & leaders</h3>
-              <p class="text-gray-600">
-                Get always up-to-date data and monitor performance of the company.
-              </p>
-            </div>
-
-            <!-- Legal Teams -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm">
-              <div class="mb-8">
-                <div class="w-full h-64 bg-gray-100 rounded-2xl mb-6 relative overflow-hidden">
-                  <div
-                    class="absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-500 opacity-20"
-                  >
-                  </div>
-                  <div class="absolute top-4 right-4">
-                    <div
-                      class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center"
-                    >
-                      <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fill-rule="evenodd"
-                          d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="absolute bottom-4 left-4 right-4">
-                    <div class="grid grid-cols-3 gap-2">
-                      <div class="w-8 h-8 bg-green-400 rounded-full"></div>
-                      <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
-                      <div class="w-8 h-8 bg-purple-400 rounded-full"></div>
-                      <div class="w-8 h-8 bg-yellow-400 rounded-full"></div>
-                      <div class="w-8 h-8 bg-pink-400 rounded-full"></div>
-                      <div class="w-8 h-8 bg-indigo-400 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">For legal teams</h3>
-              <p class="text-gray-600">
-                SummArena helps legal teams by streamlining compliance, managing contracts and
-                policies.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Integration Section -->
-      <section class="bg-white py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div class="mb-16">
-            <div
-              class="w-16 h-16 bg-orange-500 rounded-xl mx-auto mb-8 flex items-center justify-center"
-            >
-              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                ></path>
-              </svg>
-            </div>
-            <h2 class="text-5xl font-bold text-gray-900 mb-6">
-              Integrate with your existing<br />tools in seconds
-            </h2>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center max-w-4xl mx-auto">
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-red-500 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">A</span>
-              </div>
-            </div>
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">L</span>
-              </div>
-            </div>
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">G</span>
-              </div>
-            </div>
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">O</span>
-              </div>
-            </div>
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">T</span>
-              </div>
-            </div>
-            <div class="flex justify-center">
-              <div class="w-16 h-16 bg-gray-600 rounded-xl flex items-center justify-center">
-                <span class="text-white font-bold text-xl">S</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 text-xl text-gray-600">
-            <span class="font-semibold">Google Meet</span><br />
-            <span class="text-sm">Seamless video meetings</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Testimonials Section -->
-      <section class="bg-gray-50 py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gray-900 mb-6">Words of Appreciation</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Thousands of businesses, from startups to enterprises, use SummArena to handle
-              payments.
-            </p>
-          </div>
-
-          <div class="max-w-2xl mx-auto">
-            <div class="bg-white rounded-3xl p-12 shadow-sm text-center">
-              <div
-                class="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full mx-auto mb-6"
-              >
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 mb-2">James Carter</h3>
-              <p class="text-gray-600 mb-6">Manager at BrightPath Solutions</p>
-
-              <div class="flex justify-center mb-6">
-                <div class="flex space-x-1">
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                </div>
-                <span class="ml-2 text-gray-900 font-semibold">5.0</span>
-              </div>
-
-              <blockquote class="text-lg text-gray-600 italic">
-                "The platform is easy to use, keeps everything in one place, and helps our team stay
-                on top of things without extra hassle."
-              </blockquote>
-
-              <!-- Navigation arrows -->
-              <div class="flex justify-center space-x-4 mt-8">
-                <button
-                  class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-                >
-                  <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    ></path>
-                  </svg>
-                </button>
-                <button
-                  class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-                >
-                  <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid md:grid-cols-5 gap-8">
-          <div class="md:col-span-2">
-            <div class="mb-6">
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">SummArena</h3>
-              <p class="text-gray-600 max-w-md">
-                SummArena is the platform that builds a thriving workplace culture—all in one place.
-              </p>
-            </div>
-          </div>
-
+<div class="h-12 bg-gradient-to-b from-slate-50 to-white"></div>
+    <!-- Problem (short) -->
+    <!-- <section id="problem" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12"> -->
+<section id="problem" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10">
+      <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-slate-50/60 p-6 md:p-8">
+        <div class="flex items-start gap-4">
+        <div class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 font-bold">!</div>
           <div>
-            <h4 class="font-semibold text-gray-900 mb-4">Product</h4>
-            <ul class="space-y-3">
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Core</a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Recruit</a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Perform</a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Pulse</a>
-              </li>
-            </ul>
+<h2 class="font-display text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-slate-900
+               leading-none -mt-1">
+      Staying informed shouldn’t feel like a part-time job.
+    </h2>
+            <p class="mt-6 text-lg leading-relaxed text-slate-700 space-y-4">
+              <span>You want to stay on top of your field, follow trusted creators, keep up with relevant news, and extract insights that actually matter to you.</span><br/><br/>
+              <span>You don’t have a motivation problem — you have a <strong>bandwidth</strong> problem.</span><br/><br/>
+              <span>And when everything demands your attention, you end up wasting time on what isn’t important — and missing what is.</span>
+            </p>
           </div>
-
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-4">Features</h4>
-            <ul class="space-y-3">
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Desk</a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Time</a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Analytics</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-4">Follow us</h4>
-            <div class="flex space-x-4">
-              <a
-                href="#"
-                class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <span class="text-gray-600 font-bold">X</span>
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <span class="text-gray-600 font-bold">T</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-16 text-center">
-          <div class="text-8xl font-bold text-orange-500 opacity-20">SummArena</div>
         </div>
       </div>
-    </footer>
-  </body>
-</html>
+    </section>
+
+    <!-- Solution -->
+    <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">An AI Digest You Control</h2>
+        <p class="mt-4 text-slate-600">Our AI reads everything you follow and delivers a clear daily digest. You decide what belongs and how it reads, shaping the digest to fit your needs.</p>
+      </div>
+
+    <!-- Features -->
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Feature 1 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold">1</div>
+          <h3 class="mt-4 text-lg font-semibold">Connect your sources</h3>
+          <p class="mt-2 text-slate-600">arXiv, Newsletters, RSS, Youtube and more — all in one place.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold">2</div>
+          <h3 class="mt-4 text-lg font-semibold">Shape your digest</h3>
+          <p class="mt-2 text-slate-600">Define the signal to cut the noise and surface what matters.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold">3</div>
+          <h3 class="mt-4 text-lg font-semibold">Schedule the delivery</h3>
+          <p class="mt-2 text-slate-600">Get your digest via inbox or dashboard — daily, weekly, or whenever you want it.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold">4</div>
+          <h3 class="mt-4 text-lg font-semibold">Distilled, not diluted</h3>
+          <p class="mt-2 text-slate-600">Clear summaries with citations, no fluff or filler.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold">5</div>
+          <h3 class="mt-4 text-lg font-semibold">Refine with feedback</h3>
+          <p class="mt-2 text-slate-600">Quick feedback makes your digest sharper with each use.</p>
+        </div>
+        <!-- CTA card -->
+        <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-soft flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-semibold">Ready to try it?</h3>
+            <p class="mt-2 text-slate-600">Join the pilot and start receiving your personalized digest.</p>
+          </div>
+          <a href="#pilot" class="mt-4 inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">Join the Pilot</a>
+        </div>
+      </div>
+
+
+<div class="mt-20 max-w-2xl mx-auto grid sm:grid-cols-3 gap-6 text-left">
+  <div class="flex flex-col items-center text-center">
+    <div class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3">
+      ✓
+    </div>
+    <p class="text-slate-700 text-sm font-medium mb-0">Clear summaries</p>
+    <p class="text-slate-500 text-sm mt-1">Your information feeds distilled into readable briefs</p>
+  </div>
+
+  <div class="flex flex-col items-center text-center">
+    <div class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3">
+      🔗
+    </div>
+    <p class="text-slate-700 text-sm font-medium mb-0">Direct links & citations</p>
+    <p class="text-slate-500 text-sm mt-1">Verify fast and dive deeper when needed</p>
+  </div>
+
+  <div class="flex flex-col items-center text-center">
+    <div class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3">
+      ✦
+    </div>
+    <p class="text-slate-700 text-sm font-medium mb-0">Tailored to you</p>
+    <p class="text-slate-500 text-sm mt-1">Only the updates you actually care about</p>
+  </div>
+</div>
+
+    </section>
+
+    <!-- Trust / Social Proof -->
+<!-- Trust / Social Proof -->
+<section id="trust" class="bg-slate-50 border-y border-slate-100">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-xs font-semibold tracking-widest text-brand-700 uppercase">In good company</p>
+      <h2 class="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight">
+        Trusted by top researchers and professionals
+      </h2>
+    </div>
+
+  <div class="mt-8 mx-auto max-w-2xl text-left space-y-3">
+      <p class="text-slate-600 font-medium">Already used by:</p>
+      <div class="flex items-start gap-2">
+        <span class="text-brand-600">✓</span>
+        <span class="text-lg text-slate-800">Researchers at UC Berkeley, Stanford, and ETH Zurich</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="text-brand-600">✓</span>
+        <span class="text-lg text-slate-800">Executives and busy professionals who need to stay informed to make better decisions</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="text-brand-600">✓</span>
+        <span class="text-lg text-slate-800">Graduate students who want to keep up without burning out</span>
+      </div>
+    </div>
+
+    <!-- testimonials -->
+<div class="mt-8 flex flex-wrap justify-center gap-2">
+  <!-- Card 1 -->
+  <figure class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+    <svg class="absolute -top-3 left-6 h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"/>
+    </svg>
+    <blockquote class="text-slate-800 leading-snug ml-0 mr-1">
+      “I used to open dozens of arXiv tabs every morning just to keep up — and still felt like I was falling behind. Now I get one focused summary that’s actually relevant to my research, saving me hours.”
+    </blockquote>
+    <figcaption class="mt-3 text-sm text-slate-600">
+      <div class="font-medium text-slate-800">Postdoc Researcher</div>
+      <div class="text-slate-500">UC Berkeley</div>
+    </figcaption>
+  </figure>
+
+  <!-- Card 2 -->
+  <figure class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+    <svg class="absolute -top-3 left-6 h-6 w-6 text-brand-200" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"/>
+    </svg>
+    <blockquote class="text-slate-800 leading-snug ml-0 mr-1">
+      “I signed up for all the right newsletters, but never had time to read them. SummArena declutters my inbox and keeps me up to date with the key developments in AI.”
+    </blockquote>
+    <figcaption class="mt-3 text-sm text-slate-600">
+      <div class="font-medium text-slate-800">Product Manager</div>
+      <div class="text-slate-500">AI startup</div>
+    </figcaption>
+  </figure>
+</div>
+  </div>
+</section>
+
+
+<!-- <div class="h-12 bg-gradient-to-b from-slate-50 to-white"></div> -->
+
+<!-- Final CTA / Pilot -->
+<section id="pilot" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24">
+  <!-- single card with subtle blue tint -->
+  <div class="rounded-3xl bg-gradient-to-br from-white to-brand-50/50 border border-brand-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)] p-8 lg:p-12">
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Left content -->
+      <div class="lg:col-span-7">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">Join the Pilot Program for Free</h2>
+        <p class="mt-4 text-slate-700">Be among the first to try SummArena.</p>
+        <ul class="mt-6 space-y-3 text-slate-700 list-disc list-outside pl-6 marker:text-brand-600 marker:text-base">
+          <li>Stay ahead with your personalized AI digest</li>
+          <li>Help shape the product with your feedback</li>
+          <li>100% free during the pilot, no credit card required</li>
+        </ul>
+        <p class="mt-6 font-medium text-slate-800">Spots are limited. Secure your place today.</p>
+      </div>
+
+      <!-- Right form -->
+      <div class="lg:col-span-5">
+        <!-- keep this a simple white card; no extra border on the outer wrapper -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch soon!');">
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@mail.com" class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1" />
+            </div>
+            <div>
+              <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
+              <input id="role" name="role" type="text" placeholder="Researcher, Grad Student, Product Manager" class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1" />
+            </div>
+            <div>
+              <label for="interests" class="block text-sm font-medium text-slate-700">What do you want in your digest?</label>
+              <input id="interests" name="interests" type="text" placeholder="ML papers, substack, policy updates" class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1" />
+            </div>
+            <button
+              type="submit"
+              class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600
+                     px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none
+                     focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition">
+              Request Invite
+            </button>
+            <p class="text-xs text-slate-500 text-center">By requesting an invite you agree to be contacted about the pilot.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+
+<!-- <hr class="mx-auto max-w-7xl border-t border-slate-200" /> -->
+
+<!-- FAQ -->
+<section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+  <div class="max-w-3xl mx-auto [&_summary::-webkit-details-marker]:hidden">
+
+    <div class="mt-10 divide-y divide-slate-200">
+      <!-- Q1 -->
+      <details class="group py-6">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <span class="text-lg font-medium text-slate-900">What sources are supported?</span>
+          <span class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none">+</span>
+        </summary>
+        <div class="pt-4 text-slate-600">
+          SummArena works with arXiv, newsletters, RSS feeds, YouTube, and more. You can also request new sources, and we’ll add them based on feedback.
+        </div>
+      </details>
+
+      <!-- Q2 -->
+      <details class="group py-6">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <span class="text-lg font-medium text-slate-900">How does a digest look like?</span>
+          <span class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none">+</span>
+        </summary>
+        <div class="pt-4 text-slate-600">
+          Each digest is a personalized briefing. You decide what’s included and how it’s written, so the digest reflects your focus, not generic AI blurbs.
+        </div>
+      </details>
+
+      <!-- Q3 -->
+      <details class="group py-6">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <span class="text-lg font-medium text-slate-900">Why is it free?</span>
+          <span class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none">+</span>
+        </summary>
+        <div class="pt-4 text-slate-600">
+          The pilot program is 100% free. No credit card required. All we ask is your feedback to help us refine the product.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</Layout>
