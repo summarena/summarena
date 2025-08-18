@@ -11,7 +11,7 @@ export default defineConfig({
   site: 'https://summarena.com', // Update with your actual domain
   integrations: [
     tailwind({
-      applyBaseStyles: false,
+      applyBaseStyles: true,
     }),
     vue(),
     starlight({
