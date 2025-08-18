@@ -12,6 +12,7 @@ export default defineConfig(
         'tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
         'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
       ],
+      testTimeout: 120000, // 2 minutes for integration tests
     },
   })
 );

@@ -28,9 +28,13 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:unit": "vitest run tests/api tests/components.test.ts tests/pages.test.ts",
+    "test:integration": "pnpm build && vitest run tests/integration",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "test:e2e:email": "playwright test e2e/email-collection.spec.ts",
+    "test:all": "pnpm test:unit && pnpm test:integration && pnpm test:e2e:email",
     "build:clean": "astro check && astro build",
     "playwright:install": "playwright install chromium webkit"
   },
@@ -61,6 +65,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "wrangler": "^4.31.0"
   }
 }

@@ -1,0 +1,13 @@
+name = "summarena-website"
+compatibility_date = "2024-08-01"
+
+[env.test]
+compatibility_date = "2024-08-01"
+
+[[env.test.kv_namespaces]]
+binding = "EMAILS"
+id = "test_kv_namespace"
+preview_id = "test_kv_namespace"
+
+[env.test.vars]
+GSHEET_WEBHOOK_URL = "https://httpbin.org/post"

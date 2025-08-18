@@ -387,12 +387,14 @@ import Layout from '../layouts/Layout.astro';
               </div>
               <button
                 type="submit"
+                id="submit-btn"
                 class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600
                      px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none
-                     focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition"
+                     focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Request Invite
               </button>
+              <p id="form-message" class="text-xs text-center" aria-live="polite"></p>
               <p class="text-xs text-slate-500 text-center">
                 By requesting an invite you agree to be contacted about the pilot.
               </p>
@@ -459,9 +461,58 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
   <script>
-    document.getElementById('contact-form')?.addEventListener('submit', event => {
+    document.getElementById('contact-form')?.addEventListener('submit', async event => {
       event.preventDefault();
-      alert("Thanks — we'll be in touch soon!");
+
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+      const messageEl = document.getElementById('form-message') as HTMLElement;
+
+      const email = formData.get('email') as string;
+
+      if (!email) {
+        messageEl.textContent = 'Please enter your email address.';
+        messageEl.className = 'text-xs text-center text-red-600';
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      messageEl.textContent = '';
+
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (result.ok && result.status === 'subscribed') {
+          messageEl.textContent = "Thanks! You're on the list. We'll be in touch soon.";
+          messageEl.className = 'text-xs text-center text-green-600';
+          form.reset();
+        } else if (result.ok && result.status === 'already_subscribed') {
+          messageEl.textContent = "You're already on our list! We'll be in touch soon.";
+          messageEl.className = 'text-xs text-center text-blue-600';
+        } else if (result.error === 'invalid_email') {
+          messageEl.textContent = 'Please enter a valid email address.';
+          messageEl.className = 'text-xs text-center text-red-600';
+        } else {
+          messageEl.textContent = 'Something went wrong. Please try again.';
+          messageEl.className = 'text-xs text-center text-red-600';
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        messageEl.textContent = 'Something went wrong. Please try again.';
+        messageEl.className = 'text-xs text-center text-red-600';
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Request Invite';
+      }
     });
   </script>
 </Layout>
