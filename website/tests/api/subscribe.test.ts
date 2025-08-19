@@ -34,16 +34,15 @@ describe('Subscribe API Endpoint', () => {
     });
   });
 
-  it('should successfully subscribe a new email', async () => {
+  it('should successfully subscribe a new email with full form data', async () => {
     const formData = new FormData();
     formData.append('email', 'test@example.com');
+    formData.append('role', 'Product Manager');
+    formData.append('interests', 'AI research, startup news');
 
     const request = new Request('http://localhost/api/subscribe', {
       method: 'POST',
       body: formData,
-      headers: {
-        'cf-connecting-ip': '192.168.1.1',
-      },
     });
 
     const response = await onRequestPost({ request, env: mockEnv });
@@ -61,12 +60,21 @@ describe('Subscribe API Endpoint', () => {
       expect.any(Object)
     );
 
+    // Check that the stored data includes role and interests
+    const storedData = JSON.parse(mockKV.put.mock.calls[0][1]);
+    expect(storedData).toMatchObject({
+      email: 'test@example.com',
+      role: 'Product Manager',
+      interests: 'AI research, startup news',
+      ts: expect.any(String),
+    });
+
     expect(mockFetch).toHaveBeenCalledWith(
       'https://httpbin.org/post',
       expect.objectContaining({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: expect.stringContaining('"email":"test@example.com"'),
+        body: expect.stringContaining('"role":"Product Manager"'),
       })
     );
   });
@@ -77,8 +85,9 @@ describe('Subscribe API Endpoint', () => {
       'email:existing@example.com',
       JSON.stringify({
         email: 'existing@example.com',
+        role: 'Researcher',
+        interests: 'ML papers',
         ts: '2024-01-01T00:00:00.000Z',
-        ip: '192.168.1.1',
       })
     );
 
@@ -124,13 +133,17 @@ describe('Subscribe API Endpoint', () => {
     expect(mockKV.put).not.toHaveBeenCalled();
   });
 
-  it('should handle JSON payload', async () => {
+  it('should handle JSON payload with all fields', async () => {
     const request = new Request('http://localhost/api/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: 'json@example.com' }),
+      body: JSON.stringify({
+        email: 'json@example.com',
+        role: 'Developer',
+        interests: 'Web development',
+      }),
     });
 
     const response = await onRequestPost({ request, env: mockEnv });
@@ -140,6 +153,44 @@ describe('Subscribe API Endpoint', () => {
     expect(result).toEqual({
       ok: true,
       status: 'subscribed',
+    });
+
+    // Check webhook payload includes all fields
+    expect(mockFetch).toHaveBeenCalledWith(
+      'https://httpbin.org/post',
+      expect.objectContaining({
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: expect.stringContaining('"role":"Developer"'),
+      })
+    );
+  });
+
+  it('should handle email-only submission', async () => {
+    const formData = new FormData();
+    formData.append('email', 'minimal@example.com');
+
+    const request = new Request('http://localhost/api/subscribe', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const response = await onRequestPost({ request, env: mockEnv });
+    const result = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(result).toEqual({
+      ok: true,
+      status: 'subscribed',
+    });
+
+    // Check that empty role and interests are stored
+    const storedData = JSON.parse(mockKV.put.mock.calls[0][1]);
+    expect(storedData).toMatchObject({
+      email: 'minimal@example.com',
+      role: '',
+      interests: '',
+      ts: expect.any(String),
     });
   });
 

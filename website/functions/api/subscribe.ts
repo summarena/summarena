@@ -22,27 +22,36 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
       ? await request.json()
       : Object.fromEntries(await request.formData());
 
-    const raw = String((body as any).email || '')
+    const email = String((body as any).email || '')
       .trim()
       .toLowerCase();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw);
+    const role = String((body as any).role || '').trim();
+    const interests = String((body as any).interests || '').trim();
+
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (!valid) {
       return json({ ok: false, error: 'invalid_email' }, 400);
     }
 
-    const key = `email:${raw}`;
+    const key = `email:${email}`;
 
     // Check if email already exists
     if (await env.EMAILS.get(key)) {
       return json({ ok: true, status: 'already_subscribed' });
     }
 
-    const ip = request.headers.get('cf-connecting-ip') || '';
     const ts = new Date().toISOString();
 
-    // Store in KV
-    await env.EMAILS.put(key, JSON.stringify({ email: raw, ts, ip }), {
+    // Store in KV - save the actual form data
+    const userData = {
+      email,
+      role,
+      interests,
+      ts,
+    };
+
+    await env.EMAILS.put(key, JSON.stringify(userData), {
       metadata: { ts },
     });
 
@@ -52,7 +61,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
       fetch(webhook, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: raw, ts, ip }),
+        body: JSON.stringify(userData),
       }).catch(() => {}); // Silent fail for webhook
     }
 
