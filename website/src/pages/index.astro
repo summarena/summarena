@@ -39,7 +39,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-100/40 to-white"></div>
     <div
-      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-16 lg:pt-12 lg:pb-20 grid lg:grid-cols-12 gap-6 items-center"
+      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-12 lg:pb-20 grid lg:grid-cols-12 gap-6 items-center"
     >
       <div class="lg:col-span-7 text-center lg:text-left">
         <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
@@ -49,9 +49,7 @@ import Layout from '../layouts/Layout.astro';
           Get a daily AI digest of the content you care about. Define the signal to surface what
           matters.
         </p>
-        <p class="mt-2 text-sm text-slate-500">
-          arXiv • Newsletters • RSS • YouTube • 30+ platforms
-        </p>
+        <p class="mt-2 text-sm text-slate-500">arXiv • Newsletters • RSS • YouTube • 30+ sources</p>
 
         <div class="mt-8" id="cta">
           <a
@@ -79,7 +77,7 @@ import Layout from '../layouts/Layout.astro';
   <section
     id="problem"
     data-track-view="scrolled-past-hero"
-    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10"
+    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-0"
   >
     <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-slate-50/60 p-5 md:p-8">
       <!-- mobile stacks; desktop keeps your original row -->
@@ -118,7 +116,7 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Solution -->
-  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
     <!-- Title -->
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
@@ -131,7 +129,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- Solution block -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 lg:mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-10 lg:mt-12">
       <!-- Features -->
       <h3 class="text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
         Features
@@ -286,12 +284,12 @@ import Layout from '../layouts/Layout.astro';
   <!-- Trust / Social Proof -->
   <section id="trust" class="bg-slate-50 border-y border-slate-100">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="mx-auto max-w-3xl text-center">
+      <div class="mx-auto max-w-4xl text-center">
         <p class="text-xs font-semibold tracking-widest text-brand-700 uppercase">
           In good company
         </p>
         <h2 class="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight">
-          Trusted by top researchers and professionals
+          Trusted by Top Researchers and Professionals
         </h2>
       </div>
 
@@ -399,7 +397,7 @@ import Layout from '../layouts/Layout.astro';
           <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
             Join the Pilot Program for Free
           </h2>
-          <p class="mt-4 text-slate-700">Be among the first to try SummArena digests.</p>
+          <p class="mt-4 text-slate-700">Be among the first to use our summarizers.</p>
           <ul
             class="mt-6 space-y-3 text-slate-700 list-disc list-outside pl-6 marker:text-brand-600 marker:text-base"
           >
@@ -434,7 +432,7 @@ import Layout from '../layouts/Layout.astro';
                     id="role"
                     name="role"
                     type="text"
-                    placeholder="Researcher, Student, Product Manager"
+                    placeholder="Researcher, Product Manager"
                     class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
             placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
                   />
@@ -479,9 +477,9 @@ import Layout from '../layouts/Layout.astro';
   <section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24 mt-12">
     <div class="max-w-3xl mx-auto [&_summary::-webkit-details-marker]:hidden">
       <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl text-center">
-        Frequently asked questions
+        Frequently Asked Questions
       </h2>
-      <div class="mt-10 divide-y divide-slate-200">
+      <div class="mt-2 divide-y divide-slate-200">
         <!-- Q1 -->
         <details class="group py-6">
           <summary class="flex items-center justify-between cursor-pointer">
