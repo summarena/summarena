@@ -255,7 +255,11 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: envWithoutWebhook, waitUntil: mockWaitUntil });
+    const response = await onRequestPost({
+      request,
+      env: envWithoutWebhook,
+      waitUntil: mockWaitUntil,
+    });
     const result = await response.json();
 
     expect(response.status).toBe(200);
