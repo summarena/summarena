@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
 const {
   title = 'SummArena — Your Personal Distiller',
   description = 'Summarena — Your personal AI distiller for everything you follow.',
@@ -9,10 +10,7 @@ const year = new Date().getFullYear();
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <BaseHead title={title} description={description} />
   </head>
   <body class="bg-white text-slate-900 font-body selection:bg-brand-100 selection:text-brand-900">
     <slot />
