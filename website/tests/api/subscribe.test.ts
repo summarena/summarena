@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock implementation for testing the function logic
 const mockKV = {
@@ -16,6 +16,8 @@ const mockEnv = {
   GSHEET_WEBHOOK_URL: 'https://httpbin.org/post',
 };
 
+const mockWaitUntil = vi.fn();
+
 // Mock fetch for webhook testing
 const mockFetch = vi.fn();
 vi.stubGlobal('fetch', mockFetch);
@@ -27,6 +29,7 @@ describe('Subscribe API Endpoint', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockKV.data.clear();
+    mockWaitUntil.mockClear();
     mockFetch.mockResolvedValue({
       ok: true,
       status: 200,
@@ -45,7 +48,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -99,7 +102,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -121,7 +124,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(400);
@@ -146,7 +149,7 @@ describe('Subscribe API Endpoint', () => {
       }),
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -175,7 +178,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -203,7 +206,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -228,7 +231,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(400);
@@ -252,7 +255,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: envWithoutWebhook });
+    const response = await onRequestPost({ request, env: envWithoutWebhook, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     expect(response.status).toBe(200);
@@ -275,7 +278,7 @@ describe('Subscribe API Endpoint', () => {
       body: formData,
     });
 
-    const response = await onRequestPost({ request, env: mockEnv });
+    const response = await onRequestPost({ request, env: mockEnv, waitUntil: mockWaitUntil });
     const result = await response.json();
 
     // Should still succeed even if webhook fails
