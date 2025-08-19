@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- rounded square -->
+  <rect width="256" height="256" rx="40" fill="#2b61d0"/>
+  <!-- centered S -->
+  <text
+    x="50%" y="52%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    font-weight="800"
+    font-size="150"
+    fill="#ffffff"
+  >S</text>
+</svg>

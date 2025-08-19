@@ -7,7 +7,7 @@ export interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/favicon.svg' } = Astro.props;
+const { title, description, image = '/summarena_favicon.svg' } = Astro.props;
 
 const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 ---
@@ -15,7 +15,7 @@ const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/summarena_favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->

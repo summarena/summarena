@@ -29,28 +29,28 @@ import Layout from '../layouts/Layout.astro';
           href="#pilot"
           data-track="header-cta-get-started"
           class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-          >Get started for free</a
+          >Get Started for Free</a
         >
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-cozy/60">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-cozy/80 to-transparent"></div>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-100/40 to-white"></div>
     <div
       class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-16 lg:pt-12 lg:pb-20 grid lg:grid-cols-12 gap-6 items-center"
     >
-      <div class="lg:col-span-7">
+      <div class="lg:col-span-7 text-center lg:text-left">
         <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
           Your Personal Distiller for Information
         </h1>
-        <p class="mt-5 text-lg text-slate-700 max-w-xl">
+        <p class="mt-5 text-lg text-slate-700 max-w-xl mx-auto lg:mx-0">
           Get a daily AI digest of the content you care about. Define the signal to surface what
           matters.
         </p>
         <p class="mt-2 text-sm text-slate-500">
-          arXiv • Newsletters • RSS • Youtube • 30+ platforms
+          arXiv • Newsletters • RSS • YouTube • 30+ platforms
         </p>
 
         <div class="mt-8" id="cta">
@@ -59,7 +59,7 @@ import Layout from '../layouts/Layout.astro';
             data-track="hero-cta-get-digest"
             class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
           >
-            Get your personal digest for free
+            Get Your Personal Digest for Free
           </a>
           <p class="mt-2 text-sm text-slate-600">
             Built for researchers and professionals drowning in information.
@@ -70,177 +70,219 @@ import Layout from '../layouts/Layout.astro';
       <img
         src="/hero.png"
         alt="Abstract digest"
-        class="lg:col-span-5 w-full max-w-[36rem] rounded-2xl
-         lg:self-center lg:mt-6"
+        class="lg:col-span-5 w-full max-w-[36rem] rounded-2xl lg:self-center lg:mt-6 mx-auto lg:mx-0"
       />
     </div>
   </section>
 
-  <div class="h-12 bg-gradient-to-b from-slate-50 to-white"></div>
   <!-- Problem (short) -->
-  <!-- <section id="problem" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12"> -->
   <section
     id="problem"
     data-track-view="scrolled-past-hero"
     class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10"
   >
-    <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-slate-50/60 p-6 md:p-8">
-      <div class="flex items-start gap-4">
+    <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-slate-50/60 p-5 md:p-8">
+      <!-- mobile stacks; desktop keeps your original row -->
+      <div class="md:flex md:items-start md:gap-4">
         <div
-          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 font-bold"
+          class="inline-flex h-7 w-7 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700 font-bold"
         >
           !
         </div>
-        <div>
+
+        <div class="mt-2 md:mt-0">
+          <!-- desktop unchanged (md: text-2xl + leading-none); mobile smaller + tighter -->
           <h2
-            class="font-display text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-slate-900
-               leading-none -mt-1"
+            class="font-display text-base sm:text-lg md:text-2xl font-semibold tracking-tight text-slate-900 leading-snug md:leading-none mt-0"
           >
             Staying informed shouldn’t feel like a part-time job.
           </h2>
-          <p class="mt-6 text-lg leading-relaxed text-slate-700 space-y-4">
-            <span
-              >You want to stay on top of your field, follow trusted creators, keep up with relevant
-              news, and extract insights that actually matter to you.</span
-            ><br /><br />
-            <span
-              >You don’t have a motivation problem — you have a <strong>bandwidth</strong> problem.</span
-            ><br /><br />
-            <span
-              >And when everything demands your attention, you end up wasting time on what isn’t
-              important — and missing what is.</span
-            >
-          </p>
+
+          <!-- mobile smaller text/leading & no measure; desktop restores your original -->
+          <div
+            class="mt-4 md:mt-6 text-[15px] sm:text-base md:text-lg leading-normal md:leading-relaxed text-slate-700 space-y-3 md:space-y-4 md:max-w-[72ch]"
+          >
+            <p>
+              You want to stay on top of your field, follow trusted creators, keep up with relevant
+              news, and extract insights that actually matter to you.
+            </p>
+            <p>The issue isn’t motivation, it’s <strong>bandwidth.</strong></p>
+            <p>
+              And when everything demands your attention, it’s easy to waste energy on noise and
+              overlook what truly matters.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Solution -->
-  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <!-- Title -->
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
         An AI Digest You Control
       </h2>
       <p class="mt-4 text-slate-600">
-        Our AI reads everything you follow and delivers a clear daily digest. You decide what
-        belongs and how it reads, shaping the digest to fit your needs.
+        Our AI reads everything you follow and delivers a clear digest with citations. You control
+        the style and focus so that every digest fits your needs.
       </p>
     </div>
 
-    <!-- Features -->
-    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Feature 1 -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <div
-          class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold"
-        >
-          1
+    <!-- Solution block -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 lg:mt-12">
+      <!-- Features -->
+      <h3 class="text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
+        Features
+      </h3>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+          >
+            ✓
+          </div>
+          <p class="font-semibold text-slate-900">Clear summaries</p>
+          <p class="mt-1 text-sm text-slate-600">Your feeds distilled into readable briefs.</p>
         </div>
-        <h3 class="mt-4 text-lg font-semibold">Connect your sources</h3>
-        <p class="mt-2 text-slate-600">
-          arXiv, Newsletters, RSS, Youtube and more — all in one place.
-        </p>
-      </div>
-      <!-- Feature 2 -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <div
-          class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold"
-        >
-          2
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+          >
+            🔗
+          </div>
+          <p class="font-semibold text-slate-900">Direct links &amp; citations</p>
+          <p class="mt-1 text-sm text-slate-600">Verify fast and dive deeper when needed.</p>
         </div>
-        <h3 class="mt-4 text-lg font-semibold">Shape your digest</h3>
-        <p class="mt-2 text-slate-600">
-          Define the signal to cut the noise and surface what matters.
-        </p>
-      </div>
-      <!-- Feature 3 -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <div
-          class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold"
-        >
-          3
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+          >
+            ✦
+          </div>
+          <p class="font-semibold text-slate-900">Tailored to you</p>
+          <p class="mt-1 text-sm text-slate-600">Only the updates you actually care about.</p>
         </div>
-        <h3 class="mt-4 text-lg font-semibold">Schedule the delivery</h3>
-        <p class="mt-2 text-slate-600">
-          Get your digest via inbox or dashboard — daily, weekly, or whenever you want it.
-        </p>
       </div>
-      <!-- Feature 4 -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <div
-          class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold"
-        >
-          4
+
+      <!-- How it works -->
+      <h3 class="mt-14 text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
+        How it works
+      </h3>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Step 1 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
+          >
+            <!-- Plug icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 8V3m8 5V3M6 12h12m-6 0v6a3 3 0 01-3 3"></path>
+            </svg>
+            <!-- Number badge -->
+            <span
+              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
+              >1</span
+            >
+          </div>
+          <p class="font-semibold text-slate-900">Connect your sources</p>
+          <p class="mt-1 text-sm text-slate-600">
+            arXiv, newsletters, RSS, YouTube, and more — all in one place.
+          </p>
         </div>
-        <h3 class="mt-4 text-lg font-semibold">Distilled, not diluted</h3>
-        <p class="mt-2 text-slate-600">Clear summaries with citations, no fluff or filler.</p>
-      </div>
-      <!-- Feature 5 -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <div
-          class="h-10 w-10 rounded-xl bg-brand-100 text-brand-700 inline-flex items-center justify-center font-bold"
-        >
-          5
+
+        <!-- Step 2 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
+          >
+            <!-- Funnel icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h18l-7 7v6l-4 2v-8L3 5z"
+              ></path>
+            </svg>
+            <!-- Number badge -->
+            <span
+              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
+              >2</span
+            >
+          </div>
+          <p class="font-semibold text-slate-900">Shape your digest</p>
+          <p class="mt-1 text-sm text-slate-600">
+            Define the signal to cut the noise and surface what matters.
+          </p>
         </div>
-        <h3 class="mt-4 text-lg font-semibold">Refine with feedback</h3>
-        <p class="mt-2 text-slate-600">Quick feedback makes your digest sharper with each use.</p>
+
+        <!-- Step 3 -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+          <div
+            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
+          >
+            <!-- Calendar icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <path d="M16 2v4M8 2v4M3 10h18"></path>
+            </svg>
+            <!-- Number badge -->
+            <span
+              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
+              >3</span
+            >
+          </div>
+          <p class="font-semibold text-slate-900">Schedule the delivery</p>
+          <p class="mt-1 text-sm text-slate-600">
+            Get your digest via inbox or dashboard. Daily, weekly, or whenever you want it.
+          </p>
+        </div>
       </div>
-      <!-- CTA card -->
+
+      <!-- Simple CTA -->
       <div
-        class="rounded-2xl border border-slate-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-soft flex flex-col justify-between"
+        class="mt-12 rounded-2xl bg-slate-50 px-6 pt-2 pb-6 sm:pt-6 sm:pb-6
+            text-center sm:flex sm:items-center sm:justify-between sm:px-10 sm:text-left"
       >
-        <div>
-          <h3 class="text-lg font-semibold">Ready to try it?</h3>
-          <p class="mt-2 text-slate-600">
+        <div class="sm:mb-0">
+          <h3 class="text-lg font-semibold leading-tight text-slate-900">Ready to try it?</h3>
+          <p class="mt-1 text-slate-700">
             Join the pilot and start receiving your personalized digest.
           </p>
         </div>
         <a
           href="#pilot"
           data-track="features-cta-join-pilot"
-          class="mt-4 inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-          >Join the Pilot</a
+          class="inline-flex items-center justify-center rounded-xl bg-brand-600 px-6 py-3 text-base font-semibold text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
         >
-      </div>
-    </div>
-
-    <div class="mt-20 max-w-2xl mx-auto grid sm:grid-cols-3 gap-6 text-left">
-      <div class="flex flex-col items-center text-center">
-        <div
-          class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3"
-        >
-          ✓
-        </div>
-        <p class="text-slate-700 text-sm font-medium mb-0">Clear summaries</p>
-        <p class="text-slate-500 text-sm mt-1">
-          Your information feeds distilled into readable briefs
-        </p>
-      </div>
-
-      <div class="flex flex-col items-center text-center">
-        <div
-          class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3"
-        >
-          🔗
-        </div>
-        <p class="text-slate-700 text-sm font-medium mb-0">Direct links & citations</p>
-        <p class="text-slate-500 text-sm mt-1">Verify fast and dive deeper when needed</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center">
-        <div
-          class="h-10 w-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-3"
-        >
-          ✦
-        </div>
-        <p class="text-slate-700 text-sm font-medium mb-0">Tailored to you</p>
-        <p class="text-slate-500 text-sm mt-1">Only the updates you actually care about</p>
+          Join the Pilot
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Trust / Social Proof -->
   <!-- Trust / Social Proof -->
   <section id="trust" class="bg-slate-50 border-y border-slate-100">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -256,19 +298,19 @@ import Layout from '../layouts/Layout.astro';
       <div class="mt-8 mx-auto max-w-2xl text-left space-y-3">
         <p class="text-slate-600 font-medium">Already used by:</p>
         <div class="flex items-start gap-2">
-          <span class="text-brand-600">✓</span>
+          <span class="text-brand-600 leading-relaxed">✓</span>
           <span class="text-lg text-slate-800"
             >Researchers at UC Berkeley, Stanford, and ETH Zurich</span
           >
         </div>
         <div class="flex items-start gap-2">
-          <span class="text-brand-600">✓</span>
+          <span class="text-brand-600 leading-relaxed">✓</span>
           <span class="text-lg text-slate-800"
             >Executives and busy professionals who need to stay informed to make better decisions</span
           >
         </div>
         <div class="flex items-start gap-2">
-          <span class="text-brand-600">✓</span>
+          <span class="text-brand-600 leading-relaxed">✓</span>
           <span class="text-lg text-slate-800"
             >Graduate students who want to keep up without burning out</span
           >
@@ -276,13 +318,13 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <!-- testimonials -->
-      <div class="mt-8 flex flex-wrap justify-center gap-2">
+      <div class="mt-8 flex flex-wrap justify-center gap-2 -mx-4 sm:mx-0">
         <!-- Card 1 -->
         <figure
           class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"
         >
           <svg
-            class="absolute -top-3 left-6 h-6 w-6 text-brand-200"
+            class="absolute -top-3 left-12 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
             viewBox="0 0 24 24"
             fill="currentColor"
             aria-hidden="true"
@@ -297,7 +339,7 @@ import Layout from '../layouts/Layout.astro';
             research, saving me hours.”
           </blockquote>
           <figcaption class="mt-3 text-sm text-slate-600">
-            <div class="font-medium text-slate-800">Postdoc Researcher</div>
+            <div class="font-medium text-slate-800">Postdoc</div>
             <div class="text-slate-500">UC Berkeley</div>
           </figcaption>
         </figure>
@@ -307,7 +349,7 @@ import Layout from '../layouts/Layout.astro';
           class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"
         >
           <svg
-            class="absolute -top-3 left-6 h-6 w-6 text-brand-200"
+            class="absolute -top-3 left-12 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
             viewBox="0 0 24 24"
             fill="currentColor"
             aria-hidden="true"
@@ -329,13 +371,25 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- <div class="h-12 bg-gradient-to-b from-slate-50 to-white"></div> -->
+  <!-- Onboarding divider -->
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 lg:mt-14">
+    <div class="flex items-center gap-4">
+      <div class="h-px flex-1 bg-slate-200"></div>
+      <span
+        class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1
+                 text-xs font-semibold text-slate-700 ring-1 ring-slate-200"
+      >
+        Now onboarding new users
+      </span>
+      <div class="h-px flex-1 bg-slate-200"></div>
+    </div>
+  </div>
 
   <!-- Final CTA / Pilot -->
   <section
     id="pilot"
     data-track-view="reached-signup"
-    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24"
+    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14"
   >
     <!-- single card with subtle blue tint -->
     <div
@@ -347,7 +401,7 @@ import Layout from '../layouts/Layout.astro';
           <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
             Join the Pilot Program for Free
           </h2>
-          <p class="mt-4 text-slate-700">Be among the first to try SummArena.</p>
+          <p class="mt-4 text-slate-700">Be among the first to try SummArena digests.</p>
           <ul
             class="mt-6 space-y-3 text-slate-700 list-disc list-outside pl-6 marker:text-brand-600 marker:text-base"
           >
@@ -361,55 +415,61 @@ import Layout from '../layouts/Layout.astro';
         <!-- Right form -->
         <div class="lg:col-span-5">
           <!-- keep this a simple white card; no extra border on the outer wrapper -->
-          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft -mx-2 sm:mx-0">
             <form id="contact-form" class="space-y-4">
-              <div>
-                <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@mail.com"
-                  class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1"
-                />
-              </div>
-              <div>
-                <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
-                <input
-                  id="role"
-                  name="role"
-                  type="text"
-                  placeholder="Researcher, Grad Student, Product Manager"
-                  class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1"
-                />
-              </div>
-              <div>
-                <label for="interests" class="block text-sm font-medium text-slate-700"
-                  >What do you want in your digest?</label
+              <div class="space-y-4 px-1.5">
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="you@mail.com"
+                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
+            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+                <div>
+                  <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
+                  <input
+                    id="role"
+                    name="role"
+                    type="text"
+                    placeholder="Researcher, Student, Product Manager"
+                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
+            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+                <div>
+                  <label for="interests" class="block text-sm font-medium text-slate-700"
+                    >What do you want in your digest?</label
+                  >
+                  <input
+                    id="interests"
+                    name="interests"
+                    type="text"
+                    placeholder="ML papers, substack, tech news"
+                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
+            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  data-track="pilot-form-submit"
+                  class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600
+    px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-soft hover:bg-brand-700
+    focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition
+    disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                <input
-                  id="interests"
-                  name="interests"
-                  type="text"
-                  placeholder="ML papers, substack, policy updates"
-                  class="mt-1 block w-full rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 py-1"
-                />
+                  Request Invite
+                </button>
+                <p id="form-message" class="text-xs text-center" aria-live="polite"></p>
+                <p class="text-xs text-slate-500 text-center">
+                  By requesting an invite you agree to be contacted about the pilot.
+                </p>
               </div>
-              <button
-                type="submit"
-                id="submit-btn"
-                data-track="pilot-form-submit"
-                class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600
-                     px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none
-                     focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Request Invite
-              </button>
-              <p id="form-message" class="text-xs text-center" aria-live="polite"></p>
-              <p class="text-xs text-slate-500 text-center">
-                By requesting an invite you agree to be contacted about the pilot.
-              </p>
             </form>
           </div>
         </div>
@@ -418,12 +478,11 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- FAQ -->
-
-  <!-- <hr class="mx-auto max-w-7xl border-t border-slate-200" /> -->
-
-  <!-- FAQ -->
-  <section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+  <section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24 mt-12">
     <div class="max-w-3xl mx-auto [&_summary::-webkit-details-marker]:hidden">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl text-center">
+        Frequently asked questions
+      </h2>
       <div class="mt-10 divide-y divide-slate-200">
         <!-- Q1 -->
         <details class="group py-6">
@@ -434,7 +493,7 @@ import Layout from '../layouts/Layout.astro';
               >+</span
             >
           </summary>
-          <div class="pt-4 text-slate-600">
+          <div class="pt-5 text-slate-600">
             SummArena works with arXiv, newsletters, RSS feeds, YouTube, and more. You can also
             request new sources, and we’ll add them based on feedback.
           </div>
@@ -443,15 +502,15 @@ import Layout from '../layouts/Layout.astro';
         <!-- Q2 -->
         <details class="group py-6">
           <summary class="flex items-center justify-between cursor-pointer">
-            <span class="text-lg font-medium text-slate-900">How does a digest look like?</span>
+            <span class="text-lg font-medium text-slate-900">What does a digest look like?</span>
             <span
               class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none"
               >+</span
             >
           </summary>
-          <div class="pt-4 text-slate-600">
-            Each digest is a personalized briefing. You decide what’s included and how it’s written,
-            so the digest reflects your focus, not generic AI blurbs.
+          <div class="pt-5 text-slate-600">
+            Each digest is a personalized briefing. It highlights the key updates that matter to
+            you, supported by citations. You control the style and focus.
           </div>
         </details>
 
@@ -464,7 +523,7 @@ import Layout from '../layouts/Layout.astro';
               >+</span
             >
           </summary>
-          <div class="pt-4 text-slate-600">
+          <div class="pt-5 text-slate-600">
             The pilot program is 100% free. No credit card required. All we ask is your feedback to
             help us refine the product.
           </div>
