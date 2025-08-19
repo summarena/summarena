@@ -11,7 +11,7 @@ struct PonderedPreferences {
     pub look_out_for: String,
 }
 
-fn ponder_preferences(spec: &DigestModelSpec, preferences: &DigestPreferences) -> PonderedPreferences {
+fn ponder_preferences(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences) -> PonderedPreferences {
     PonderedPreferences {
         look_out_for: preferences.description.clone(),
     }
@@ -49,7 +49,7 @@ pub struct BaselineDigestModel;
 impl DigestModel for BaselineDigestModel {
 
     fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> DigestOutput {
-        let pondered_preferences = ponder_preferences(spec, preferences);
+        let pondered_preferences = ponder_preferences(spec, memory, preferences);
         let focused_summaries = input_items.iter().map(|input_item| ponder_relevance_and_summarize(spec, &pondered_preferences, input_item)).collect::<Vec<FocusedSummary>>();
         let best_summary_indices = select_best(spec, &pondered_preferences, &focused_summaries);
         let best_summaries = best_summary_indices.iter().map(|index| focused_summaries[*index].clone()).collect::<Vec<FocusedSummary>>();
