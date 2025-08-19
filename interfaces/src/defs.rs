@@ -5,7 +5,7 @@ pub struct LiveSourceSpec {
 pub struct InputItem {
     pub uri: String,
     pub text: String,
-    pub vision: Vec<u8>,
+    pub vision: Option<Vec<u8>>,
 }
 
 #[derive(Clone)]
