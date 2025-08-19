@@ -60,9 +60,24 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     if (webhook) {
       fetch(webhook, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify(userData),
-      }).catch(() => {}); // Silent fail for webhook
+      })
+      .then(response => {
+        console.log('Webhook response status:', response.status);
+        return response.text();
+      })
+      .then(text => {
+        console.log('Webhook response body:', text);
+      })
+      .catch(error => {
+        console.error('Webhook failed:', error);
+      });
+    } else {
+      console.log('No webhook URL configured');
     }
 
     return json({ ok: true, status: 'subscribed' });

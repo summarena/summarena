@@ -10,4 +10,5 @@ id = "test_kv_namespace"
 preview_id = "test_kv_namespace"
 
 [env.test.vars]
-GSHEET_WEBHOOK_URL = "https://httpbin.org/post"
+# GSHEET_WEBHOOK_URL should be set as an environment variable
+# For local testing: npx wrangler pages dev dist --binding GSHEET_WEBHOOK_URL="your-url-here"
