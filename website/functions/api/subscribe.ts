@@ -1,15 +1,22 @@
 interface Env {
-  EMAILS: any; // KV Namespace
+  EMAILS: any;
   GSHEET_WEBHOOK_URL?: string;
 }
 
-export const onRequestPost = async ({ request, env }: { request: Request; env: Env }) => {
+export const onRequestPost = async ({
+  request,
+  env,
+  waitUntil,
+}: {
+  request: Request;
+  env: Env;
+  waitUntil: (promise: Promise<any>) => void;
+}) => {
   const json = (d: unknown, s = 200) =>
     new Response(JSON.stringify(d), {
       status: s,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-store',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST',
         'Access-Control-Allow-Headers': 'Content-Type',
@@ -28,56 +35,26 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     const role = String((body as any).role || '').trim();
     const interests = String((body as any).interests || '').trim();
 
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    if (!valid) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json({ ok: false, error: 'invalid_email' }, 400);
     }
 
     const key = `email:${email}`;
-
-    // Check if email already exists
     if (await env.EMAILS.get(key)) {
       return json({ ok: true, status: 'already_subscribed' });
     }
 
-    const ts = new Date().toISOString();
+    const userData = { email, role, interests, ts: new Date().toISOString() };
+    await env.EMAILS.put(key, JSON.stringify(userData), { metadata: { ts: userData.ts } });
 
-    // Store in KV - save the actual form data
-    const userData = {
-      email,
-      role,
-      interests,
-      ts,
-    };
-
-    await env.EMAILS.put(key, JSON.stringify(userData), {
-      metadata: { ts },
-    });
-
-    // Mirror to Google Sheets webhook (fire-and-forget)
-    const webhook = env.GSHEET_WEBHOOK_URL;
-    if (webhook) {
-      fetch(webhook, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(userData),
-      })
-      .then(response => {
-        console.log('Webhook response status:', response.status);
-        return response.text();
-      })
-      .then(text => {
-        console.log('Webhook response body:', text);
-      })
-      .catch(error => {
-        console.error('Webhook failed:', error);
-      });
-    } else {
-      console.log('No webhook URL configured');
+    if (env.GSHEET_WEBHOOK_URL) {
+      waitUntil(
+        fetch(env.GSHEET_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        }).catch(console.error)
+      );
     }
 
     return json({ ok: true, status: 'subscribed' });

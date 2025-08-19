@@ -60,5 +60,5 @@ This is an Astro-based website with Starlight documentation integration. Use pnp
 - Prettier for code formatting
 - TypeScript strict mode enabled
 - Analytics script in `src/scripts/analytics.ts`
-- After completing a set of changes, ALWAYS run linters and formatters, fixing any issues that arise.
+- **CRITICAL: After completing ANY set of changes, ALWAYS run `pnpm lint:fix` and `pnpm check` to ensure code quality and fix any formatting or type issues**
 - ALWAYS add tests for new functionality. Add regression tests when fixing bugs. Add a mix of unit, ui, and integration tests as necessary
