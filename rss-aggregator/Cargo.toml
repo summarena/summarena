@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# interfaces = { path = "../interfaces" }  # Commented out for simple demo
+interfaces = { path = "../interfaces" }
 tokio = { version = "1.0", features = ["full"] }
 reqwest = { version = "0.12", features = ["json", "gzip", "deflate", "brotli"] }
 feed-rs = "1.4"

@@ -1,18 +1,9 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-// Simplified local definitions (would normally use interfaces crate)
-#[derive(Debug, Clone)]
-pub struct InputItem {
-    pub uri: String,
-    pub text: String,
-    pub vision: Vec<u8>,
-}
-
-#[derive(Debug, Clone)]
-pub struct LiveSourceSpec {
-    pub uri: String,
-}
+// Use the interfaces crate for core types
+pub use interfaces::defs::{InputItem, LiveSourceSpec, Ingester, WatchRest};
+pub use interfaces::defs::{DigestModel, DigestModelSpec, DigestModelMemory, DigestPreferences, DigestOutput, DigestSelectedItem};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FeedMetadata {

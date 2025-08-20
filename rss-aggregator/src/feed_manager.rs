@@ -13,8 +13,13 @@ impl FeedManager {
     pub async fn new(database_url: &str) -> Result<Self> {
         let db = PgPool::connect(database_url).await?;
         
-        // Note: Database schema should be initialized with migrations before running
-        // In production, run: sqlx migrate run
+        // Run migrations automatically on startup
+        sqlx::migrate!("./migrations")
+            .run(&db)
+            .await
+            .map_err(|e| AggregatorError::General(format!("Migration failed: {}", e)))?;
+        
+        info!("Database migrations completed successfully");
         
         Ok(Self { db })
     }
@@ -390,5 +395,40 @@ impl FeedManager {
         .await?;
         
         Ok(count.unwrap_or(0))
+    }
+    
+    /// Get feed by URL (needed by state module)
+    pub async fn get_feed_by_url(&self, url: &str) -> Result<FeedMetadata> {
+        let row = sqlx::query!(
+            "SELECT * FROM feeds WHERE url = $1",
+            url
+        )
+        .fetch_optional(&self.db)
+        .await?;
+
+        match row {
+            Some(row) => Ok(FeedMetadata {
+                id: row.id,
+                url: row.url,
+                title: row.title,
+                description: row.description,
+                last_fetch_time: row.last_fetch_time.map(|t| t.with_timezone(&Utc)),
+                last_successful_fetch: row.last_successful_fetch.map(|t| t.with_timezone(&Utc)),
+                update_frequency_hours: row.update_frequency_hours.map(|h| h as u32),
+                error_count: row.error_count as u32,
+                last_error: row.last_error,
+                is_active: row.is_active,
+                created_at: row.created_at.with_timezone(&Utc),
+                updated_at: row.updated_at.with_timezone(&Utc),
+                etag: row.etag,
+                last_modified: row.last_modified,
+            }),
+            None => Err(AggregatorError::FeedNotFound { id: Uuid::new_v4() }),
+        }
+    }
+    
+    /// Get database pool reference (needed by state module)
+    pub fn get_db_pool(&self) -> &Pool<Postgres> {
+        &self.db
     }
 }
