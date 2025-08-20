@@ -1,15 +1,5 @@
-use crate::{FeedManager, Fetcher, FeedParser, FetchConfig, Result, AggregatorError};
-use crate::types::{InputItem, LiveSourceSpec};
-
-// Simplified local definitions (would normally use interfaces crate)
-pub trait Ingester {
-    fn watch(source: &LiveSourceSpec) -> WatchRest;
-}
-
-#[derive(Debug)]
-pub struct WatchRest {
-    pub wait_at_least_ms: u32,
-}
+use crate::{FeedManager, Fetcher, FeedParser, FetchConfig, Result, AggregatorError, RssState};
+use crate::types::{InputItem, LiveSourceSpec, Ingester, WatchRest};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tracing::{error, info, warn};
@@ -19,6 +9,7 @@ pub struct RssAggregator {
     feed_manager: Arc<FeedManager>,
     fetcher: Arc<RwLock<Fetcher>>,
     parser: Arc<RwLock<FeedParser>>,
+    state: Arc<RssState>,
 }
 
 impl RssAggregator {
@@ -26,11 +17,13 @@ impl RssAggregator {
         let feed_manager = Arc::new(FeedManager::new(database_url).await?);
         let fetcher = Arc::new(RwLock::new(Fetcher::new(fetch_config)));
         let parser = Arc::new(RwLock::new(FeedParser::new()));
+        let state = Arc::new(RssState::new(feed_manager.clone()));
         
         Ok(Self {
             feed_manager,
             fetcher,
             parser,
+            state,
         })
     }
     
@@ -128,7 +121,20 @@ impl RssAggregator {
         // Store entries in the database
         let new_entries_count = self.feed_manager.store_feed_entries(&feed_entries).await?;
         
-        info!("Feed {}: found {} entries, stored {} new entries", feed_id, entries_found, new_entries_count);
+        // Also ingest each new entry as InputItem for digest processing
+        let source_spec = LiveSourceSpec {
+            uri: feed_metadata.url.clone(),
+        };
+        
+        for entry in &feed_entries {
+            let input_item: InputItem = entry.into();
+            if let Err(e) = self.state.ingest(&source_spec, input_item).await {
+                warn!("Failed to ingest entry {} into state: {}", entry.id, e);
+                // Continue processing other entries even if one fails
+            }
+        }
+        
+        info!("Feed {}: found {} entries, stored {} new entries, ingested for digest processing", feed_id, entries_found, new_entries_count);
         
         Ok(new_entries_count)
     }
@@ -152,6 +158,41 @@ impl RssAggregator {
         fetcher.update_config(config);
         Ok(())
     }
+    
+    /// Get access to the state manager for ingestion functionality
+    pub fn get_state(&self) -> Arc<RssState> {
+        self.state.clone()
+    }
+    
+    /// Create digests from ingested items using the interfaces DigestModel
+    pub async fn create_digest_from_state(
+        &self, 
+        model_spec: &crate::types::DigestModelSpec,
+        memory: &crate::types::DigestModelMemory,
+        preferences: &crate::types::DigestPreferences,
+        limit: usize
+    ) -> Result<crate::types::DigestOutput> {
+        use crate::types::DigestModel;
+        use crate::digest::RssDigestModel;
+        
+        // Get recent input items from state
+        let input_items = self.state.get_recent_input_items(limit).await?;
+        
+        if input_items.is_empty() {
+            return Ok(crate::types::DigestOutput {
+                selected_items: Vec::new(),
+                text: "No recent items found for digest creation.".to_string(),
+            });
+        }
+        
+        // Create digest using RSS digest model
+        let digest = RssDigestModel::digest(model_spec, memory, preferences, &input_items);
+        
+        info!("Created digest from {} input items with {} selected items", 
+              input_items.len(), digest.selected_items.len());
+        
+        Ok(digest)
+    }
 }
 
 // Implementation of the Ingester trait for integration with the interfaces
@@ -166,11 +207,25 @@ impl RssIngester {
 }
 
 impl Ingester for RssIngester {
-    fn watch(_source: &LiveSourceSpec) -> WatchRest {
-        // This would typically trigger the aggregator to start monitoring the RSS feed
-        // For now, return a default wait time
+    fn watch(source: &LiveSourceSpec) -> WatchRest {
+        // Calculate appropriate wait time based on RSS feed characteristics
+        // RSS feeds typically update on different schedules:
+        // - News feeds: 15-30 minutes  
+        // - Blog feeds: 1-24 hours
+        // - Podcast feeds: Daily/weekly
+        
+        let wait_time_ms = if source.uri.contains("news") || source.uri.contains("breaking") {
+            900000  // 15 minutes for news feeds
+        } else if source.uri.contains("blog") || source.uri.contains("post") {
+            3600000 // 1 hour for blog feeds  
+        } else {
+            1800000 // 30 minutes default
+        };
+        
+        info!("RSS Ingester watching source: {} with interval {}ms", source.uri, wait_time_ms);
+        
         WatchRest {
-            wait_at_least_ms: 3600000, // 1 hour
+            wait_at_least_ms: wait_time_ms,
         }
     }
 }

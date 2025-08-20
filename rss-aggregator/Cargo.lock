@@ -1062,6 +1062,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "interfaces"
+version = "0.1.0"
+
+[[package]]
 name = "io-uring"
 version = "0.7.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1673,6 +1677,7 @@ dependencies = [
  "chrono",
  "clap",
  "feed-rs",
+ "interfaces",
  "reqwest",
  "serde",
  "serde_json",

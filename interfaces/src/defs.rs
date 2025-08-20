@@ -8,7 +8,7 @@ pub struct InputItem {
     pub vision: Vec<u8>,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct InputItemReference {
     // tbd
     pub text_start_index: usize,
