@@ -4,6 +4,7 @@ pub struct LiveSourceSpec {
 
 pub struct InputItem {
     pub uri: String,
+    pub live_source_uri: String,
     pub text: String,
     pub vision: Option<Vec<u8>>,
 }

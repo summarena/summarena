@@ -29,6 +29,7 @@ fn main() {
     let input_items = vec![
         InputItem {
             uri: item0_uri.to_owned(),
+            live_source_uri: "tag:summarena.pages.dev,2025-08:live_source/dummy".to_owned(),
             text: item0_text.to_owned(),
             vision: None,
         },
