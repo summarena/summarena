@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 futures = "0.3.31"
-rusqlite = "0.37.0"
+sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "sqlite", "migrate"] }
 tokio = { version = "1", features = ["full"] }
