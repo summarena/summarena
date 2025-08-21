@@ -21,6 +21,13 @@ pub struct WatchRest {
 }
 
 pub trait Ingester {
+    /// Watch a source for incoming items (for a push source) or get new items
+    /// (for a pull source).
+    ///
+    /// Call [`crate::state::ingest`] for each item.
+    ///
+    /// When there's nothing to be done for a while, return with a
+    /// [`WatchRest`] specifying how long to wait before checking again.
     fn watch(source: &LiveSourceSpec) -> impl Future<Output = WatchRest>;
 }
 
