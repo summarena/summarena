@@ -13,7 +13,8 @@ pub mod defs;
 pub mod empty;
 pub mod state;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let spec = DigestModelSpec {
         uri: "tag:summarena.pages.dev,2025-08:digest_model/baseline".to_owned(),
     };
@@ -34,7 +35,7 @@ fn main() {
             vision: None,
         },
     ];
-    let output = BaselineDigestModel::digest(&spec, &memory_in, &preferences, &input_items);
+    let output = BaselineDigestModel::digest(&spec, &memory_in, &preferences, &input_items).await;
     println!("output: {:#?}", &output);
     let other_output = DigestOutput {
         selected_items: vec![
@@ -50,6 +51,6 @@ fn main() {
         ],
         text: "They said the usual hello world".to_owned(),
     };
-    let memory_out = BaselineDigestModel::reflect(&spec, &memory_in, &preferences, &input_items, &output, &other_output, true);
+    let memory_out = BaselineDigestModel::reflect(&spec, &memory_in, &preferences, &input_items, &output, &other_output, true).await;
     println!("memory_out: {:#?}", &memory_out);
 }

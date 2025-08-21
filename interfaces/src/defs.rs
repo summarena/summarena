@@ -21,7 +21,7 @@ pub struct WatchRest {
 }
 
 pub trait Ingester {
-    fn watch(source: &LiveSourceSpec) -> WatchRest;
+    fn watch(source: &LiveSourceSpec) -> impl Future<Output = WatchRest>;
 }
 
 pub struct DigestPreferences {
@@ -64,8 +64,8 @@ pub struct DigestOutput {
 // method.
 
 pub trait DigestModel {
-    fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> DigestOutput;
-    fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory;
+    fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> impl Future<Output = DigestOutput>;
+    fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> impl Future<Output = DigestModelMemory>;
 }
 
 pub struct DigestAttempt {

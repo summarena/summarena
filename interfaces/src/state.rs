@@ -7,7 +7,7 @@ fn get_db_connection() -> Connection {
     Connection::open("omni.db").unwrap()
 }
 
-pub fn ingest(source: &LiveSourceSpec, input_item: InputItem) {
+pub async fn ingest(source: &LiveSourceSpec, input_item: InputItem) {
     let conn = get_db_connection();
     conn.execute(
         "
