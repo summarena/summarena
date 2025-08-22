@@ -59,7 +59,7 @@ impl RssState {
     async fn store_input_item(&self, feed_id: Uuid, input_item: &InputItem) -> Result<Uuid> {
         // Create a feed entry from the input item
         let entry_id = Uuid::new_v4();
-        let now = Utc::now();
+        let _now = Utc::now();
         
         // Parse the input item text to extract title and content
         // The InputItem text format is: "Title: {title}\n\nDescription: {description}\n\nContent: {content}"

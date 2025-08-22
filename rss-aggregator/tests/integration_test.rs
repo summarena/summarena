@@ -1,4 +1,10 @@
-use rss_aggregator::{FetchConfig, RssAggregator, types::*};
+use rss_aggregator::{
+    FetchConfig, RssAggregator, types::*, 
+    // New modular components
+    PipelineBuilder, WsjFeedSource, PullFeed,
+    RelevanceStage, SummarizationStage, FilterStage, UserAggregatorManager,
+    DigestPreferences, DigestModelMemory
+};
 use sqlx::{PgPool, Row};
 use std::env;
 use tokio;
@@ -7,6 +13,141 @@ use tracing_subscriber;
 use uuid::Uuid;
 
 const WSJ_RSS_URL: &str = "https://feeds.content.dowjones.io/public/rss/RSSWorldNews";
+
+#[tokio::test]
+async fn test_modular_pipeline_end_to_end() -> Result<()> {
+    // Initialize tracing
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .init();
+
+    info!("Starting modular pipeline end-to-end test");
+    
+    // Create fetch configuration
+    let fetch_config = FetchConfig {
+        user_agent: "RSS-Pipeline-Test/1.0".to_string(),
+        timeout_seconds: 30,
+        max_retries: 2,
+        retry_delay_seconds: 1,
+        respect_robots_txt: false, // Disable for testing
+        max_feed_size_mb: 10,
+        follow_redirects: true,
+        max_redirects: 5,
+    };
+    
+    // Create WSJ feed source
+    let wsj_source = Box::new(WsjFeedSource::main_feed(fetch_config.clone()));
+    info!("Created WSJ source: {}", wsj_source.source_name());
+    
+    // Create processing stages
+    let relevance_stage = Box::new(RelevanceStage::new());
+    let summarization_stage = Box::new(SummarizationStage::new());
+    let filter_stage = Box::new(FilterStage::new(0.3).with_max_items(10));
+    
+    // Create user preferences
+    let preferences = DigestPreferences {
+        uri: "test-user-prefs".to_string(),
+        description: "I'm interested in technology, business news, and AI developments".to_string(),
+    };
+    
+    let memory = DigestModelMemory {
+        text: "Previous context about user interests in tech and finance".to_string(),
+    };
+    
+    // Build the pipeline
+    let mut pipeline = PipelineBuilder::new()
+        .add_source(wsj_source)
+        .add_processing_stage(relevance_stage)
+        .add_processing_stage(summarization_stage)
+        .add_processing_stage(filter_stage)
+        .add_user_aggregator("test-user".to_string(), "daily", None).await?
+        .add_user_preferences("test-user".to_string(), preferences, memory).await?
+        .build();
+    
+    info!("Built modular ingestion pipeline");
+    
+    // Start the pipeline
+    pipeline.start().await?;
+    info!("Started pipeline");
+    
+    // Manually trigger ingestion for testing
+    let items_ingested = pipeline.ingest_all_sources().await?;
+    info!("Ingested {} items from sources", items_ingested);
+    
+    // Wait a bit for processing
+    tokio::time::sleep(tokio::time::Duration::from_secs(10)).await;
+    
+    // Check for aggregated output
+    let mut _outputs_received = 0;
+    for _ in 0..5 {
+        if let Some(output) = pipeline.get_output().await {
+            info!("Received aggregated output for user: {}", output.user_id);
+            info!("Aggregator type: {}", output.aggregator_type);
+            info!("Items in output: {}", output.items.len());
+            if let Some(summary) = &output.summary {
+                info!("Summary length: {} characters", summary.len());
+            }
+            _outputs_received += 1;
+        } else {
+            tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+        }
+    }
+    
+    // Stop the pipeline
+    pipeline.stop().await?;
+    info!("Stopped pipeline");
+    
+    // Assertions
+    assert!(items_ingested > 0, "Should have ingested some items");
+    info!("Modular pipeline test completed successfully!");
+    
+    Ok(())
+}
+
+#[tokio::test]
+async fn test_user_aggregator_manager() -> Result<()> {
+    // Initialize tracing
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .init();
+
+    info!("Starting user aggregator manager test");
+    
+    let manager = UserAggregatorManager::new();
+    
+    // Test creating different types of aggregators
+    manager.create_daily_digest("user1".to_string(), Some(20)).await?;
+    manager.create_user_aggregator("user2".to_string(), "hourly", None).await?;
+    manager.create_custom_time_bucket("user3".to_string(), 6, Some(15)).await?; // 6-hour buckets
+    
+    // Test manager stats
+    let stats = manager.get_manager_stats().await;
+    info!("Manager stats: total_users={}, types={:?}", stats.total_users, stats.aggregator_types);
+    
+    // Test bulk operations
+    let bulk_configs = vec![
+        ("user4".to_string(), "daily".to_string(), None),
+        ("user5".to_string(), "weekly".to_string(), None),
+    ];
+    
+    let bulk_result = manager.bulk_create_aggregators(bulk_configs).await?;
+    info!("Bulk create result: {} successful, {} failed", 
+          bulk_result.successful.len(), bulk_result.failed.len());
+    
+    // Test user lookup
+    let managed_users = manager.get_managed_users().await;
+    info!("Managed users: {:?}", managed_users);
+    
+    // Assertions
+    assert_eq!(stats.total_users, 3, "Should have 3 users initially");
+    assert!(stats.aggregator_types.contains_key("time_bucket_24h"), "Should have daily aggregators");
+    assert_eq!(managed_users.len(), 5, "Should have 5 users after bulk create");
+    assert_eq!(bulk_result.successful.len(), 2, "Should have 2 successful bulk creates");
+    assert_eq!(bulk_result.failed.len(), 0, "Should have no failed bulk creates");
+    
+    info!("User aggregator manager test completed successfully!");
+    Ok(())
+}
 
 #[tokio::test]
 async fn test_rss_aggregator_end_to_end() -> Result<()> {
