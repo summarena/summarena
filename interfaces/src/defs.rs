@@ -5,10 +5,10 @@ pub struct LiveSourceSpec {
 pub struct InputItem {
     pub uri: String,
     pub text: String,
-    pub vision: Vec<u8>,
+    pub vision: Option<Vec<u8>>,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct InputItemReference {
     // tbd
     pub text_start_index: usize,
@@ -37,15 +37,18 @@ pub struct DigestModelSpec {
     pub uri: String,
 }
 
+#[derive(Debug)]
 pub struct DigestModelMemory {
     pub text: String,
 }
 
+#[derive(Debug)]
 pub struct DigestSelectedItem {
     pub input_item_uri: String,
     pub references: Vec<InputItemReference>,
 }
 
+#[derive(Debug)]
 pub struct DigestOutput {
     pub selected_items: Vec<DigestSelectedItem>,
     pub text: String,
