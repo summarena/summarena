@@ -11,7 +11,9 @@ struct PonderedPreferences {
     pub look_out_for: String,
 }
 
-fn ponder_preferences(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences) -> PonderedPreferences {
+async fn ponder_preferences(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences) -> PonderedPreferences {
+    _ = spec;
+    _ = memory;
     PonderedPreferences {
         look_out_for: preferences.description.clone(),
     }
@@ -23,22 +25,35 @@ struct FocusedSummary {
     pub references: Vec<InputItemReference>,
 }
 
-fn ponder_relevance_and_summarize(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, input_item: &InputItem) -> FocusedSummary {
+async fn ponder_relevance_and_summarize(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, input_item: &InputItem) -> FocusedSummary {
+    _ = spec;
+    _ = pondered_preferences.look_out_for;
     FocusedSummary {
         summary_text: input_item.text.clone(),
         references: vec![InputItemReference { text_start_index: 0, text_end_index: input_item.text.len() }],
     }
 }
 
-fn select_best(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, focused_summaries: &[FocusedSummary]) -> Vec<usize> {
+async fn select_best(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, focused_summaries: &[FocusedSummary]) -> Vec<usize> {
+    _ = spec;
+    _ = pondered_preferences.look_out_for;
     (0..focused_summaries.len()).collect()
 }
 
-fn compose_digest(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, best_summaries: &[FocusedSummary]) -> String {
+async fn compose_digest(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, best_summaries: &[FocusedSummary]) -> String {
+    _ = spec;
+    _ = pondered_preferences.look_out_for;
     best_summaries.iter().map(|summary| summary.summary_text.clone()).collect::<Vec<String>>().join("\n")
 }
 
-fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory {
+async fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory {
+    _ = spec;
+    _ = memory;
+    _ = preferences;
+    _ = input_items;
+    _ = self_output;
+    _ = opponent_output;
+    _ = win;
     DigestModelMemory {
         text: memory.text.clone(),
     }
@@ -48,20 +63,20 @@ pub struct BaselineDigestModel;
 
 impl DigestModel for BaselineDigestModel {
 
-    fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> DigestOutput {
-        let pondered_preferences = ponder_preferences(spec, memory, preferences);
-        let focused_summaries = input_items.iter().map(|input_item| ponder_relevance_and_summarize(spec, &pondered_preferences, input_item)).collect::<Vec<FocusedSummary>>();
-        let best_summary_indices = select_best(spec, &pondered_preferences, &focused_summaries);
+    async fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> DigestOutput {
+        let pondered_preferences = ponder_preferences(spec, memory, preferences).await;
+        let focused_summaries = futures::future::join_all(input_items.iter().map(|input_item| ponder_relevance_and_summarize(spec, &pondered_preferences, input_item))).await;
+        let best_summary_indices = select_best(spec, &pondered_preferences, &focused_summaries).await;
         let best_summaries = best_summary_indices.iter().map(|index| focused_summaries[*index].clone()).collect::<Vec<FocusedSummary>>();
-        let digest_text = compose_digest(spec, &pondered_preferences, &best_summaries);
+        let digest_text = compose_digest(spec, &pondered_preferences, &best_summaries).await;
         DigestOutput {
             selected_items: best_summary_indices.iter().map(|index| DigestSelectedItem { input_item_uri: input_items[*index].uri.clone(), references: focused_summaries[*index].references.clone() }).collect::<Vec<DigestSelectedItem>>(),
             text: digest_text,
         }
     }
 
-    fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory {
-        reflect(spec, memory, preferences, input_items, self_output, opponent_output, win)
+    async fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory {
+        reflect(spec, memory, preferences, input_items, self_output, opponent_output, win).await
     }
 
 }
