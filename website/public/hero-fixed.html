@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-container {
+            display: grid;
+            grid-template-columns: 600px 340px;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .content-preview {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .digest-header {
+            background: linear-gradient(135deg, #2b61d0 0%, #3b82f6 100%);
+            color: white;
+            padding: 24px 28px;
+            position: relative;
+        }
+        
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .logo {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .brand-text h1 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        
+        .brand-text .tagline {
+            opacity: 0.9;
+            font-size: 12px;
+        }
+        
+        .digest-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .digest-date {
+            opacity: 0.8;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+        
+        .digest-content {
+            padding: 24px;
+            height: 440px;
+            overflow-y: auto;
+        }
+        
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .highlight-item {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+            border: 1px solid #e0e7ff;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .highlight-number {
+            background: #2b61d0;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .highlight-content {
+            flex: 1;
+        }
+        
+        .highlight-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .highlight-desc {
+            color: #475569;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+        
+        .paper-preview {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+            background: #f8fafc;
+        }
+        
+        .paper-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #2b61d0;
+            margin-bottom: 3px;
+        }
+        
+        .paper-authors {
+            color: #64748b;
+            font-size: 9px;
+            margin-bottom: 6px;
+        }
+        
+        .paper-summary {
+            color: #475569;
+            font-size: 9px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+        
+        .metric-mini {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+            padding: 4px 6px;
+            margin: 3px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .metric-mini .label {
+            color: #64748b;
+            font-size: 8px;
+        }
+        
+        .metric-mini .value {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 8px;
+        }
+        
+        .tags-mini {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+        
+        .tag-mini {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 2px 4px;
+            border-radius: 6px;
+            font-size: 7px;
+            font-weight: 500;
+        }
+        
+        .tag-mini.breakthrough {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .illustration-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .floating-elements {
+            position: relative;
+            width: 280px;
+            height: 240px;
+            margin-bottom: 24px;
+        }
+        
+        .floating-card {
+            position: absolute;
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .card1 {
+            top: 10px;
+            left: 10px;
+            width: 120px;
+            animation: float1 4s ease-in-out infinite;
+        }
+        
+        .card2 {
+            top: 80px;
+            right: 20px;
+            width: 140px;
+            animation: float2 5s ease-in-out infinite;
+        }
+        
+        .card3 {
+            bottom: 20px;
+            left: 40px;
+            width: 110px;
+            animation: float3 3.5s ease-in-out infinite;
+        }
+        
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(1deg); }
+        }
+        
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(-1deg); }
+        }
+        
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(0.5deg); }
+        }
+        
+        .card-content {
+            color: #1e293b;
+        }
+        
+        .card-title {
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .card-text {
+            font-size: 8px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+        
+        .value-props {
+            max-width: 300px;
+        }
+        
+        .main-heading {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .main-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        
+        .feature-icon {
+            background: rgba(255,255,255,0.2);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        
+        @media (max-width: 1000px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            .illustration-panel {
+                order: -1;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="content-preview">
+            <div class="digest-header">
+                <div class="brand-header">
+                    <div class="logo">S</div>
+                    <div class="brand-text">
+                        <h1>SummArena</h1>
+                        <div class="tagline">Research Digest</div>
+                    </div>
+                </div>
+                
+                <div class="digest-title">Daily Research Brief</div>
+                <div class="digest-date">August 22, 2025</div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Papers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Findings</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">23</div>
+                        <div class="stat-label">Citations</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="digest-content">
+                <div class="section-title">📋 Today's Highlights</div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-number">1</div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">New Mathematical Reasoning Breakthrough</div>
+                        <div class="highlight-desc">Novel approach achieves 94.6% accuracy on complex problem-solving tasks through enhanced reasoning methodologies.</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-number">2</div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">Spatial Reasoning Benchmark Results</div>
+                        <div class="highlight-desc">New evaluation framework reveals significant gaps in current multimodal approaches to spatial understanding.</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-number">3</div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">Open Research Model Release</div>
+                        <div class="highlight-desc">High-performance reasoning system now available for research use, running efficiently on standard hardware.</div>
+                    </div>
+                </div>
+                
+                <div class="paper-preview">
+                    <div class="paper-title">Advanced Problem Solving in Complex Domains</div>
+                    <div class="paper-authors">Research Consortium</div>
+                    <div class="paper-summary">Comprehensive study demonstrating breakthrough performance across mathematical, logical, and analytical reasoning tasks...</div>
+                    <div class="metric-mini">
+                        <span class="label">Problem Solving</span>
+                        <span class="value">94.6%</span>
+                    </div>
+                    <div class="metric-mini">
+                        <span class="label">Analytical Tasks</span>
+                        <span class="value">88.4%</span>
+                    </div>
+                    <div class="tags-mini">
+                        <span class="tag-mini breakthrough">Breakthrough</span>
+                        <span class="tag-mini">Methodology</span>
+                        <span class="tag-mini">Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="illustration-panel">
+            <div class="floating-elements">
+                <div class="floating-card card1">
+                    <div class="card-content">
+                        <div class="card-title">Your Sources</div>
+                        <div class="card-text">Journals, arxiv, newsletters</div>
+                    </div>
+                </div>
+                <div class="floating-card card2">
+                    <div class="card-content">
+                        <div class="card-title">Key Insights</div>
+                        <div class="card-text">Summarized findings</div>
+                    </div>
+                </div>
+                <div class="floating-card card3">
+                    <div class="card-content">
+                        <div class="card-title">Citations</div>
+                        <div class="card-text">Linked to originals</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="value-props">
+                <div class="main-heading">Your Daily Research Brief</div>
+                <div class="main-desc">Stay current without the overwhelm</div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">📊</div>
+                        <span>Key findings summarized</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔗</div>
+                        <span>All sources linked</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <span>Save hours of reading</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

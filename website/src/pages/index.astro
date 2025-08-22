@@ -3,7 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 ---
 
-<Layout title="SummArena — Your Personal Distiller" description="An AI digest you control.">
+<Layout
+  title="SummArena — Research brief with citations"
+  description="One daily research brief from your sources: arXiv, newsletters, RSS, YouTube. Linked citations. Free during pilot."
+>
   <Header />
 
   <!-- Hero -->
@@ -14,32 +17,82 @@ import Header from '../components/Header.astro';
     >
       <div class="lg:col-span-7 text-center lg:text-left">
         <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-          Your Personal Distiller for Information
+          One research brief keeps you current.
         </h1>
-        <p class="mt-5 text-lg text-slate-700 max-w-xl mx-auto lg:mx-0">
-          Get a daily AI digest of the content you care about. Define the signal to surface what
-          matters.
+        <p class="mt-5 text-lg text-slate-700 max-w-[60ch] mx-auto lg:mx-0">
+          Connect arXiv, newsletters, RSS, and YouTube. Get a single daily brief with links and
+          citations. Save 5+ hours a week.
         </p>
-        <p class="mt-2 text-sm text-slate-500">arXiv • Newsletters • RSS • YouTube • 30+ sources</p>
 
         <div class="mt-8" id="cta">
-          <a
-            href="#pilot"
-            data-track="hero-cta-get-digest"
-            class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-          >
-            Get Your Personal Digest for Free
-          </a>
-          <p class="mt-2 text-sm text-slate-600">
-            Built for researchers and professionals drowning in information.
+          <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+            <a
+              href="#pilot"
+              data-track="cta_hero_click"
+              class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+            >
+              Start free
+            </a>
+            <a
+              href="#sample"
+              data-track="sample_view"
+              class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-soft hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+            >
+              See a sample brief
+            </a>
+          </div>
+        </div>
+
+        <!-- Proof row -->
+        <div class="mt-6">
+          <p class="text-sm text-slate-600 text-center lg:text-left">
+            Used by researchers at UC Berkeley, Stanford, ETH Zurich
           </p>
+        </div>
+
+        <!-- Trust badges -->
+        <div
+          class="mt-4 flex flex-wrap justify-center lg:justify-start gap-4 text-xs text-slate-500"
+        >
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+            Citations in every brief
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            Privacy-first
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            No credit card
+          </span>
         </div>
       </div>
 
       <img
-        src="/hero.png"
-        alt="Abstract digest"
+        src="/brief-900.webp"
+        srcset="/brief-600.webp 600w, /brief-900.webp 900w, /brief-1200.webp 1200w"
+        sizes="(min-width:1024px) 36rem, 92vw"
+        alt="Sample SummArena brief showing research summaries with citations"
         class="lg:col-span-5 w-full max-w-[36rem] rounded-2xl lg:self-center lg:mt-6 mx-auto lg:mx-0"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
       />
     </div>
   </section>
@@ -91,10 +144,10 @@ import Header from '../components/Header.astro';
     <!-- Title -->
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
-        An AI Digest You Control
+        A Research Digest You Control
       </h2>
       <p class="mt-4 text-slate-600">
-        Our AI reads everything you follow and delivers a clear digest with citations. You control
+        We read everything you follow and deliver a clear digest with citations. You control
         the style and focus so that every digest fits your needs.
       </p>
     </div>
@@ -121,7 +174,7 @@ import Header from '../components/Header.astro';
           >
             🔗
           </div>
-          <p class="font-semibold text-slate-900">Direct links &amp; citations</p>
+          <p class="font-semibold text-slate-900">Linked citations</p>
           <p class="mt-1 text-sm text-slate-600">Verify fast and dive deeper when needed.</p>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
@@ -130,7 +183,7 @@ import Header from '../components/Header.astro';
           >
             ✦
           </div>
-          <p class="font-semibold text-slate-900">Tailored to you</p>
+          <p class="font-semibold text-slate-900">Fully configurable</p>
           <p class="mt-1 text-sm text-slate-600">Only the updates you actually care about.</p>
         </div>
       </div>
@@ -139,6 +192,9 @@ import Header from '../components/Header.astro';
       <h3 class="mt-14 text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
         How it works
       </h3>
+      <p class="mt-4 text-center text-lg text-slate-700">
+        Connect sources → Set signal → Get brief on your schedule
+      </p>
       <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Step 1 -->
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
@@ -165,7 +221,7 @@ import Header from '../components/Header.astro';
               >1</span
             >
           </div>
-          <p class="font-semibold text-slate-900">Connect your sources</p>
+          <p class="font-semibold text-slate-900">Connect sources</p>
           <p class="mt-1 text-sm text-slate-600">
             arXiv, newsletters, RSS, YouTube, and more — all in one place.
           </p>
@@ -194,7 +250,7 @@ import Header from '../components/Header.astro';
               >2</span
             >
           </div>
-          <p class="font-semibold text-slate-900">Shape your digest</p>
+          <p class="font-semibold text-slate-900">Set signal</p>
           <p class="mt-1 text-sm text-slate-600">
             Define the signal to cut the noise and surface what matters.
           </p>
@@ -223,7 +279,7 @@ import Header from '../components/Header.astro';
               >3</span
             >
           </div>
-          <p class="font-semibold text-slate-900">Schedule the delivery</p>
+          <p class="font-semibold text-slate-900">Get brief on your schedule</p>
           <p class="mt-1 text-sm text-slate-600">
             Get your digest via inbox or dashboard. Daily, weekly, or whenever you want it.
           </p>
@@ -249,6 +305,142 @@ import Header from '../components/Header.astro';
           Join the Pilot
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- Sample Brief Section -->
+  <section id="sample" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">Sample Brief</h2>
+      <p class="mt-4 text-slate-600">
+        Here's what your daily research brief looks like — real summaries with linked citations.
+      </p>
+    </div>
+
+    <div class="mt-8 mx-auto max-w-4xl">
+      <!-- Article-style preview inspired by the demo -->
+      <article class="bg-white rounded-lg shadow-md">
+        <div class="px-8 py-10">
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900">Sample Research Brief</h3>
+                <p class="text-gray-600 text-lg">Daily Research Digest</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample content preview with realistic highlights -->
+          <div class="article-content max-w-none">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-xl font-semibold text-gray-900 pb-2 border-b-2 border-brand-100">
+                📋 Today's Highlights
+              </h4>
+              <div class="text-sm text-gray-500">15 papers • 23 citations</div>
+            </div>
+
+            <div class="space-y-3 mb-6">
+              <div
+                class="flex items-start bg-gradient-to-r from-brand-50 to-blue-50 p-4 rounded-lg border border-brand-100"
+              >
+                <span
+                  class="bg-brand-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                  >1</span
+                >
+                <div>
+                  <div class="font-semibold text-gray-900 mb-1">
+                    LiveMCP-101: Stress Testing MCP-enabled Agents
+                  </div>
+                  <div class="text-gray-700 text-sm">
+                    Frontier LLMs score &lt;60% on 101 real-world multi-tool tasks; exposes agent tool-use failure modes.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200"
+              >
+                <span
+                  class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                  >2</span
+                >
+                <div>
+                  <div class="font-semibold text-gray-900 mb-1">
+                    Mobile-Agent-v3: GUI Automation Framework
+                  </div>
+                  <div class="text-gray-700 text-sm">
+                    AndroidWorld 73.3, OSWorld 37.7; GUI-Owl-7B hits 66.4 and 29.4 on cross-platform automation.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-200"
+              >
+                <span
+                  class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                  >3</span
+                >
+                <div>
+                  <div class="font-semibold text-gray-900 mb-1">
+                    Don't Think Twice! Over-Reasoning Impairs Calibration
+                  </div>
+                  <div class="text-gray-700 text-sm">
+                    Search-augmented generation reaches 89.3% confidence accuracy vs 48.7% for pure reasoning.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+              <div class="flex items-center text-yellow-800 font-semibold mb-2">
+                <span class="mr-2">💡</span>
+                Key Insight
+              </div>
+              <p class="text-yellow-700 text-sm">
+                Agent tool-use reveals critical gaps: frontier LLMs achieve &lt;60% success on real-world multi-tool tasks, while GUI automation reaches new SOTA with 73.3% on AndroidWorld.
+              </p>
+            </div>
+
+            <p class="text-gray-600 italic text-center mb-2">
+              ...continues with detailed analysis, metrics, and citations
+            </p>
+            <div class="text-center text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1">
+                <span class="w-2 h-2 bg-brand-600 rounded-full"></span>
+                Agent Systems
+              </span>
+              <span class="mx-2">•</span>
+              <span class="inline-flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                GUI Automation
+              </span>
+              <span class="mx-2">•</span>
+              <span class="inline-flex items-center gap-1">
+                <span class="w-2 h-2 bg-purple-600 rounded-full"></span>
+                Calibration & Reasoning
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+            <a
+              href="/sample-brief.pdf"
+              download
+              data-track="sample_download"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              Download Full Sample Brief
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -328,8 +520,8 @@ import Header from '../components/Header.astro';
             ></path>
           </svg>
           <blockquote class="text-slate-800 leading-snug ml-0 mr-1">
-            “I signed up for all the right newsletters, but never had time to read them. SummArena
-            declutters my inbox and keeps me up to date with the key developments in AI.”
+            "I signed up for all the right newsletters, but never had time to read them. SummArena
+            declutters my inbox and keeps me up to date with the key developments in my field."
           </blockquote>
           <figcaption class="mt-3 text-sm text-slate-600">
             <div class="font-medium text-slate-800">Product Manager</div>
@@ -372,7 +564,7 @@ import Header from '../components/Header.astro';
           <ul
             class="mt-6 space-y-3 text-slate-700 list-disc list-outside pl-6 marker:text-brand-600 marker:text-base"
           >
-            <li>Stay ahead with your personalized AI digest</li>
+            <li>Stay ahead with your personalized research digest</li>
             <li>Help shape the product with your feedback</li>
             <li>100% free during the pilot, no credit card required</li>
           </ul>
@@ -383,60 +575,35 @@ import Header from '../components/Header.astro';
         <div class="lg:col-span-5">
           <!-- keep this a simple white card; no extra border on the outer wrapper -->
           <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft -mx-2 sm:mx-0">
-            <form id="contact-form" class="space-y-4">
-              <div class="space-y-4 px-1.5">
-                <div>
-                  <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@mail.com"
-                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
-            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-                <div>
-                  <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
-                  <input
-                    id="role"
-                    name="role"
-                    type="text"
-                    placeholder="Researcher, Product Manager"
-                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
-            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-                <div>
-                  <label for="interests" class="block text-sm font-medium text-slate-700"
-                    >What do you want in your digest?</label
-                  >
-                  <input
-                    id="interests"
-                    name="interests"
-                    type="text"
-                    placeholder="ML papers, substack, tech news"
-                    class="mt-1 block w-[97%] rounded-lg border border-slate-300 bg-white pl-2 py-1 placeholder:text-sm text-sm sm:text-base text-slate-900
-            placeholder-slate-400 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  id="submit-btn"
-                  data-track="pilot-form-submit"
-                  class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600
-    px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-soft hover:bg-brand-700
-    focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 cursor-pointer transition
-    disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Request Invite
-                </button>
-                <p id="form-message" class="text-xs text-center" aria-live="polite"></p>
-                <p class="text-xs text-slate-500 text-center">
-                  By requesting an invite you agree to be contacted about the pilot.
-                </p>
-              </div>
+            <form id="lead-form" class="space-y-3" action="/api/subscribe" method="POST" novalidate>
+              <label for="email" class="sr-only">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                required
+                placeholder="you@mail.com"
+                class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500"
+              />
+              <input
+                type="text"
+                name="company"
+                tabindex="-1"
+                autocomplete="off"
+                class="hidden"
+                aria-hidden="true"
+              />
+              <button
+                type="submit"
+                id="lead-submit"
+                class="w-full rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-700"
+              >
+                Start free
+              </button>
+              <p id="lead-msg" class="text-xs text-center" aria-live="polite"></p>
+              <p class="text-xs text-slate-500 text-center">No credit card. Unsubscribe anytime.</p>
             </form>
           </div>
         </div>
@@ -498,59 +665,103 @@ import Header from '../components/Header.astro';
       </div>
     </div>
   </section>
-  <script>
-    document.getElementById('contact-form')?.addEventListener('submit', async event => {
-      event.preventDefault();
+  <script is:inline>
+    const params = new URLSearchParams(location.search);
+    const form = document.getElementById('lead-form');
+    const msg = document.getElementById('lead-msg');
+    const btn = document.getElementById('lead-submit');
 
-      const form = event.target as HTMLFormElement;
-      const formData = new FormData(form);
-      const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-      const messageEl = document.getElementById('form-message') as HTMLElement;
-
-      const email = formData.get('email') as string;
-
-      if (!email) {
-        messageEl.textContent = 'Please enter your email address.';
-        messageEl.className = 'text-xs text-center text-red-600';
-        return;
-      }
-
-      // Show loading state
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting...';
-      messageEl.textContent = '';
-
-      try {
-        const response = await fetch('/api/subscribe', {
-          method: 'POST',
-          body: formData,
+    // Reliable view event
+    (function trackView() {
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track('view_lp', {
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          referrer: document.referrer || '',
         });
+      } else setTimeout(trackView, 300);
+    })();
 
-        const result = await response.json().catch(() => ({}));
+    document
+      .getElementById('email')
+      ?.addEventListener('focus', () => window.umami?.track('form_start'));
 
-        if (result.ok && result.status === 'subscribed') {
-          messageEl.textContent = "Thanks! You're on the list. We'll be in touch soon.";
-          messageEl.className = 'text-xs text-center text-green-600';
-          form.reset();
-        } else if (result.ok && result.status === 'already_subscribed') {
-          messageEl.textContent = "You're already on our list! We'll be in touch soon.";
-          messageEl.className = 'text-xs text-center text-blue-600';
-        } else if (result.error === 'invalid_email') {
-          messageEl.textContent = 'Please enter a valid email address.';
-          messageEl.className = 'text-xs text-center text-red-600';
+    form?.addEventListener('submit', async e => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Submitting';
+      msg.textContent = '';
+      msg.className = 'text-xs text-center';
+
+      window.umami?.track('form_submit');
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (data.ok) {
+          msg.textContent = "You're in. Check the sample below.";
+          msg.className = 'text-xs text-center text-green-600';
+          window.umami?.track('form_success');
         } else {
-          messageEl.textContent = 'Something went wrong. Please try again.';
-          messageEl.className = 'text-xs text-center text-red-600';
+          msg.textContent =
+            data.error === 'already_subscribed'
+              ? "You're already on the list."
+              : 'Please enter a valid email.';
+          msg.className = 'text-xs text-center text-red-600';
+          window.umami?.track('form_error');
         }
-      } catch (error) {
-        console.error('Form submission error:', error);
-        messageEl.textContent = 'Something went wrong. Please try again.';
-        messageEl.className = 'text-xs text-center text-red-600';
+      } catch {
+        msg.textContent = 'Error. Try again.';
+        msg.className = 'text-xs text-center text-red-600';
+        window.umami?.track('form_error');
       } finally {
-        // Reset button state
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Request Invite';
+        btn.disabled = false;
+        btn.textContent = 'Start free';
       }
     });
+
+    // Hide mobile CTA when #pilot is visible
+    const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div');
+    const pilot = document.getElementById('pilot');
+    if (bar && pilot && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        bar.style.display = e.isIntersecting ? 'none' : '';
+      }).observe(pilot);
+    }
+
+    // click tracking for [data-track]
+    document.addEventListener('click', e => {
+      const el = e.target && e.target.closest?.('[data-track]');
+      const name = el && el.getAttribute && el.getAttribute('data-track');
+      if (name && window.umami?.track) window.umami.track(name);
+    });
+
+    // section view tracking for [data-track-view] (fires once per section)
+    document.querySelectorAll('[data-track-view]').forEach(el => {
+      const name = el.getAttribute('data-track-view');
+      if (!name) return;
+      const io = new IntersectionObserver(
+        entries => {
+          const ent = entries[0];
+          if (ent.isIntersecting) {
+            window.umami?.track?.(name);
+            io.unobserve(el);
+          }
+        },
+        { threshold: 0.5 }
+      );
+      io.observe(el);
+    });
   </script>
+
+  <!-- Mobile persistent bottom bar CTA -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-4 md:hidden">
+    <a
+      href="#pilot"
+      data-track="mobile-bottom-cta"
+      class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+    >
+      Start free
+    </a>
+  </div>
 </Layout>

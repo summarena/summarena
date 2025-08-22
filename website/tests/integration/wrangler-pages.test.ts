@@ -82,21 +82,22 @@ describe('Wrangler Pages Integration Tests', () => {
     }
   });
 
-  it('should serve the homepage', async () => {
+  it('should serve the homepage with updated form', async () => {
     const response = await fetch(`${baseUrl}/`);
     expect(response.status).toBe(200);
 
     const html = await response.text();
     expect(html).toContain('SummArena');
-    expect(html).toContain('contact-form');
+    expect(html).toContain('lead-form'); // Updated form ID
+    expect(html).toContain('Start free'); // Updated CTA text
+    expect(html).toContain('One AI brief keeps you current'); // Updated hero copy
   });
 
-  it('should successfully subscribe a new email via API', async () => {
+  it('should successfully subscribe a new email via API (minimal form)', async () => {
     const uniqueEmail = `integration-test-${Date.now()}@example.com`;
     const formData = new FormData();
     formData.append('email', uniqueEmail);
-    formData.append('role', 'Tester');
-    formData.append('interests', 'Testing, QA');
+    formData.append('company', ''); // Empty honeypot field
 
     const response = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -112,12 +113,48 @@ describe('Wrangler Pages Integration Tests', () => {
     });
   });
 
+  it('should handle honeypot protection - silently succeed for bots', async () => {
+    const uniqueEmail = `bot-test-${Date.now()}@example.com`;
+    const formData = new FormData();
+    formData.append('email', uniqueEmail);
+    formData.append('company', 'Bot Company Inc'); // Filled honeypot field
+
+    const response = await fetch(`${baseUrl}/api/subscribe`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    expect(response.status).toBe(200);
+
+    const result = await response.json();
+    expect(result).toEqual({
+      ok: true,
+      status: 'subscribed', // Should return success but not actually store
+    });
+
+    // Verify the email was NOT actually stored by trying again without honeypot
+    const formData2 = new FormData();
+    formData2.append('email', uniqueEmail);
+    formData2.append('company', ''); // Empty honeypot
+
+    const response2 = await fetch(`${baseUrl}/api/subscribe`, {
+      method: 'POST',
+      body: formData2,
+    });
+
+    expect(response2.status).toBe(200);
+    const result2 = await response2.json();
+    // If honeypot worked, this should be 'subscribed' not 'already_subscribed'
+    expect(result2.status).toBe('subscribed');
+  });
+
   it('should handle already subscribed email', async () => {
     const email = `already-subscribed-${Date.now()}@example.com`;
 
     // First subscription
     const formData1 = new FormData();
     formData1.append('email', email);
+    formData1.append('company', ''); // Empty honeypot
 
     const response1 = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -131,6 +168,7 @@ describe('Wrangler Pages Integration Tests', () => {
     // Second subscription (should be already_subscribed)
     const formData2 = new FormData();
     formData2.append('email', email);
+    formData2.append('company', ''); // Empty honeypot
 
     const response2 = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -148,6 +186,7 @@ describe('Wrangler Pages Integration Tests', () => {
   it('should reject invalid email addresses', async () => {
     const formData = new FormData();
     formData.append('email', 'invalid-email-format');
+    formData.append('company', ''); // Empty honeypot
 
     const response = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -171,6 +210,7 @@ describe('Wrangler Pages Integration Tests', () => {
       },
       body: JSON.stringify({
         email: `json-test-${Date.now()}@example.com`,
+        company: '', // Empty honeypot
       }),
     });
 
@@ -187,6 +227,7 @@ describe('Wrangler Pages Integration Tests', () => {
     const timestamp = Date.now();
     const formData = new FormData();
     formData.append('email', `UPPERCASE-${timestamp}@EXAMPLE.COM`);
+    formData.append('company', ''); // Empty honeypot
 
     const response = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -204,6 +245,7 @@ describe('Wrangler Pages Integration Tests', () => {
     // Try the same email in lowercase - should be already subscribed
     const formData2 = new FormData();
     formData2.append('email', `uppercase-${timestamp}@example.com`);
+    formData2.append('company', ''); // Empty honeypot
 
     const response2 = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -231,7 +273,7 @@ describe('Wrangler Pages Integration Tests', () => {
 
   it('should return proper error for missing email', async () => {
     const formData = new FormData();
-    // Don't add email field
+    formData.append('company', ''); // Empty honeypot but no email
 
     const response = await fetch(`${baseUrl}/api/subscribe`, {
       method: 'POST',
@@ -244,6 +286,63 @@ describe('Wrangler Pages Integration Tests', () => {
     expect(result).toEqual({
       ok: false,
       error: 'invalid_email',
+    });
+  });
+
+  it('should serve privacy and terms pages', async () => {
+    const privacyResponse = await fetch(`${baseUrl}/privacy`);
+    expect(privacyResponse.status).toBe(200);
+    const privacyHtml = await privacyResponse.text();
+    expect(privacyHtml).toContain('Privacy Policy');
+
+    const termsResponse = await fetch(`${baseUrl}/terms`);
+    expect(termsResponse.status).toBe(200);
+    const termsHtml = await termsResponse.text();
+    expect(termsHtml).toContain('Terms of Service');
+  });
+
+  it('should serve sample download link (even if file missing)', async () => {
+    // This will 404 until actual file is added, but should not crash
+    const response = await fetch(`${baseUrl}/sample-brief.pdf`);
+    // Either 200 (if file exists) or 404 (if not) - both are acceptable
+    expect([200, 404]).toContain(response.status);
+  });
+
+  it('should handle metadata correctly', async () => {
+    const response = await fetch(`${baseUrl}/`);
+    const html = await response.text();
+
+    // Check updated title and meta description
+    expect(html).toContain('SummArena — AI research brief with citations');
+    expect(html).toContain(
+      'One daily AI brief from your sources: arXiv, newsletters, RSS, YouTube. Linked citations. Free during pilot.'
+    );
+
+    // Check structured data
+    expect(html).toContain('application/ld+json');
+    expect(html).toContain('SoftwareApplication');
+    expect(html).toContain('FAQPage');
+  });
+
+  it('should maintain backward compatibility for role/interests fields if sent', async () => {
+    // Even though UI doesn't have these fields, API should still accept them
+    const uniqueEmail = `backward-compat-${Date.now()}@example.com`;
+    const formData = new FormData();
+    formData.append('email', uniqueEmail);
+    formData.append('role', 'Legacy Tester'); // Should be ignored but not error
+    formData.append('interests', 'Legacy interests'); // Should be ignored but not error
+    formData.append('company', ''); // Empty honeypot
+
+    const response = await fetch(`${baseUrl}/api/subscribe`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    expect(response.status).toBe(200);
+    const result = await response.json();
+    expect(result).toEqual({
+      ok: true,
+      status: 'subscribed',
     });
   });
 });

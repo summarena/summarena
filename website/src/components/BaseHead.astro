@@ -7,7 +7,7 @@ export interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/summarena_favicon.svg' } = Astro.props;
+const { title, description, image = '/og-1200x630.png' } = Astro.props;
 
 const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 ---
@@ -17,6 +17,7 @@ const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/summarena_favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<meta name="robots" content="index,follow" />
 
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
@@ -32,18 +33,68 @@ const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(image, Astro.site)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+<!-- Structured Data -->
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'SummArena',
+    applicationCategory: 'Productivity',
+    description: 'One daily AI brief from your sources with linked citations.',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  })}
+/>
+
+<!-- FAQ Schema -->
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What sources are supported?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "SummArena works with arXiv, newsletters, RSS feeds, YouTube, and more. You can also request new sources, and we'll add them based on feedback.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What does a digest look like?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Each digest is a personalized briefing. It highlights the key updates that matter to you, supported by citations. You control the style and focus.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why is it free?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The pilot program is 100% free. No credit card required. All we ask is your feedback to help us refine the product.',
+        },
+      },
+    ],
+  })}
+/>
 
 <!-- Analytics Integration -->
 {websiteId && <script is:inline defer src="/umami.js" data-website-id={websiteId} />}
-{websiteId && <script src="/src/scripts/analytics.ts" />}

@@ -13,3 +13,35 @@
     @apply no-underline;
   }
 }
+
+/* Article content styling inspired by the demo */
+.article-content {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.article-content h4 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  margin-top: 1.25rem !important;
+  color: #374151 !important;
+  line-height: 1.4 !important;
+}
+
+.article-content p {
+  margin-bottom: 1.25rem !important;
+  color: #374151 !important;
+  line-height: 1.7 !important;
+}
+
+.article-content ul {
+  margin-bottom: 1.25rem !important;
+  color: #374151 !important;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.7 !important;
+}

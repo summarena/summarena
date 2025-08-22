@@ -34,6 +34,12 @@ export const onRequestPost = async ({
       .toLowerCase();
     const role = String((body as any).role || '').trim();
     const interests = String((body as any).interests || '').trim();
+    const company = String((body as any).company || '').trim(); // honeypot
+
+    if (company) {
+      // silently succeed to mislead bots
+      return json({ ok: true, status: 'subscribed' });
+    }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json({ ok: false, error: 'invalid_email' }, 400);

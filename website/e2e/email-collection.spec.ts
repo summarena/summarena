@@ -6,28 +6,41 @@ test.describe('Email Collection Flow', () => {
     await page.goto('/');
   });
 
-  test('should display the contact form', async ({ page }) => {
-    // Check that the form elements are present
-    await expect(page.locator('#contact-form')).toBeVisible();
+  test('should display the lead form with single email input', async ({ page }) => {
+    // Check that the simplified form elements are present
+    await expect(page.locator('#lead-form')).toBeVisible();
     await expect(page.locator('#email')).toBeVisible();
-    await expect(page.locator('#role')).toBeVisible();
-    await expect(page.locator('#interests')).toBeVisible();
-    await expect(page.locator('#submit-btn')).toBeVisible();
+    await expect(page.locator('#lead-submit')).toBeVisible();
 
-    // Check form labels
-    await expect(page.locator('label[for="email"]')).toHaveText('Email');
-    await expect(page.locator('label[for="role"]')).toHaveText('Role');
-    await expect(page.locator('label[for="interests"]')).toHaveText(
-      'What do you want in your digest?'
-    );
+    // Check form attributes
+    await expect(page.locator('#lead-form')).toHaveAttribute('action', '/api/subscribe');
+    await expect(page.locator('#lead-form')).toHaveAttribute('method', 'POST');
 
     // Check button text
-    await expect(page.locator('#submit-btn')).toHaveText('Request Invite');
+    await expect(page.locator('#lead-submit')).toHaveText('Start free');
+
+    // Check email input attributes
+    await expect(page.locator('#email')).toHaveAttribute('type', 'email');
+    await expect(page.locator('#email')).toHaveAttribute('required');
+    await expect(page.locator('#email')).toHaveAttribute('autocomplete', 'email');
+
+    // Check honeypot field is present but hidden
+    await expect(page.locator('input[name="company"]')).toHaveClass(/hidden/);
+    await expect(page.locator('input[name="company"]')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  test('should have proper accessibility attributes', async ({ page }) => {
+    // Check screen reader label
+    await expect(page.locator('label[for="email"]')).toHaveClass(/sr-only/);
+    await expect(page.locator('label[for="email"]')).toHaveText('Email');
+
+    // Check aria-live for message element
+    await expect(page.locator('#lead-msg')).toHaveAttribute('aria-live', 'polite');
   });
 
   test('should validate email field client-side', async ({ page }) => {
     const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
+    const submitBtn = page.locator('#lead-submit');
 
     // Try to submit with invalid email
     await emailInput.fill('invalid-email');
@@ -36,22 +49,6 @@ test.describe('Email Collection Flow', () => {
     // Check that browser validation prevents submission
     await expect(emailInput).toHaveAttribute('type', 'email');
     await expect(emailInput).toHaveAttribute('required');
-  });
-
-  test('should show validation message for empty email', async ({ page }) => {
-    const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
-
-    // Temporarily remove required attribute to test our custom validation
-    await emailInput.evaluate(el => el.removeAttribute('required'));
-
-    // Click submit without email
-    await submitBtn.click();
-
-    // Should show validation message
-    await expect(messageEl).toHaveText('Please enter your email address.');
-    await expect(messageEl).toHaveClass(/text-red-600/);
   });
 
   test('should handle successful form submission', async ({ page }) => {
@@ -68,22 +65,18 @@ test.describe('Email Collection Flow', () => {
     });
 
     const emailInput = page.locator('#email');
-    const roleInput = page.locator('#role');
-    const interestsInput = page.locator('#interests');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
     // Fill out the form
     await emailInput.fill('test@example.com');
-    await roleInput.fill('Product Manager');
-    await interestsInput.fill('AI papers, startup news');
 
     // Submit the form
     await submitBtn.click();
 
-    // Check loading state (might be very quick, so we use a shorter timeout)
+    // Check loading state (might be very quick)
     await expect(submitBtn)
-      .toHaveText('Submitting...')
+      .toHaveText('Submitting')
       .catch(() => {
         // If we miss the loading state, that's ok - the request was too fast
       });
@@ -94,16 +87,11 @@ test.describe('Email Collection Flow', () => {
       });
 
     // Wait for completion and check success message
-    await expect(messageEl).toHaveText("Thanks! You're on the list. We'll be in touch soon.");
+    await expect(messageEl).toHaveText("You're in. Check the sample below.");
     await expect(messageEl).toHaveClass(/text-green-600/);
 
-    // Check that form is reset
-    await expect(emailInput).toHaveValue('');
-    await expect(roleInput).toHaveValue('');
-    await expect(interestsInput).toHaveValue('');
-
-    // Check that button is re-enabled
-    await expect(submitBtn).toHaveText('Request Invite');
+    // Check that button is re-enabled with original text
+    await expect(submitBtn).toHaveText('Start free');
     await expect(submitBtn).toBeEnabled();
   });
 
@@ -114,21 +102,21 @@ test.describe('Email Collection Flow', () => {
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
-          ok: true,
-          status: 'already_subscribed',
+          ok: false,
+          error: 'already_subscribed',
         }),
       });
     });
 
     const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
     await emailInput.fill('existing@example.com');
     await submitBtn.click();
 
-    await expect(messageEl).toHaveText("You're already on our list! We'll be in touch soon.");
-    await expect(messageEl).toHaveClass(/text-blue-600/);
+    await expect(messageEl).toHaveText("You're already on the list.");
+    await expect(messageEl).toHaveClass(/text-red-600/);
   });
 
   test('should handle invalid email from server', async ({ page }) => {
@@ -145,37 +133,30 @@ test.describe('Email Collection Flow', () => {
     });
 
     const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
     await emailInput.fill('invalid@email');
     await submitBtn.click();
 
-    await expect(messageEl).toHaveText('Please enter a valid email address.');
+    await expect(messageEl).toHaveText('Please enter a valid email.');
     await expect(messageEl).toHaveClass(/text-red-600/);
   });
 
   test('should handle server errors gracefully', async ({ page }) => {
-    // Mock a server error
+    // Mock a server error (network/parse error to trigger catch block)
     await page.route('/api/subscribe', async route => {
-      await route.fulfill({
-        status: 500,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          ok: false,
-          error: 'server_error',
-        }),
-      });
+      await route.abort('failed');
     });
 
     const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
     await emailInput.fill('test@example.com');
     await submitBtn.click();
 
-    await expect(messageEl).toHaveText('Something went wrong. Please try again.');
+    await expect(messageEl).toHaveText('Error. Try again.');
     await expect(messageEl).toHaveClass(/text-red-600/);
 
     // Button should be re-enabled for retry
@@ -189,22 +170,61 @@ test.describe('Email Collection Flow', () => {
     });
 
     const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
     await emailInput.fill('test@example.com');
     await submitBtn.click();
 
-    await expect(messageEl).toHaveText('Something went wrong. Please try again.');
+    await expect(messageEl).toHaveText('Error. Try again.');
     await expect(messageEl).toHaveClass(/text-red-600/);
   });
 
-  test('should submit form data correctly', async ({ page }) => {
-    let capturedRequest: any = null;
+  test('should protect against bot submissions with honeypot', async ({ page }) => {
+    // Mock successful response (honeypot protection happens server-side)
+    await page.route('/api/subscribe', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          ok: true,
+          status: 'subscribed',
+        }),
+      });
+    });
+
+    // Verify honeypot field exists and is properly hidden
+    const honeyPot = page.locator('input[name="company"]');
+    await expect(honeyPot).toHaveClass(/hidden/);
+    await expect(honeyPot).toHaveAttribute('aria-hidden', 'true');
+
+    // Simulate bot filling honeypot field
+    await page.evaluate(() => {
+      const honeyPot = document.querySelector('input[name="company"]') as HTMLInputElement;
+      if (honeyPot) honeyPot.value = 'bot-company';
+    });
+
+    const emailInput = page.locator('#email');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
+
+    await emailInput.fill('bot@example.com');
+    await submitBtn.click();
+
+    // Should still show success to bot (server handles the filtering)
+    await expect(messageEl).toHaveText("You're in. Check the sample below.");
+  });
+
+  test('should submit minimal form data correctly', async ({ page }) => {
+    let capturedFormData: any = null;
 
     // Capture the request data
     await page.route('/api/subscribe', async route => {
-      capturedRequest = route.request();
+      const postData = route.request().postData();
+      if (postData) {
+        capturedFormData = Object.fromEntries(new URLSearchParams(postData));
+      }
+
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -216,65 +236,19 @@ test.describe('Email Collection Flow', () => {
     });
 
     const emailInput = page.locator('#email');
-    const roleInput = page.locator('#role');
-    const interestsInput = page.locator('#interests');
-    const submitBtn = page.locator('#submit-btn');
+    const submitBtn = page.locator('#lead-submit');
+    const messageEl = page.locator('#lead-msg');
 
-    // Fill out the form
-    await emailInput.fill('form-test@example.com');
-    await roleInput.fill('Researcher');
-    await interestsInput.fill('ML research, robotics');
-
-    await submitBtn.click();
-
-    // Wait for the request to be captured
-    await expect(page.locator('#form-message')).toHaveText(
-      "Thanks! You're on the list. We'll be in touch soon."
-    );
-
-    // Verify request details
-    expect(capturedRequest?.method()).toBe('POST');
-    expect(capturedRequest?.url()).toContain('/api/subscribe');
-
-    // Check that form data was sent (we can't easily inspect FormData, but we can verify the request was made)
-    expect(capturedRequest).toBeTruthy();
-  });
-
-  test('should work with only email field filled', async ({ page }) => {
-    // Mock successful response
-    await page.route('/api/subscribe', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          ok: true,
-          status: 'subscribed',
-        }),
-      });
-    });
-
-    const emailInput = page.locator('#email');
-    const submitBtn = page.locator('#submit-btn');
-    const messageEl = page.locator('#form-message');
+    // Verify form fields are present
+    await expect(emailInput).toBeVisible();
+    await expect(page.locator('input[name="company"]')).toHaveClass(/hidden/);
 
     // Fill only email field
     await emailInput.fill('minimal@example.com');
     await submitBtn.click();
 
-    await expect(messageEl).toHaveText("Thanks! You're on the list. We'll be in touch soon.");
+    // Wait for completion
+    await expect(messageEl).toHaveText("You're in. Check the sample below.");
     await expect(messageEl).toHaveClass(/text-green-600/);
-  });
-
-  test('should maintain form accessibility', async ({ page }) => {
-    // Check that form elements have proper accessibility attributes
-    await expect(page.locator('#form-message')).toHaveAttribute('aria-live', 'polite');
-
-    // Check that labels are properly associated with inputs
-    await expect(page.locator('label[for="email"]')).toBeVisible();
-    await expect(page.locator('label[for="role"]')).toBeVisible();
-    await expect(page.locator('label[for="interests"]')).toBeVisible();
-
-    // Check that email input is required
-    await expect(page.locator('#email')).toHaveAttribute('required');
   });
 });
