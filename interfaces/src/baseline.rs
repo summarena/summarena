@@ -8,12 +8,12 @@ use crate::defs::InputItemReference;
 use crate::defs::InputItem;
 
 struct PonderedPreferences {
-    pub look_out_for: String,
+    pub _look_out_for: String,
 }
 
-fn ponder_preferences(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences) -> PonderedPreferences {
+fn ponder_preferences(_spec: &DigestModelSpec, _memory: &DigestModelMemory, preferences: &DigestPreferences) -> PonderedPreferences {
     PonderedPreferences {
-        look_out_for: preferences.description.clone(),
+        _look_out_for: preferences.description.clone(),
     }
 }
 
@@ -23,22 +23,22 @@ struct FocusedSummary {
     pub references: Vec<InputItemReference>,
 }
 
-fn ponder_relevance_and_summarize(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, input_item: &InputItem) -> FocusedSummary {
+fn ponder_relevance_and_summarize(_spec: &DigestModelSpec, _pondered_preferences: &PonderedPreferences, input_item: &InputItem) -> FocusedSummary {
     FocusedSummary {
         summary_text: input_item.text.clone(),
         references: vec![InputItemReference { text_start_index: 0, text_end_index: input_item.text.len() }],
     }
 }
 
-fn select_best(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, focused_summaries: &[FocusedSummary]) -> Vec<usize> {
+fn select_best(_spec: &DigestModelSpec, _pondered_preferences: &PonderedPreferences, focused_summaries: &[FocusedSummary]) -> Vec<usize> {
     (0..focused_summaries.len()).collect()
 }
 
-fn compose_digest(spec: &DigestModelSpec, pondered_preferences: &PonderedPreferences, best_summaries: &[FocusedSummary]) -> String {
+fn compose_digest(_spec: &DigestModelSpec, _pondered_preferences: &PonderedPreferences, best_summaries: &[FocusedSummary]) -> String {
     best_summaries.iter().map(|summary| summary.summary_text.clone()).collect::<Vec<String>>().join("\n")
 }
 
-fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> DigestModelMemory {
+fn reflect(_spec: &DigestModelSpec, memory: &DigestModelMemory, _preferences: &DigestPreferences, _input_items: &[InputItem], _self_output: &DigestOutput, _opponent_output: &DigestOutput, _win: bool) -> DigestModelMemory {
     DigestModelMemory {
         text: memory.text.clone(),
     }

@@ -1,14 +1,16 @@
+#[derive(Clone, Debug)]
 pub struct LiveSourceSpec {
     pub uri: String,
 }
 
+#[derive(Clone, Debug)]
 pub struct InputItem {
     pub uri: String,
     pub text: String,
     pub vision: Vec<u8>,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct InputItemReference {
     // tbd
     pub text_start_index: usize,
@@ -23,29 +25,35 @@ pub trait Ingester {
     fn watch(source: &LiveSourceSpec) -> WatchRest;
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestPreferences {
     pub uri: String,
     pub description: String,
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestDataset {
     pub uri: String,
     pub input_item_uris: Vec<String>,
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestModelSpec {
     pub uri: String,
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestModelMemory {
     pub text: String,
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestSelectedItem {
     pub input_item_uri: String,
     pub references: Vec<InputItemReference>,
 }
 
+#[derive(Clone, Debug)]
 pub struct DigestOutput {
     pub selected_items: Vec<DigestSelectedItem>,
     pub text: String,
