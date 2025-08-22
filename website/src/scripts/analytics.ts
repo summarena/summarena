@@ -114,3 +114,11 @@ function initAnalytics(): void {
 
 // Initialize analytics when DOM is loaded
 document.addEventListener('DOMContentLoaded', initAnalytics);
+
+// Also initialize immediately if DOM is already loaded (for dynamic imports/test environments)
+if (document.readyState === 'loading') {
+  // Document is still loading, wait for DOMContentLoaded
+} else {
+  // Document has already loaded, initialize immediately
+  initAnalytics();
+}

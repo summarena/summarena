@@ -10,10 +10,12 @@ test.describe('Blog functionality', () => {
     // Check main heading
     await expect(page.locator('h1')).toContainText('Blog');
 
-    // Check navigation links are present
+    // Check header and logo are present
+    await expect(page.locator('header')).toBeVisible();
+    await expect(page.locator('a[data-track="header-logo-click"]')).toBeVisible();
+
+    // Check navigation exists (even if it's for homepage sections)
     await expect(page.locator('nav')).toBeVisible();
-    await expect(page.locator('nav a[href="/"]').first()).toBeVisible();
-    await expect(page.locator('nav a[href="/blog"]').first()).toBeVisible();
   });
 
   test('should display individual blog posts', async ({ page }) => {
@@ -40,18 +42,18 @@ test.describe('Blog functionality', () => {
   test('should have working navigation', async ({ page }) => {
     await page.goto('/blog');
 
-    // Test home link
-    await page.locator('nav a[href="/"]').first().click();
+    // Test logo link to home (this actually exists)
+    await page.locator('a[data-track="header-logo-click"]').click();
     await expect(page).toHaveURL('/');
 
     // Navigate back to blog
     await page.goto('/blog');
 
-    // Test docs link if present
-    const docsLink = page.locator('a[href^="/docs"]');
-    if ((await docsLink.count()) > 0) {
-      await docsLink.click();
-      await expect(page).toHaveURL(/\/docs/);
+    // Test CTA button navigation (it links to #pilot relative to current page)
+    const ctaButton = page.locator('a[data-track="header-cta-get-started"]');
+    if ((await ctaButton.count()) > 0) {
+      await ctaButton.click();
+      await expect(page).toHaveURL('/blog#pilot');
     }
   });
 
@@ -74,13 +76,14 @@ test.describe('Blog functionality', () => {
 
     // Check that the page is still functional
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('nav')).toBeVisible();
 
-    // Check mobile navigation if applicable
-    const mobileNav = page.locator('[class*="mobile"]');
-    if ((await mobileNav.count()) > 0) {
-      await expect(mobileNav).toBeVisible();
-    }
+    // On mobile, nav is hidden (has class "hidden md:flex")
+    const nav = page.locator('nav');
+    await expect(nav).toHaveClass(/hidden/);
+
+    // But header should still be visible
+    await expect(page.locator('header')).toBeVisible();
+    await expect(page.locator('a[data-track="header-logo-click"]')).toBeVisible();
   });
 
   test('should have all expected blog posts accessible', async ({ page }) => {

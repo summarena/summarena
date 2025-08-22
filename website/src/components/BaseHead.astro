@@ -98,3 +98,4 @@ const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 
 <!-- Analytics Integration -->
 {websiteId && <script is:inline defer src="/umami.js" data-website-id={websiteId} />}
+{websiteId && <script src="/src/scripts/analytics.ts" />}

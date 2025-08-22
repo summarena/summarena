@@ -131,7 +131,9 @@ test.describe('Analytics and User Interactions', () => {
     await page.click('[data-track="cta_hero_click"]');
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-    const ctaEvents = umamiCalls.filter(call => call.eventName === 'cta_hero_click');
+    const ctaEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'cta_hero_click'
+    );
     expect(ctaEvents.length).toBeGreaterThan(0);
   });
 
@@ -140,7 +142,9 @@ test.describe('Analytics and User Interactions', () => {
     await page.click('[data-track="sample_download"]');
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-    const downloadEvents = umamiCalls.filter(call => call.eventName === 'sample_download');
+    const downloadEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'sample_download'
+    );
     expect(downloadEvents.length).toBeGreaterThan(0);
   });
 
@@ -169,16 +173,20 @@ test.describe('Analytics and User Interactions', () => {
     // Manually call the tracking functions to verify they work
     await page.evaluate(() => {
       if (window.umami && window.umami.track) {
-        window.umami.track('header-logo-click');
-        window.umami.track('header-cta-get-started');
+        window.umami.track('click', { element: 'header-logo-click' });
+        window.umami.track('click', { element: 'header-cta-get-started' });
       }
     });
 
     await page.waitForTimeout(200);
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-    const logoEvents = umamiCalls.filter(call => call.eventName === 'header-logo-click');
-    const headerCtaEvents = umamiCalls.filter(call => call.eventName === 'header-cta-get-started');
+    const logoEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'header-logo-click'
+    );
+    const headerCtaEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'header-cta-get-started'
+    );
 
     expect(logoEvents.length).toBeGreaterThan(0);
     expect(headerCtaEvents.length).toBeGreaterThan(0);
@@ -189,7 +197,9 @@ test.describe('Analytics and User Interactions', () => {
     await page.click('[data-track="nav-features-click"]');
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-    const navEvents = umamiCalls.filter(call => call.eventName === 'nav-features-click');
+    const navEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'nav-features-click'
+    );
     expect(navEvents.length).toBeGreaterThan(0);
   });
 
@@ -205,12 +215,7 @@ test.describe('Analytics and User Interactions', () => {
       await page.waitForTimeout(1000);
 
       umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-      const viewEvents = umamiCalls.filter(
-        call =>
-          call.eventName !== 'view_lp' &&
-          call.eventName !== 'form_start' &&
-          call.eventName !== 'form_submit'
-      );
+      const viewEvents = umamiCalls.filter(call => call.eventName === 'section-view');
 
       // Should have at least tracked some section view
       expect(viewEvents.length).toBeGreaterThan(0);
@@ -241,10 +246,23 @@ test.describe('Analytics and User Interactions', () => {
       }
 
       umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-      const sectionEvents = umamiCalls.filter(call => call.eventName === sectionName);
+      const sectionEvents = umamiCalls.filter(
+        call => call.eventName === 'section-view' && call.eventData?.section === sectionName
+      );
 
       // Should only track once despite multiple scrolls
       expect(sectionEvents.length).toBe(1);
     }
+  });
+
+  test('should verify analytics script is loaded and functional', async ({ page }) => {
+    // Verify the analytics script is properly loaded and initialized
+    await page.waitForLoadState('networkidle');
+
+    const analyticsLoaded = await page.evaluate(() => {
+      return window.umami && typeof window.umami.track === 'function';
+    });
+
+    expect(analyticsLoaded).toBe(true);
   });
 });

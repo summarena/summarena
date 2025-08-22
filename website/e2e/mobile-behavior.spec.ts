@@ -131,7 +131,9 @@ test.describe('Mobile Behavior', () => {
     await page.waitForTimeout(200);
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
-    const mobileCtaEvents = umamiCalls.filter(call => call.eventName === 'mobile-bottom-cta');
+    const mobileCtaEvents = umamiCalls.filter(
+      call => call.eventName === 'click' && call.eventData?.element === 'mobile-bottom-cta'
+    );
     expect(mobileCtaEvents.length).toBeGreaterThan(0);
   });
 

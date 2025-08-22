@@ -16,8 +16,8 @@ test.describe('Email Collection Flow', () => {
     await expect(page.locator('#lead-form')).toHaveAttribute('action', '/api/subscribe');
     await expect(page.locator('#lead-form')).toHaveAttribute('method', 'POST');
 
-    // Check button text
-    await expect(page.locator('#lead-submit')).toHaveText('Start free');
+    // Check button text (actual text includes icon and spans)
+    await expect(page.locator('#lead-submit')).toContainText('Join the Pilot Program');
 
     // Check email input attributes
     await expect(page.locator('#email')).toHaveAttribute('type', 'email');
@@ -30,9 +30,9 @@ test.describe('Email Collection Flow', () => {
   });
 
   test('should have proper accessibility attributes', async ({ page }) => {
-    // Check screen reader label
-    await expect(page.locator('label[for="email"]')).toHaveClass(/sr-only/);
-    await expect(page.locator('label[for="email"]')).toHaveText('Email');
+    // Check email label (it's visible, not sr-only)
+    await expect(page.locator('label[for="email"]')).toBeVisible();
+    await expect(page.locator('label[for="email"]')).toContainText('Email Address');
 
     // Check aria-live for message element
     await expect(page.locator('#lead-msg')).toHaveAttribute('aria-live', 'polite');

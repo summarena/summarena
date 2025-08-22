@@ -58,7 +58,7 @@
     "@astrojs/starlight-tailwind": "^2.0.3",
     "@astrojs/tailwind": "^6.0.2",
     "@astrojs/vue": "^5.1.0",
-    "@playwright/test": "^1.54.2",
+    "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/vue": "^8.1.0",
     "@types/node": "^24.3.0",
