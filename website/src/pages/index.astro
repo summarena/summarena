@@ -1158,7 +1158,7 @@ import Header from '../components/Header.astro';
             const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
             const data = await res.json().catch(() => ({}));
             if (data.ok) {
-              msg.textContent = "You're in. Check the sample below.";
+              msg.textContent = "Thanks! We'll notify you when a spot opens up.";
               msg.className = 'text-xs text-center text-green-600';
               window.umami?.track('form_success');
             } else {

@@ -87,7 +87,7 @@ test.describe('Email Collection Flow', () => {
       });
 
     // Wait for completion and check success message
-    await expect(messageEl).toHaveText("You're in. Check the sample below.");
+    await expect(messageEl).toHaveText("Thanks! We'll notify you when a spot opens up.");
     await expect(messageEl).toHaveClass(/text-green-600/);
 
     // Check that button is re-enabled with original text
@@ -212,7 +212,7 @@ test.describe('Email Collection Flow', () => {
     await submitBtn.click();
 
     // Should still show success to bot (server handles the filtering)
-    await expect(messageEl).toHaveText("You're in. Check the sample below.");
+    await expect(messageEl).toHaveText("Thanks! We'll notify you when a spot opens up.");
   });
 
   test('should submit minimal form data correctly', async ({ page }) => {
@@ -248,7 +248,7 @@ test.describe('Email Collection Flow', () => {
     await submitBtn.click();
 
     // Wait for completion
-    await expect(messageEl).toHaveText("You're in. Check the sample below.");
+    await expect(messageEl).toHaveText("Thanks! We'll notify you when a spot opens up.");
     await expect(messageEl).toHaveClass(/text-green-600/);
   });
 });

@@ -83,7 +83,7 @@ test.describe('Analytics and User Interactions', () => {
     await submitBtn.click();
 
     // Wait for form completion
-    await expect(page.locator('#lead-msg')).toHaveText("You're in. Check the sample below.");
+    await expect(page.locator('#lead-msg')).toHaveText("Thanks! We'll notify you when a spot opens up.");
 
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
 
