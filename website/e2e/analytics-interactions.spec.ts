@@ -150,9 +150,13 @@ test.describe('Analytics and User Interactions', () => {
     await expect(page.locator('[data-track="header-logo-click"]')).toBeVisible();
 
     // Test that the tracking elements exist with correct attributes
-    const logoTrackAttr = await page.locator('[data-track="header-logo-click"]').getAttribute('data-track');
-    const ctaTrackAttr = await page.locator('[data-track="header-cta-get-started"]').getAttribute('data-track');
-    
+    const logoTrackAttr = await page
+      .locator('[data-track="header-logo-click"]')
+      .getAttribute('data-track');
+    const ctaTrackAttr = await page
+      .locator('[data-track="header-cta-get-started"]')
+      .getAttribute('data-track');
+
     expect(logoTrackAttr).toBe('header-logo-click');
     expect(ctaTrackAttr).toBe('header-cta-get-started');
 
@@ -175,7 +179,7 @@ test.describe('Analytics and User Interactions', () => {
     umamiCalls = await page.evaluate(() => (window as any).umamiCalls || []);
     const logoEvents = umamiCalls.filter(call => call.eventName === 'header-logo-click');
     const headerCtaEvents = umamiCalls.filter(call => call.eventName === 'header-cta-get-started');
-    
+
     expect(logoEvents.length).toBeGreaterThan(0);
     expect(headerCtaEvents.length).toBeGreaterThan(0);
   });
@@ -228,7 +232,7 @@ test.describe('Analytics and User Interactions', () => {
       // Scroll away and back
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForTimeout(500);
-      
+
       // Check element is still attached before scrolling again
       const isAttached = await page.locator(`[data-track-view="${sectionName}"]`).count();
       if (isAttached > 0) {

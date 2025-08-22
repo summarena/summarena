@@ -1,543 +1,588 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SummArena - AI Research Digest</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f8fafc;
-            line-height: 1.6;
-            color: #334155;
-            min-height: 100vh;
-        }
-        
-        .header {
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        
-        .header-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .logo {
-            background: #2b61d0;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 18px;
-        }
-        
-        .header-text h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.25rem;
-        }
-        
-        .header-text .subtitle {
-            color: #64748b;
-            font-size: 0.875rem;
-        }
-        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #f8fafc;
+        line-height: 1.6;
+        color: #334155;
+        min-height: 100vh;
+      }
+
+      .header {
+        background: white;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .header-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        background: #2b61d0;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      .header-text h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.25rem;
+      }
+
+      .header-text .subtitle {
+        color: #64748b;
+        font-size: 0.875rem;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .digest-header {
+        background: linear-gradient(135deg, #2b61d0 0%, #3b82f6 100%);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        text-align: center;
+      }
+
+      .digest-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .digest-date {
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .digest-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+
+      .section {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid #e2e8f0;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .highlights {
+        background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+        border-left: 4px solid #2b61d0;
+        border-radius: 0 12px 12px 0;
+      }
+
+      .highlight-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e0e7ff;
+      }
+
+      .highlight-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .bullet {
+        background: #2b61d0;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+      }
+
+      .highlight-content {
+        flex: 1;
+      }
+
+      .highlight-title {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight-desc {
+        color: #475569;
+        line-height: 1.7;
+      }
+
+      .paper-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.2s;
+      }
+
+      .paper-item:hover {
+        border-color: #2b61d0;
+        box-shadow: 0 4px 12px rgba(43, 97, 208, 0.1);
+      }
+
+      .paper-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+      }
+
+      .paper-authors {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .paper-summary {
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .metric {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .metric-label {
+        color: #64748b;
+        font-size: 0.875rem;
+      }
+
+      .metric-value {
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .paper-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background: #f1f5f9;
+        color: #475569;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .tag.breakthrough {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .tag.trending {
+        background: #f0fdf4;
+        color: #166534;
+      }
+
+      .citation-link {
+        color: #2b61d0;
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid #bfdbfe;
+        transition: all 0.2s;
+      }
+
+      .citation-link:hover {
+        color: #1d4ed8;
+        border-bottom-color: #1d4ed8;
+      }
+
+      .insight-box {
+        background: linear-gradient(135deg, #fef7cd 0%, #fde68a 100%);
+        border: 1px solid #f59e0b;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .insight-box .insight-label {
+        font-weight: 600;
+        color: #92400e;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .footer {
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 3rem;
+        padding: 2rem;
+        text-align: center;
+        color: #64748b;
+      }
+
+      .footer-logo {
+        margin-bottom: 1rem;
+      }
+
+      @media (max-width: 640px) {
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
+          padding: 1rem;
         }
-        
-        .digest-header {
-            background: linear-gradient(135deg, #2b61d0 0%, #3b82f6 100%);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            color: white;
-            text-align: center;
-        }
-        
-        .digest-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-        
-        .digest-date {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-        
         .digest-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
+          flex-direction: column;
+          gap: 1rem;
         }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.8;
-        }
-        
         .section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid #e2e8f0;
+          padding: 1.5rem;
         }
-        
-        .section h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .highlights {
-            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
-            border-left: 4px solid #2b61d0;
-            border-radius: 0 12px 12px 0;
-        }
-        
-        .highlight-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e0e7ff;
-        }
-        
-        .highlight-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .bullet {
-            background: #2b61d0;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-            flex-shrink: 0;
-        }
-        
-        .highlight-content {
-            flex: 1;
-        }
-        
-        .highlight-title {
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-        
-        .highlight-desc {
-            color: #475569;
-            line-height: 1.7;
-        }
-        
-        .paper-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.2s;
-        }
-        
-        .paper-item:hover {
-            border-color: #2b61d0;
-            box-shadow: 0 4px 12px rgba(43, 97, 208, 0.1);
-        }
-        
-        .paper-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-        
-        .paper-authors {
-            color: #64748b;
-            font-size: 0.875rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .paper-summary {
-            color: #475569;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-        
         .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
-            margin: 1rem 0;
+          grid-template-columns: 1fr;
         }
-        
-        .metric {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .metric-label {
-            color: #64748b;
-            font-size: 0.875rem;
-        }
-        
-        .metric-value {
-            font-weight: 600;
-            color: #1e293b;
-        }
-        
-        .paper-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .tag {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        
-        .tag.breakthrough {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        
-        .tag.trending {
-            background: #f0fdf4;
-            color: #166534;
-        }
-        
-        .citation-link {
-            color: #2b61d0;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid #bfdbfe;
-            transition: all 0.2s;
-        }
-        
-        .citation-link:hover {
-            color: #1d4ed8;
-            border-bottom-color: #1d4ed8;
-        }
-        
-        .insight-box {
-            background: linear-gradient(135deg, #fef7cd 0%, #fde68a 100%);
-            border: 1px solid #f59e0b;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .insight-box .insight-label {
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .footer {
-            background: white;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 3rem;
-            padding: 2rem;
-            text-align: center;
-            color: #64748b;
-        }
-        
-        .footer-logo {
-            margin-bottom: 1rem;
-        }
-        
-        @media (max-width: 640px) {
-            .container { padding: 1rem; }
-            .digest-stats { flex-direction: column; gap: 1rem; }
-            .section { padding: 1.5rem; }
-            .metrics-grid { grid-template-columns: 1fr; }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <div class="header-content">
-            <div class="logo">S</div>
-            <div class="header-text">
-                <h1>SummArena</h1>
-                <div class="subtitle">Research Digest</div>
-            </div>
+      <div class="header-content">
+        <div class="logo">S</div>
+        <div class="header-text">
+          <h1>SummArena</h1>
+          <div class="subtitle">Research Digest</div>
         </div>
+      </div>
     </header>
 
     <div class="container">
-        <div class="digest-header">
-            <div class="digest-title">Weekly Research Digest</div>
-            <div class="digest-date">June–August 2025 • AI & Computing Focus</div>
-            <div class="digest-stats">
-                <div class="stat">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">Breakthrough Papers</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Major Model Releases</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">23</div>
-                    <div class="stat-label">Key Metrics</div>
-                </div>
+      <div class="digest-header">
+        <div class="digest-title">Weekly Research Digest</div>
+        <div class="digest-date">June–August 2025 • AI & Computing Focus</div>
+        <div class="digest-stats">
+          <div class="stat">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Breakthrough Papers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Major Model Releases</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">23</div>
+            <div class="stat-label">Key Metrics</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section highlights">
+        <h2><span>🎯</span>Key Breakthroughs</h2>
+
+        <div class="highlight-item">
+          <div class="bullet">1</div>
+          <div class="highlight-content">
+            <div class="highlight-title">OpenAI GPT-5 Achieves 94.6% on AIME 2025</div>
+            <div class="highlight-desc">
+              Revolutionary reasoning capabilities with 94.6% AIME accuracy (no tools), 74.9%
+              SWE-bench Verified, and 88.4% GPQA with GPT-5 Pro. Represents major breakthrough in
+              mathematical problem-solving.
             </div>
+          </div>
         </div>
 
-        <section class="section highlights">
-            <h2><span>🎯</span>Key Breakthroughs</h2>
-            
-            <div class="highlight-item">
-                <div class="bullet">1</div>
-                <div class="highlight-content">
-                    <div class="highlight-title">OpenAI GPT-5 Achieves 94.6% on AIME 2025</div>
-                    <div class="highlight-desc">Revolutionary reasoning capabilities with 94.6% AIME accuracy (no tools), 74.9% SWE-bench Verified, and 88.4% GPQA with GPT-5 Pro. Represents major breakthrough in mathematical problem-solving.</div>
-                </div>
+        <div class="highlight-item">
+          <div class="bullet">2</div>
+          <div class="highlight-content">
+            <div class="highlight-title">New Benchmarks Reveal Model Limitations</div>
+            <div class="highlight-desc">
+              MARBLE shows 12 advanced MLLMs score near-random on M-Portal and 0% on M-Cube.
+              PuzzleWorld achieves just 1-2% final accuracy. These harder benchmarks expose
+              significant gaps in multimodal reasoning.
             </div>
+          </div>
+        </div>
 
-            <div class="highlight-item">
-                <div class="bullet">2</div>
-                <div class="highlight-content">
-                    <div class="highlight-title">New Benchmarks Reveal Model Limitations</div>
-                    <div class="highlight-desc">MARBLE shows 12 advanced MLLMs score near-random on M-Portal and 0% on M-Cube. PuzzleWorld achieves just 1-2% final accuracy. These harder benchmarks expose significant gaps in multimodal reasoning.</div>
-                </div>
+        <div class="highlight-item">
+          <div class="bullet">3</div>
+          <div class="highlight-content">
+            <div class="highlight-title">OpenAI Releases Open-Weight gpt-oss Models</div>
+            <div class="highlight-desc">
+              20B and 120B parameter reasoning models achieve near-parity with o4-mini on core
+              reasoning tasks while running on single 80GB GPU. Now available on AWS, GCP,
+              Databricks.
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div class="highlight-item">
-                <div class="bullet">3</div>
-                <div class="highlight-content">
-                    <div class="highlight-title">OpenAI Releases Open-Weight gpt-oss Models</div>
-                    <div class="highlight-desc">20B and 120B parameter reasoning models achieve near-parity with o4-mini on core reasoning tasks while running on single 80GB GPU. Now available on AWS, GCP, Databricks.</div>
-                </div>
-            </div>
-        </section>
+      <section class="section">
+        <h2><span>🚀</span>Major Model Releases</h2>
 
-        <section class="section">
-            <h2><span>🚀</span>Major Model Releases</h2>
-            
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">GPT-5: Advanced Reasoning and Problem Solving</a>
-                </div>
-                <div class="paper-authors">OpenAI (August 7, 2025)</div>
-                <div class="paper-summary">
-                    OpenAI's latest flagship model represents a significant leap in reasoning capabilities. GPT-5 excels at mathematical problem-solving, coding challenges, and complex reasoning tasks through enhanced test-time compute and improved training methodologies.
-                </div>
-                <div class="insight-box">
-                    <div class="insight-label">💡 Key Achievement</div>
-                    First model to achieve >90% on AIME 2025 without external tools, demonstrating human-expert level mathematical reasoning.
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <span class="metric-label">AIME 2025 (no tools)</span>
-                        <span class="metric-value">94.6%</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">SWE-bench Verified</span>
-                        <span class="metric-value">74.9%</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">MMMU</span>
-                        <span class="metric-value">84.2%</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">GPQA (Pro)</span>
-                        <span class="metric-value">88.4%</span>
-                    </div>
-                </div>
-                <div class="paper-tags">
-                    <span class="tag breakthrough">Breakthrough</span>
-                    <span class="tag">Reasoning</span>
-                    <span class="tag">Mathematics</span>
-                    <span class="tag">Coding</span>
-                </div>
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link">GPT-5: Advanced Reasoning and Problem Solving</a>
+          </div>
+          <div class="paper-authors">OpenAI (August 7, 2025)</div>
+          <div class="paper-summary">
+            OpenAI's latest flagship model represents a significant leap in reasoning capabilities.
+            GPT-5 excels at mathematical problem-solving, coding challenges, and complex reasoning
+            tasks through enhanced test-time compute and improved training methodologies.
+          </div>
+          <div class="insight-box">
+            <div class="insight-label">💡 Key Achievement</div>
+            First model to achieve >90% on AIME 2025 without external tools, demonstrating
+            human-expert level mathematical reasoning.
+          </div>
+          <div class="metrics-grid">
+            <div class="metric">
+              <span class="metric-label">AIME 2025 (no tools)</span>
+              <span class="metric-value">94.6%</span>
             </div>
+            <div class="metric">
+              <span class="metric-label">SWE-bench Verified</span>
+              <span class="metric-value">74.9%</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">MMMU</span>
+              <span class="metric-value">84.2%</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">GPQA (Pro)</span>
+              <span class="metric-value">88.4%</span>
+            </div>
+          </div>
+          <div class="paper-tags">
+            <span class="tag breakthrough">Breakthrough</span>
+            <span class="tag">Reasoning</span>
+            <span class="tag">Mathematics</span>
+            <span class="tag">Coding</span>
+          </div>
+        </div>
 
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">Gemini 2.5 Pro Experimental</a>
-                </div>
-                <div class="paper-authors">Google DeepMind (March 25, 2025)</div>
-                <div class="paper-summary">
-                    Google's most advanced model leads GPQA and AIME 2025 benchmarks without test-time voting. Demonstrates strong performance on "Humanity's Last Exam" and achieves competitive results on software engineering tasks.
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <span class="metric-label">Humanity's Last Exam</span>
-                        <span class="metric-value">18.8%</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">SWE-bench Verified</span>
-                        <span class="metric-value">63.8%</span>
-                    </div>
-                </div>
-                <div class="paper-tags">
-                    <span class="tag trending">Leading</span>
-                    <span class="tag">Reasoning</span>
-                    <span class="tag">Multimodal</span>
-                </div>
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link">Gemini 2.5 Pro Experimental</a>
+          </div>
+          <div class="paper-authors">Google DeepMind (March 25, 2025)</div>
+          <div class="paper-summary">
+            Google's most advanced model leads GPQA and AIME 2025 benchmarks without test-time
+            voting. Demonstrates strong performance on "Humanity's Last Exam" and achieves
+            competitive results on software engineering tasks.
+          </div>
+          <div class="metrics-grid">
+            <div class="metric">
+              <span class="metric-label">Humanity's Last Exam</span>
+              <span class="metric-value">18.8%</span>
             </div>
+            <div class="metric">
+              <span class="metric-label">SWE-bench Verified</span>
+              <span class="metric-value">63.8%</span>
+            </div>
+          </div>
+          <div class="paper-tags">
+            <span class="tag trending">Leading</span>
+            <span class="tag">Reasoning</span>
+            <span class="tag">Multimodal</span>
+          </div>
+        </div>
 
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">Claude 3.7 Sonnet</a>
-                </div>
-                <div class="paper-authors">Anthropic (February 24, 2025)</div>
-                <div class="paper-summary">
-                    Anthropic's latest model achieves strong coding performance with minimal scaffolding. Shows excellent results on SWE-bench with both vanilla and high-compute configurations.
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <span class="metric-label">SWE-bench (vanilla)</span>
-                        <span class="metric-value">63.7%</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">SWE-bench (high-compute)</span>
-                        <span class="metric-value">70.3%</span>
-                    </div>
-                </div>
-                <div class="paper-tags">
-                    <span class="tag">Coding</span>
-                    <span class="tag">Software Engineering</span>
-                </div>
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link">Claude 3.7 Sonnet</a>
+          </div>
+          <div class="paper-authors">Anthropic (February 24, 2025)</div>
+          <div class="paper-summary">
+            Anthropic's latest model achieves strong coding performance with minimal scaffolding.
+            Shows excellent results on SWE-bench with both vanilla and high-compute configurations.
+          </div>
+          <div class="metrics-grid">
+            <div class="metric">
+              <span class="metric-label">SWE-bench (vanilla)</span>
+              <span class="metric-value">63.7%</span>
             </div>
-        </section>
+            <div class="metric">
+              <span class="metric-label">SWE-bench (high-compute)</span>
+              <span class="metric-value">70.3%</span>
+            </div>
+          </div>
+          <div class="paper-tags">
+            <span class="tag">Coding</span>
+            <span class="tag">Software Engineering</span>
+          </div>
+        </div>
+      </section>
 
-        <section class="section">
-            <h2><span>🧪</span>Challenging New Benchmarks</h2>
-            
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">MARBLE: A Hard Benchmark for Multimodal Spatial Reasoning</a>
-                </div>
-                <div class="paper-authors">Yulun Jiang et al.</div>
-                <div class="paper-summary">
-                    Introduces extremely challenging multimodal reasoning tasks where 12 advanced MLLMs score near-random on M-Portal and achieve 0% success on M-Cube, highlighting fundamental limitations in current multimodal models.
-                </div>
-                <div class="insight-box">
-                    <div class="insight-label">🔍 Reality Check</div>
-                    Even the most advanced models fail completely on these spatial reasoning tasks, showing perception remains a critical bottleneck.
-                </div>
-                <div class="paper-tags">
-                    <span class="tag breakthrough">Eye-opening</span>
-                    <span class="tag">Multimodal</span>
-                    <span class="tag">Reasoning</span>
-                </div>
-            </div>
+      <section class="section">
+        <h2><span>🧪</span>Challenging New Benchmarks</h2>
 
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">PuzzleWorld: Open-Ended Reasoning Benchmark</a>
-                </div>
-                <div class="paper-authors">Hengzhi Li et al.</div>
-                <div class="paper-summary">
-                    Puzzlehunt-based benchmark where SOTA models achieve only 1-2% final-answer accuracy. Best model solves 14% with 40% step-wise accuracy. Shows reasoning-trace finetuning can boost performance from 4% to 11%.
-                </div>
-                <div class="paper-tags">
-                    <span class="tag">Reasoning</span>
-                    <span class="tag">Benchmark</span>
-                    <span class="tag">Open-ended</span>
-                </div>
-            </div>
-        </section>
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link"
+              >MARBLE: A Hard Benchmark for Multimodal Spatial Reasoning</a
+            >
+          </div>
+          <div class="paper-authors">Yulun Jiang et al.</div>
+          <div class="paper-summary">
+            Introduces extremely challenging multimodal reasoning tasks where 12 advanced MLLMs
+            score near-random on M-Portal and achieve 0% success on M-Cube, highlighting fundamental
+            limitations in current multimodal models.
+          </div>
+          <div class="insight-box">
+            <div class="insight-label">🔍 Reality Check</div>
+            Even the most advanced models fail completely on these spatial reasoning tasks, showing
+            perception remains a critical bottleneck.
+          </div>
+          <div class="paper-tags">
+            <span class="tag breakthrough">Eye-opening</span>
+            <span class="tag">Multimodal</span>
+            <span class="tag">Reasoning</span>
+          </div>
+        </div>
 
-        <section class="section">
-            <h2><span>🔬</span>Safety & Alignment Research</h2>
-            
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">Chain-of-Thought Monitorability: A Fragile Opportunity</a>
-                </div>
-                <div class="paper-authors">Tomek Korbak et al.</div>
-                <div class="paper-summary">
-                    Argues that Chain-of-Thought monitoring can catch AI misbehavior but warns this capability is fragile and limited. Proposes directions for developing safer reasoning systems.
-                </div>
-                <div class="paper-tags">
-                    <span class="tag">Safety</span>
-                    <span class="tag">Alignment</span>
-                    <span class="tag">Monitoring</span>
-                </div>
-            </div>
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link">PuzzleWorld: Open-Ended Reasoning Benchmark</a>
+          </div>
+          <div class="paper-authors">Hengzhi Li et al.</div>
+          <div class="paper-summary">
+            Puzzlehunt-based benchmark where SOTA models achieve only 1-2% final-answer accuracy.
+            Best model solves 14% with 40% step-wise accuracy. Shows reasoning-trace finetuning can
+            boost performance from 4% to 11%.
+          </div>
+          <div class="paper-tags">
+            <span class="tag">Reasoning</span>
+            <span class="tag">Benchmark</span>
+            <span class="tag">Open-ended</span>
+          </div>
+        </div>
+      </section>
 
-            <div class="paper-item">
-                <div class="paper-title">
-                    <a href="#" class="citation-link">Predicting Alignment Before Models Finish Thinking</a>
-                </div>
-                <div class="paper-authors">Y.S. Chan et al.</div>
-                <div class="paper-summary">
-                    Demonstrates that linear probes on Chain-of-Thought activations outperform text-based monitors at predicting unsafe responses, offering a new approach to AI safety monitoring.
-                </div>
-                <div class="paper-tags">
-                    <span class="tag">Safety</span>
-                    <span class="tag">Interpretability</span>
-                    <span class="tag">Probing</span>
-                </div>
-            </div>
-        </section>
+      <section class="section">
+        <h2><span>🔬</span>Safety & Alignment Research</h2>
+
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link"
+              >Chain-of-Thought Monitorability: A Fragile Opportunity</a
+            >
+          </div>
+          <div class="paper-authors">Tomek Korbak et al.</div>
+          <div class="paper-summary">
+            Argues that Chain-of-Thought monitoring can catch AI misbehavior but warns this
+            capability is fragile and limited. Proposes directions for developing safer reasoning
+            systems.
+          </div>
+          <div class="paper-tags">
+            <span class="tag">Safety</span>
+            <span class="tag">Alignment</span>
+            <span class="tag">Monitoring</span>
+          </div>
+        </div>
+
+        <div class="paper-item">
+          <div class="paper-title">
+            <a href="#" class="citation-link">Predicting Alignment Before Models Finish Thinking</a>
+          </div>
+          <div class="paper-authors">Y.S. Chan et al.</div>
+          <div class="paper-summary">
+            Demonstrates that linear probes on Chain-of-Thought activations outperform text-based
+            monitors at predicting unsafe responses, offering a new approach to AI safety
+            monitoring.
+          </div>
+          <div class="paper-tags">
+            <span class="tag">Safety</span>
+            <span class="tag">Interpretability</span>
+            <span class="tag">Probing</span>
+          </div>
+        </div>
+      </section>
     </div>
 
     <footer class="footer">
-        <div class="footer-logo">
-            <div class="logo" style="margin: 0 auto;">S</div>
-        </div>
-        <p><strong>SummArena</strong> • Personalized Research Digest</p>
-        <p>Generated from arXiv, journals, industry reports, and your trusted sources</p>
-        <p>Stay current with breakthroughs in your research domains</p>
+      <div class="footer-logo">
+        <div class="logo" style="margin: 0 auto">S</div>
+      </div>
+      <p><strong>SummArena</strong> • Personalized Research Digest</p>
+      <p>Generated from arXiv, journals, industry reports, and your trusted sources</p>
+      <p>Stay current with breakthroughs in your research domains</p>
     </footer>
-</body>
+  </body>
 </html>

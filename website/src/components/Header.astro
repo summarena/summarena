@@ -4,37 +4,65 @@
 
 <!-- Header -->
 <header
-  class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-slate-100"
+  class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-slate-200/60 shadow-sm"
 >
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <a href="/" data-track="header-logo-click" class="flex items-center gap-2 group">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <a href="/" data-track="header-logo-click" class="flex items-center gap-3 group">
+      <div class="relative">
+        <span
+          class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-bold shadow-lg group-hover:scale-105 group-hover:shadow-xl transition-all duration-200"
+          >S</span
+        >
+        <div
+          class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity duration-200"
+        >
+        </div>
+      </div>
       <span
-        class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white font-bold shadow-soft group-hover:scale-105 transition"
-        >S</span
-      >
-      <span class="font-display text-lg font-semibold tracking-tight text-slate-800">SummArena</span
+        class="font-display text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent"
+        >SummArena</span
       >
     </a>
-    <nav class="hidden md:flex items-center gap-6">
+    <nav class="hidden md:flex items-center gap-8">
       <a
         href="#features"
         data-track="nav-features-click"
-        class="text-sm font-medium text-slate-600 hover:text-slate-900">Features</a
+        class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-600 after:transition-all after:duration-200 hover:after:w-full"
+        >Features</a
       >
-      <!-- <a href="#trust" class="text-sm font-medium text-slate-600 hover:text-slate-900">Why us</a> -->
+      <a
+        href="#sample"
+        data-track="nav-sample-click"
+        class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-600 after:transition-all after:duration-200 hover:after:w-full"
+        >Sample</a
+      >
       <a
         href="#pilot"
         data-track="nav-pilot-click"
-        class="text-sm font-medium text-slate-600 hover:text-slate-900">Pilot</a
+        class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-600 after:transition-all after:duration-200 hover:after:w-full"
+        >Pilot</a
       >
     </nav>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-4">
       <a
         href="#pilot"
         data-track="header-cta-get-started"
-        class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-        >Start free</a
+        class="inline-flex items-center justify-center rounded-2xl border border-transparent bg-gradient-to-r from-brand-600 to-brand-700 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:from-brand-700 hover:to-brand-800 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-brand-500/40 focus:ring-offset-2 transition-all duration-200"
       >
+        <span class="flex items-center gap-1">
+          Start free
+          <svg
+            class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </span>
+      </a>
     </div>
   </div>
 </header>

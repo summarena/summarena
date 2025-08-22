@@ -54,7 +54,9 @@ test.describe('Mobile Behavior', () => {
 
     // Test that the intersection observer logic can hide the bar by manually triggering it
     await page.evaluate(() => {
-      const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div') as HTMLElement;
+      const bar = document
+        .querySelector('[data-track="mobile-bottom-cta"]')
+        ?.closest('div') as HTMLElement;
       if (bar) {
         bar.style.display = 'none'; // Simulate what intersection observer would do
       }
@@ -76,10 +78,12 @@ test.describe('Mobile Behavior', () => {
 
     // Test the show/hide functionality by manually controlling the style
     // (intersection observer behavior is hard to test reliably in headless browsers)
-    
+
     // Hide the bar (simulating intersection observer when pilot is visible)
     await page.evaluate(() => {
-      const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div') as HTMLElement;
+      const bar = document
+        .querySelector('[data-track="mobile-bottom-cta"]')
+        ?.closest('div') as HTMLElement;
       if (bar) bar.style.display = 'none';
     });
 
@@ -88,7 +92,9 @@ test.describe('Mobile Behavior', () => {
 
     // Show the bar again (simulating intersection observer when pilot is not visible)
     await page.evaluate(() => {
-      const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div') as HTMLElement;
+      const bar = document
+        .querySelector('[data-track="mobile-bottom-cta"]')
+        ?.closest('div') as HTMLElement;
       if (bar) bar.style.display = '';
     });
 

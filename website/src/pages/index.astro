@@ -10,129 +10,288 @@ import Header from '../components/Header.astro';
   <Header />
 
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-100/40 to-white"></div>
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-brand-50/30"
+  >
+    <!-- Enhanced gradient background -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-brand-50/30"></div>
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-brand-100/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-100/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"
+      >
+      </div>
+    </div>
     <div
-      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-12 lg:pb-20 grid lg:grid-cols-12 gap-6 items-center"
+      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-16 lg:pt-20 lg:pb-24 grid lg:grid-cols-12 gap-8 items-center"
     >
       <div class="lg:col-span-7 text-center lg:text-left">
-        <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-          One research brief keeps you current.
+        <!-- Status badge -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-sm font-medium mb-6"
+        >
+          <div class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
+          Now accepting pilot users
+        </div>
+
+        <h1
+          class="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none bg-gradient-to-r from-slate-900 via-slate-800 to-brand-700 bg-clip-text text-transparent"
+        >
+          Stay ahead
+          <span class="block text-brand-600">effortlessly</span>
         </h1>
-        <p class="mt-5 text-lg text-slate-700 max-w-[60ch] mx-auto lg:mx-0">
-          Connect arXiv, newsletters, RSS, and YouTube. Get a single daily brief with links and
-          citations. Save 5+ hours a week.
+        <p
+          class="mt-6 text-xl sm:text-2xl text-slate-600 max-w-[55ch] mx-auto lg:mx-0 leading-relaxed"
+        >
+          Transform information overload into personalized insights. Connect all your sources, get
+          one intelligent daily brief with citations.
         </p>
 
-        <div class="mt-8" id="cta">
-          <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+        <div class="mt-10" id="cta">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a
               href="#pilot"
               data-track="cta_hero_click"
-              class="inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+              class="group relative inline-flex items-center justify-center rounded-2xl border border-transparent bg-gradient-to-r from-brand-600 to-brand-700 px-8 py-4 text-lg font-bold text-white shadow-xl hover:shadow-2xl hover:from-brand-500 hover:to-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2 transform hover:scale-105 transition-all duration-200"
             >
-              Start free
+              <span
+                class="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              ></span>
+              <span class="relative flex items-center gap-2">
+                Start free pilot
+                <svg
+                  class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </span>
             </a>
             <a
               href="#sample"
               data-track="sample_view"
-              class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-soft hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+              class="inline-flex items-center justify-center rounded-2xl border-2 border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-lg hover:border-brand-400 hover:bg-slate-50 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-500/30 focus:ring-offset-2 transition-all duration-200"
             >
-              See a sample brief
+              <span class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                  <path
+                    fill-rule="evenodd"
+                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                View sample brief
+              </span>
             </a>
           </div>
         </div>
 
-        <!-- Proof row -->
-        <div class="mt-6">
-          <p class="text-sm text-slate-600 text-center lg:text-left">
-            Used by researchers at UC Berkeley, Stanford, ETH Zurich
-          </p>
+        <!-- Enhanced social proof -->
+        <div class="mt-8">
+          <div class="flex items-center justify-center lg:justify-start gap-2 mb-4">
+            <div class="flex -space-x-2">
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-2 border-white flex items-center justify-center"
+              >
+                <span class="text-white text-xs font-bold">UC</span>
+              </div>
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full border-2 border-white flex items-center justify-center"
+              >
+                <span class="text-white text-xs font-bold">S</span>
+              </div>
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full border-2 border-white flex items-center justify-center"
+              >
+                <span class="text-white text-xs font-bold">E</span>
+              </div>
+            </div>
+            <p class="text-sm font-medium text-slate-700">
+              Trusted by researchers at <span class="font-semibold text-slate-900"
+                >UC Berkeley, Stanford, ETH Zurich</span
+              >
+            </p>
+          </div>
         </div>
 
-        <!-- Trust badges -->
+        <!-- Premium trust badges -->
         <div
-          class="mt-4 flex flex-wrap justify-center lg:justify-start gap-4 text-xs text-slate-500"
+          class="mt-6 flex flex-wrap justify-center lg:justify-start gap-6 text-sm text-slate-600"
         >
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+          <span
+            class="flex items-center gap-2 bg-white/60 px-3 py-2 rounded-lg border border-slate-200"
+          >
+            <svg class="w-5 h-5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                 clip-rule="evenodd"></path>
             </svg>
-            Citations in every brief
+            <span class="font-medium">Cited sources</span>
           </span>
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+          <span
+            class="flex items-center gap-2 bg-white/60 px-3 py-2 rounded-lg border border-slate-200"
+          >
+            <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            Privacy-first
+            <span class="font-medium">Privacy-first</span>
           </span>
-          <span class="flex items-center gap-1">
-            <svg class="w-4 h-4 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+          <span
+            class="flex items-center gap-2 bg-white/60 px-3 py-2 rounded-lg border border-slate-200"
+          >
+            <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            No credit card
+            <span class="font-medium">Free during pilot</span>
           </span>
         </div>
       </div>
 
-      <img
-        src="/brief-900.webp"
-        srcset="/brief-600.webp 600w, /brief-900.webp 900w, /brief-1200.webp 1200w"
-        sizes="(min-width:1024px) 36rem, 92vw"
-        alt="Sample SummArena brief showing research summaries with citations"
-        class="lg:col-span-5 w-full max-w-[36rem] rounded-2xl lg:self-center lg:mt-6 mx-auto lg:mx-0"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
+      <div class="lg:col-span-5 relative">
+        <!-- Enhanced image container with premium styling -->
+        <div
+          class="relative bg-gradient-to-br from-white to-slate-50 rounded-3xl p-2 shadow-2xl border border-slate-200"
+        >
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-blue-500 rounded-3xl blur-xl opacity-20"
+          >
+          </div>
+          <img
+            src="/brief-900.webp"
+            srcset="/brief-600.webp 600w, /brief-900.webp 900w, /brief-1200.webp 1200w"
+            sizes="(min-width:1024px) 36rem, 92vw"
+            alt="Sample SummArena brief showing research summaries with citations"
+            class="relative w-full max-w-[36rem] rounded-2xl mx-auto shadow-lg"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <!-- Floating elements for visual appeal -->
+          <div
+            class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12"
+          >
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg transform -rotate-12"
+          >
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Problem (short) -->
+  <!-- Problem (premium redesign) -->
   <section
     id="problem"
     data-track-view="scrolled-past-hero"
-    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-0"
+    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-12"
   >
-    <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-slate-50/60 p-5 md:p-8">
-      <!-- mobile stacks; desktop keeps your original row -->
-      <div class="md:flex md:items-start md:gap-4">
-        <div
-          class="inline-flex h-7 w-7 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700 font-bold"
-        >
-          !
+    <div class="mx-auto max-w-5xl">
+      <!-- Attention-grabbing problem statement -->
+      <div
+        class="relative bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl border border-orange-200 p-8 md:p-12 shadow-xl"
+      >
+        <!-- Background pattern -->
+        <div class="absolute inset-0 opacity-5">
+          <div
+            class="absolute inset-0"
+            style="background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0); background-size: 20px 20px;"
+          >
+          </div>
         </div>
 
-        <div class="mt-2 md:mt-0">
-          <!-- desktop unchanged (md: text-2xl + leading-none); mobile smaller + tighter -->
-          <h2
-            class="font-display text-base sm:text-lg md:text-xl font-semibold tracking-tight text-slate-900 leading-snug md:leading-none mt-0 md:mt-1.5"
-          >
-            Staying informed shouldn’t feel like a part-time job.
-          </h2>
+        <div class="relative">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div
+                class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg"
+              >
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </div>
 
-          <!-- mobile smaller text/leading & no measure; desktop restores your original -->
-          <div
-            class="mt-4 md:mt-6 text-[15px] sm:text-base md:text-lg leading-normal md:leading-relaxed text-slate-700 space-y-3 md:space-y-4 md:max-w-[72ch]"
-          >
-            <p>
-              You want to stay on top of your field, follow trusted creators, keep up with relevant
-              news, and extract insights that actually matter to you.
-            </p>
-            <p>The issue isn’t motivation, it’s <strong>bandwidth.</strong></p>
-            <p>
-              And when everything demands your attention, it’s easy to waste energy on noise and
-              overlook what truly matters.
-            </p>
+            <div class="flex-1">
+              <h2
+                class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight"
+              >
+                Information overload is crushing productivity
+              </h2>
+
+              <div class="mt-6 space-y-4 text-lg text-slate-700 leading-relaxed">
+                <p class="flex items-start gap-3">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mt-0.5"
+                  >
+                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                  </span>
+                  <span
+                    ><strong class="text-slate-900">5+ hours weekly</strong> spent hunting through arXiv,
+                    newsletters, RSS feeds, and YouTube</span
+                  >
+                </p>
+                <p class="flex items-start gap-3">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mt-0.5"
+                  >
+                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                  </span>
+                  <span
+                    ><strong class="text-slate-900">Endless tabs and bookmarks</strong> that pile up
+                    faster than you can process</span
+                  >
+                </p>
+                <p class="flex items-start gap-3">
+                  <span
+                    class="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mt-0.5"
+                  >
+                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                  </span>
+                  <span
+                    ><strong class="text-slate-900">Critical insights buried</strong> in noise, causing
+                    you to miss what matters</span
+                  >
+                </p>
+              </div>
+
+              <div class="mt-8 p-6 bg-white/70 rounded-2xl border border-orange-200">
+                <p class="text-xl font-semibold text-slate-900 mb-2">The result?</p>
+                <p class="text-lg text-slate-700">
+                  You're either behind on important developments or drowning in information you
+                  don't have time to process.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -140,628 +299,932 @@ import Header from '../components/Header.astro';
   </section>
 
   <!-- Solution -->
-  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+  <section id="features" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
     <!-- Title -->
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
-        A Research Digest You Control
+    <div class="mx-auto max-w-4xl text-center">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-medium mb-6"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path>
+        </svg>
+        The Solution
+      </div>
+      <h2
+        class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-emerald-700 bg-clip-text text-transparent"
+      >
+        Your Personal Intelligence
+        <span class="block text-emerald-600">Assistant</span>
       </h2>
-      <p class="mt-4 text-slate-600">
-        We read everything you follow and deliver a clear digest with citations. You control
-        the style and focus so that every digest fits your needs.
+      <p class="mt-6 text-xl sm:text-2xl text-slate-600 leading-relaxed">
+        Connect all your information sources. Get one intelligent daily brief with citations.
+        Reclaim your time and stay ahead effortlessly.
       </p>
     </div>
 
     <!-- Solution block -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-10 lg:mt-12">
-      <!-- Features -->
-      <h3 class="text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
-        Features
-      </h3>
-      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <!-- Premium Features Grid -->
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          class="group relative bg-gradient-to-br from-white to-blue-50 rounded-3xl border border-blue-200 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+        >
           <div
-            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+            class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl"
           >
-            ✓
           </div>
-          <p class="font-semibold text-slate-900">Clear summaries</p>
-          <p class="mt-1 text-sm text-slate-600">Your feeds distilled into readable briefs.</p>
+          <div class="relative">
+            <div
+              class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300"
+            >
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Intelligent Summaries</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Advanced AI distills complex research, news, and content into clear, actionable
+              insights tailored to your interests.
+            </p>
+          </div>
         </div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+
+        <div
+          class="group relative bg-gradient-to-br from-white to-emerald-50 rounded-3xl border border-emerald-200 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+        >
           <div
-            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+            class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-3xl"
           >
-            🔗
           </div>
-          <p class="font-semibold text-slate-900">Linked citations</p>
-          <p class="mt-1 text-sm text-slate-600">Verify fast and dive deeper when needed.</p>
+          <div class="relative">
+            <div
+              class="w-16 h-16 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300"
+            >
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Verified Citations</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Every insight links directly to its source. Verify claims instantly and dive deeper
+              into topics that matter to you.
+            </p>
+          </div>
         </div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+
+        <div
+          class="group relative bg-gradient-to-br from-white to-purple-50 rounded-3xl border border-purple-200 p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 sm:col-span-2 lg:col-span-1"
+        >
           <div
-            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700 text-2xl"
+            class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl"
           >
-            ✦
           </div>
-          <p class="font-semibold text-slate-900">Fully configurable</p>
-          <p class="mt-1 text-sm text-slate-600">Only the updates you actually care about.</p>
+          <div class="relative">
+            <div
+              class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300"
+            >
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Fully Customizable</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Control your digest style, frequency, and focus areas. Get exactly the information you
+              need, when you need it.
+            </p>
+          </div>
         </div>
       </div>
 
       <!-- How it works -->
-      <h3 class="mt-14 text-center text-xs font-semibold tracking-widest text-slate-500 uppercase">
-        How it works
-      </h3>
-      <p class="mt-4 text-center text-lg text-slate-700">
-        Connect sources → Set signal → Get brief on your schedule
-      </p>
-      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Step 1 -->
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
-          <div
-            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
-          >
-            <!-- Plug icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8 8V3m8 5V3M6 12h12m-6 0v6a3 3 0 01-3 3"></path>
-            </svg>
-            <!-- Number badge -->
-            <span
-              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
-              >1</span
-            >
-          </div>
-          <p class="font-semibold text-slate-900">Connect sources</p>
-          <p class="mt-1 text-sm text-slate-600">
-            arXiv, newsletters, RSS, YouTube, and more — all in one place.
-          </p>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
-          <div
-            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
-          >
-            <!-- Funnel icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h18l-7 7v6l-4 2v-8L3 5z"
-              ></path>
-            </svg>
-            <!-- Number badge -->
-            <span
-              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
-              >2</span
-            >
-          </div>
-          <p class="font-semibold text-slate-900">Set signal</p>
-          <p class="mt-1 text-sm text-slate-600">
-            Define the signal to cut the noise and surface what matters.
-          </p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
-          <div
-            class="relative mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700"
-          >
-            <!-- Calendar icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <path d="M16 2v4M8 2v4M3 10h18"></path>
-            </svg>
-            <!-- Number badge -->
-            <span
-              class="absolute -top-1 -right-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white text-xs font-bold"
-              >3</span
-            >
-          </div>
-          <p class="font-semibold text-slate-900">Get brief on your schedule</p>
-          <p class="mt-1 text-sm text-slate-600">
-            Get your digest via inbox or dashboard. Daily, weekly, or whenever you want it.
-          </p>
-        </div>
+      <div class="mt-24 text-center">
+        <h3 class="text-lg font-bold text-brand-600 mb-4">How it works</h3>
+        <h4 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+          Three simple steps to stay informed
+        </h4>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+          From information chaos to personalized insights in minutes
+        </p>
       </div>
 
-      <!-- Simple CTA -->
-      <div
-        class="mt-12 rounded-2xl bg-slate-50 px-6 pt-2 pb-6 sm:pt-6 sm:pb-6
-            text-center sm:flex sm:items-center sm:justify-between sm:px-10 sm:text-left"
-      >
-        <div class="sm:mb-0">
-          <h3 class="text-lg font-semibold leading-tight text-slate-900">Ready to try it?</h3>
-          <p class="mt-1 text-slate-700">
-            Join the pilot and start receiving your personalized digest.
-          </p>
-        </div>
-        <a
-          href="#pilot"
-          data-track="features-cta-join-pilot"
-          class="inline-flex items-center justify-center rounded-xl bg-brand-600 px-6 py-3 text-base font-semibold text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+      <!-- Process visualization -->
+      <div class="mt-16 relative">
+        <!-- Connection lines for desktop -->
+        <div
+          class="hidden lg:block absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-4xl"
         >
-          Join the Pilot
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sample Brief Section -->
-  <section id="sample" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-    <div class="mx-auto max-w-4xl text-center">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">Sample Brief</h2>
-      <p class="mt-4 text-slate-600">
-        Here's what your daily research brief looks like — real summaries with linked citations.
-      </p>
-    </div>
-
-    <div class="mt-8 mx-auto max-w-4xl">
-      <!-- Article-style preview inspired by the demo -->
-      <article class="bg-white rounded-lg shadow-md">
-        <div class="px-8 py-10">
-          <div class="mb-6">
-            <div class="flex items-center justify-between mb-6">
-              <div>
-                <h3 class="text-2xl font-bold text-gray-900">Sample Research Brief</h3>
-                <p class="text-gray-600 text-lg">Daily Research Digest</p>
-              </div>
-            </div>
+          <div
+            class="absolute top-0 left-1/4 w-1/2 h-0.5 bg-gradient-to-r from-blue-300 via-emerald-300 to-purple-300"
+          >
           </div>
+        </div>
 
-          <!-- Sample content preview with realistic highlights -->
-          <div class="article-content max-w-none">
-            <div class="flex items-center justify-between mb-4">
-              <h4 class="text-xl font-semibold text-gray-900 pb-2 border-b-2 border-brand-100">
-                📋 Today's Highlights
-              </h4>
-              <div class="text-sm text-gray-500">15 papers • 23 citations</div>
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 relative">
+          <!-- Step 1 -->
+          <div
+            class="group relative bg-gradient-to-br from-white to-blue-50 rounded-3xl border border-blue-200 p-8 shadow-xl text-center"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-600/5 rounded-3xl"
+            >
             </div>
-
-            <div class="space-y-3 mb-6">
+            <div class="relative">
               <div
-                class="flex items-start bg-gradient-to-r from-brand-50 to-blue-50 p-4 rounded-lg border border-brand-100"
+                class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-lg mx-auto mb-6"
               >
-                <span
-                  class="bg-brand-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
-                  >1</span
+                <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <div
+                  class="absolute -top-3 -right-3 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-lg"
                 >
-                <div>
-                  <div class="font-semibold text-gray-900 mb-1">
-                    LiveMCP-101: Stress Testing MCP-enabled Agents
-                  </div>
-                  <div class="text-gray-700 text-sm">
-                    Frontier LLMs score &lt;60% on 101 real-world multi-tool tasks; exposes agent tool-use failure modes.
-                  </div>
+                  <span class="text-white text-lg font-bold">1</span>
                 </div>
               </div>
-
-              <div
-                class="flex items-start bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200"
-              >
-                <span
-                  class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
-                  >2</span
-                >
-                <div>
-                  <div class="font-semibold text-gray-900 mb-1">
-                    Mobile-Agent-v3: GUI Automation Framework
-                  </div>
-                  <div class="text-gray-700 text-sm">
-                    AndroidWorld 73.3, OSWorld 37.7; GUI-Owl-7B hits 66.4 and 29.4 on cross-platform automation.
-                  </div>
-                </div>
-              </div>
-
-              <div
-                class="flex items-start bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-200"
-              >
-                <span
-                  class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
-                  >3</span
-                >
-                <div>
-                  <div class="font-semibold text-gray-900 mb-1">
-                    Don't Think Twice! Over-Reasoning Impairs Calibration
-                  </div>
-                  <div class="text-gray-700 text-sm">
-                    Search-augmented generation reaches 89.3% confidence accuracy vs 48.7% for pure reasoning.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-              <div class="flex items-center text-yellow-800 font-semibold mb-2">
-                <span class="mr-2">💡</span>
-                Key Insight
-              </div>
-              <p class="text-yellow-700 text-sm">
-                Agent tool-use reveals critical gaps: frontier LLMs achieve &lt;60% success on real-world multi-tool tasks, while GUI automation reaches new SOTA with 73.3% on AndroidWorld.
+              <h3 class="text-xl font-bold text-slate-900 mb-3">Connect Your Sources</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Link arXiv, newsletters, RSS feeds, YouTube channels, and other trusted sources in
+                one central hub.
               </p>
             </div>
+          </div>
 
-            <p class="text-gray-600 italic text-center mb-2">
-              ...continues with detailed analysis, metrics, and citations
-            </p>
-            <div class="text-center text-xs text-gray-500">
-              <span class="inline-flex items-center gap-1">
-                <span class="w-2 h-2 bg-brand-600 rounded-full"></span>
-                Agent Systems
-              </span>
-              <span class="mx-2">•</span>
-              <span class="inline-flex items-center gap-1">
-                <span class="w-2 h-2 bg-green-600 rounded-full"></span>
-                GUI Automation
-              </span>
-              <span class="mx-2">•</span>
-              <span class="inline-flex items-center gap-1">
-                <span class="w-2 h-2 bg-purple-600 rounded-full"></span>
-                Calibration & Reasoning
-              </span>
+          <!-- Step 2 -->
+          <div
+            class="group relative bg-gradient-to-br from-white to-emerald-50 rounded-3xl border border-emerald-200 p-8 shadow-xl text-center"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-emerald-600/5 rounded-3xl"
+            >
+            </div>
+            <div class="relative">
+              <div
+                class="w-20 h-20 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl flex items-center justify-center shadow-lg mx-auto mb-6"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                  ></path>
+                </svg>
+                <div
+                  class="absolute -top-3 -right-3 w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <span class="text-white text-lg font-bold">2</span>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-3">Define Your Signal</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Set your interests and preferences to filter signal from noise. AI learns what
+                matters most to you.
+              </p>
             </div>
           </div>
 
-          <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-            <a
-              href="/sample-brief.pdf"
-              download
-              data-track="sample_download"
-              class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-colors"
+          <!-- Step 3 -->
+          <div
+            class="group relative bg-gradient-to-br from-white to-purple-50 rounded-3xl border border-purple-200 p-8 shadow-xl text-center"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-purple-600/5 rounded-3xl"
+            >
+            </div>
+            <div class="relative">
+              <div
+                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg mx-auto mb-6"
+              >
+                <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <div
+                  class="absolute -top-3 -right-3 w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <span class="text-white text-lg font-bold">3</span>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-3">Receive Your Brief</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Get personalized, citeable insights delivered on your schedule. Email or dashboard,
+                daily or weekly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhanced CTA -->
+        <div class="mt-20 relative">
+          <div
+            class="bg-gradient-to-r from-brand-600 to-emerald-600 rounded-3xl p-8 md:p-12 shadow-2xl text-center"
+          >
+            <div class="absolute inset-0 bg-black/10 rounded-3xl"></div>
+            <div class="relative">
+              <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Ready to reclaim your time?
+              </h3>
+              <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Join hundreds of researchers and professionals who've transformed their information
+                diet
+              </p>
+              <a
+                href="#pilot"
+                data-track="features-cta-join-pilot"
+                class="inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 text-lg font-bold text-brand-600 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-xl"
+              >
+                <span class="flex items-center gap-2">
+                  Start Your Free Pilot
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample Brief Section -->
+    <section id="sample" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">Sample Brief</h2>
+        <p class="mt-4 text-slate-600">
+          Here's what your daily research brief looks like — real summaries with linked citations.
+        </p>
+      </div>
+
+      <div class="mt-8 mx-auto max-w-4xl">
+        <!-- Article-style preview inspired by the demo -->
+        <article class="bg-white rounded-lg shadow-md">
+          <div class="px-8 py-10">
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900">Sample Research Brief</h3>
+                  <p class="text-gray-600 text-lg">Daily Research Digest</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sample content preview with realistic highlights -->
+            <div class="article-content max-w-none">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-xl font-semibold text-gray-900 pb-2 border-b-2 border-brand-100">
+                  📋 Today's Highlights
+                </h4>
+                <div class="text-sm text-gray-500">15 papers • 23 citations</div>
+              </div>
+
+              <div class="space-y-3 mb-6">
+                <div
+                  class="flex items-start bg-gradient-to-r from-brand-50 to-blue-50 p-4 rounded-lg border border-brand-100"
+                >
+                  <span
+                    class="bg-brand-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                    >1</span
+                  >
+                  <div>
+                    <div class="font-semibold text-gray-900 mb-1">
+                      LiveMCP-101: Stress Testing MCP-enabled Agents
+                    </div>
+                    <div class="text-gray-700 text-sm">
+                      Frontier LLMs score &lt;60% on 101 real-world multi-tool tasks; exposes agent
+                      tool-use failure modes.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex items-start bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200"
+                >
+                  <span
+                    class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                    >2</span
+                  >
+                  <div>
+                    <div class="font-semibold text-gray-900 mb-1">
+                      Mobile-Agent-v3: GUI Automation Framework
+                    </div>
+                    <div class="text-gray-700 text-sm">
+                      AndroidWorld 73.3, OSWorld 37.7; GUI-Owl-7B hits 66.4 and 29.4 on
+                      cross-platform automation.
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex items-start bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-200"
+                >
+                  <span
+                    class="bg-purple-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5"
+                    >3</span
+                  >
+                  <div>
+                    <div class="font-semibold text-gray-900 mb-1">
+                      Don't Think Twice! Over-Reasoning Impairs Calibration
+                    </div>
+                    <div class="text-gray-700 text-sm">
+                      Search-augmented generation reaches 89.3% confidence accuracy vs 48.7% for
+                      pure reasoning.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center text-yellow-800 font-semibold mb-2">
+                  <span class="mr-2">💡</span>
+                  Key Insight
+                </div>
+                <p class="text-yellow-700 text-sm">
+                  Agent tool-use reveals critical gaps: frontier LLMs achieve &lt;60% success on
+                  real-world multi-tool tasks, while GUI automation reaches new SOTA with 73.3% on
+                  AndroidWorld.
+                </p>
+              </div>
+
+              <p class="text-gray-600 italic text-center mb-2">
+                ...continues with detailed analysis, metrics, and citations
+              </p>
+              <div class="text-center text-xs text-gray-500">
+                <span class="inline-flex items-center gap-1">
+                  <span class="w-2 h-2 bg-brand-600 rounded-full"></span>
+                  Agent Systems
+                </span>
+                <span class="mx-2">•</span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                  GUI Automation
+                </span>
+                <span class="mx-2">•</span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="w-2 h-2 bg-purple-600 rounded-full"></span>
+                  Calibration & Reasoning
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+              <a
+                href="/sample-brief.pdf"
+                download
+                data-track="sample_download"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-colors"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                Download Full Sample Brief
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Trust / Social Proof -->
+    <section id="trust" class="bg-slate-50 border-y border-slate-100">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="mx-auto max-w-4xl text-center">
+          <p class="text-xs font-semibold tracking-widest text-brand-700 uppercase">
+            In good company
+          </p>
+          <h2 class="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight">
+            Trusted by Top Researchers and Professionals
+          </h2>
+        </div>
+
+        <div class="mt-8 mx-auto max-w-2xl text-left space-y-3">
+          <p class="text-slate-600 font-medium">Already used by:</p>
+          <div class="flex items-start gap-2">
+            <span class="text-brand-600 leading-relaxed">✓</span>
+            <span class="text-lg text-slate-800"
+              >Researchers at UC Berkeley, Stanford, and ETH Zurich</span
+            >
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-brand-600 leading-relaxed">✓</span>
+            <span class="text-lg text-slate-800"
+              >Students who want to keep up without burning out</span
+            >
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-brand-600 leading-relaxed">✓</span>
+            <span class="text-lg text-slate-800"
+              >Executives and busy professionals who need to stay informed to make better decisions</span
+            >
+          </div>
+        </div>
+
+        <!-- testimonials -->
+        <div class="mt-8 grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+          <!-- Card 1 -->
+          <figure class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+            <svg
+              class="absolute -top-3 left-8 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"
+              ></path>
+            </svg>
+            <blockquote class="text-slate-800 leading-relaxed">
+              "I used to open dozens of arXiv tabs every morning just to keep up — and still felt
+              like I was falling behind. Now I get one focused summary that's actually relevant to
+              my research, saving me hours."
+            </blockquote>
+            <figcaption class="mt-4 text-sm text-slate-600">
+              <div class="font-medium text-slate-800">Postdoc</div>
+              <div class="text-slate-500">UC Berkeley</div>
+            </figcaption>
+          </figure>
+
+          <!-- Card 2 -->
+          <figure class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+            <svg
+              class="absolute -top-3 left-8 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"
+              ></path>
+            </svg>
+            <blockquote class="text-slate-800 leading-relaxed">
+              "I signed up for all the right newsletters, but never had time to read them. SummArena
+              declutters my inbox and keeps me up to date with the key developments in my field."
+            </blockquote>
+            <figcaption class="mt-4 text-sm text-slate-600">
+              <div class="font-medium text-slate-800">Product Manager</div>
+              <div class="text-slate-500">AI startup</div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Onboarding divider -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 lg:mt-14">
+      <div class="flex items-center justify-center">
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1
+               text-xs font-semibold text-slate-700 ring-1 ring-slate-200"
+        >
+          Now onboarding new users
+        </span>
+      </div>
+    </div>
+
+    <!-- Final CTA / Pilot -->
+    <section
+      id="pilot"
+      data-track-view="reached-signup"
+      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14"
+    >
+      <!-- Premium signup card -->
+      <div class="relative">
+        <!-- Background gradient -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-brand-600/5 to-emerald-600/5 rounded-3xl transform rotate-1"
+        >
+        </div>
+        <div class="relative bg-white rounded-3xl border-2 border-slate-200 shadow-2xl p-8 lg:p-12">
+          <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <!-- Left content -->
+            <div class="lg:col-span-7">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-50 to-emerald-50 border border-brand-200 text-brand-700 text-sm font-medium mb-6"
+              >
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                Limited pilot spots available
+              </div>
+
+              <h2
+                class="font-display text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-brand-700 bg-clip-text text-transparent"
+              >
+                Transform Your
+                <span class="block text-brand-600">Information Diet</span>
+              </h2>
+              <p class="mt-6 text-xl text-slate-600 leading-relaxed">
+                Join the exclusive pilot program and be among the first to experience intelligent
+                content summarization.
+              </p>
+
+              <!-- Premium benefits -->
+              <div class="mt-8 space-y-6">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-8 h-8 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-slate-900 leading-tight">
+                      Early access to all features
+                    </p>
+                    <p class="text-slate-600 text-sm leading-tight mt-1">
+                      Get first-class access to our complete intelligence platform
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-slate-900 leading-tight">
+                      Shape the product roadmap
+                    </p>
+                    <p class="text-slate-600 text-sm leading-tight mt-1">
+                      Your feedback directly influences feature development
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-slate-900 leading-tight">Lifetime pilot pricing</p>
+                    <p class="text-slate-600 text-sm leading-tight mt-1">
+                      Lock in special pricing when we transition to paid tiers
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mt-8 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border border-orange-200"
+              >
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                  >
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.414L10 9.586V6z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-bold text-orange-900 mb-1">Limited time offer</p>
+                    <p class="text-orange-800">
+                      Only 100 pilot spots available. Join now before we reach capacity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Premium signup form -->
+            <div class="lg:col-span-5">
+              <div class="relative">
+                <!-- Form card with enhanced styling -->
+                <div
+                  class="bg-gradient-to-br from-slate-50 to-white rounded-3xl border-2 border-slate-200 px-6 py-8 shadow-xl"
+                >
+                  <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Start Your Free Pilot</h3>
+                    <p class="text-slate-600">No credit card required • Cancel anytime</p>
+                  </div>
+
+                  <form
+                    id="lead-form"
+                    class="space-y-6"
+                    action="/api/subscribe"
+                    method="POST"
+                    novalidate
+                  >
+                    <div class="w-full">
+                      <label for="email" class="block text-sm font-semibold text-slate-700 mb-2"
+                        >Email Address</label
+                      >
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        inputmode="email"
+                        required
+                        placeholder="your.email@example.com"
+                        class="w-full max-w-full rounded-2xl border-2 border-slate-300 px-4 py-4 text-base focus:ring-4 focus:ring-brand-500/30 focus:border-brand-500 transition-all duration-200 bg-white shadow-sm box-border"
+                      />
+                    </div>
+
+                    <input
+                      type="text"
+                      name="company"
+                      tabindex="-1"
+                      autocomplete="off"
+                      class="hidden"
+                      aria-hidden="true"
+                    />
+
+                    <button
+                      type="submit"
+                      id="lead-submit"
+                      class="w-full rounded-2xl bg-gradient-to-r from-brand-600 to-emerald-600 px-6 py-4 text-lg font-bold text-white hover:from-brand-700 hover:to-emerald-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-brand-500/50 transition-all duration-200 shadow-xl"
+                    >
+                      <span class="flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd"></path>
+                        </svg>
+                        Join the Pilot Program
+                      </span>
+                    </button>
+
+                    <p id="lead-msg" class="text-sm text-center font-medium" aria-live="polite"></p>
+
+                    <div class="text-center space-y-2">
+                      <p class="text-sm text-slate-500 leading-none">✓ No credit card required</p>
+                      <p class="text-sm text-slate-500 leading-none">✓ Unsubscribe anytime</p>
+                      <p class="text-sm text-slate-500 leading-none">✓ GDPR compliant</p>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Floating trust badge -->
+                <div
+                  class="absolute -bottom-4 -right-4 bg-emerald-500 text-white px-4 py-2 rounded-2xl shadow-lg transform rotate-3"
+                >
+                  <div class="flex items-center gap-2 text-sm font-bold">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                    Trusted
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24 mt-12">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-sm font-medium mb-6"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
-                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
                   clip-rule="evenodd"></path>
               </svg>
-              Download Full Sample Brief
-            </a>
+              FAQ
+            </div>
+            <h2
+              class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-blue-700 bg-clip-text text-transparent mb-4"
+            >
+              Common Questions
+            </h2>
+            <p class="text-xl text-slate-600">
+              Everything you need to know about the pilot program
+            </p>
           </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Trust / Social Proof -->
-  <section id="trust" class="bg-slate-50 border-y border-slate-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="mx-auto max-w-4xl text-center">
-        <p class="text-xs font-semibold tracking-widest text-brand-700 uppercase">
-          In good company
-        </p>
-        <h2 class="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight">
-          Trusted by Top Researchers and Professionals
-        </h2>
-      </div>
-
-      <div class="mt-8 mx-auto max-w-2xl text-left space-y-3">
-        <p class="text-slate-600 font-medium">Already used by:</p>
-        <div class="flex items-start gap-2">
-          <span class="text-brand-600 leading-relaxed">✓</span>
-          <span class="text-lg text-slate-800"
-            >Researchers at UC Berkeley, Stanford, and ETH Zurich</span
-          >
-        </div>
-        <div class="flex items-start gap-2">
-          <span class="text-brand-600 leading-relaxed">✓</span>
-          <span class="text-lg text-slate-800"
-            >Students who want to keep up without burning out</span
-          >
-        </div>
-        <div class="flex items-start gap-2">
-          <span class="text-brand-600 leading-relaxed">✓</span>
-          <span class="text-lg text-slate-800"
-            >Executives and busy professionals who need to stay informed to make better decisions</span
-          >
-        </div>
-      </div>
-
-      <!-- testimonials -->
-      <div class="mt-8 flex flex-wrap justify-center gap-2 -mx-4 sm:mx-0">
-        <!-- Card 1 -->
-        <figure
-          class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"
-        >
-          <svg
-            class="absolute -top-3 left-12 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"
-            ></path>
-          </svg>
-          <blockquote class="text-slate-800 leading-snug ml-0 mr-1">
-            “I used to open dozens of arXiv tabs every morning just to keep up — and still felt like
-            I was falling behind. Now I get one focused summary that’s actually relevant to my
-            research, saving me hours.”
-          </blockquote>
-          <figcaption class="mt-3 text-sm text-slate-600">
-            <div class="font-medium text-slate-800">Postdoc</div>
-            <div class="text-slate-500">UC Berkeley</div>
-          </figcaption>
-        </figure>
-
-        <!-- Card 2 -->
-        <figure
-          class="relative max-w-lg rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"
-        >
-          <svg
-            class="absolute -top-3 left-12 h-6 w-6 text-brand-200 transform scale-x-[-1] origin-left"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              d="M7.2 4C4.9 4 3 5.9 3 8.2c0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2C7.2 17.9 9 14.9 9 11.4 9 7.3 8 4 7.2 4zm11 0c-2.3 0-4.2 1.9-4.2 4.2 0 2.1 1.5 3.8 3.5 4.1-.3 2.4-1.8 4.3-3.5 5.5l1.4 2c2.8-2 4.7-5 4.7-8.5 0-4.1-1-7.4-1.9-7.4z"
-            ></path>
-          </svg>
-          <blockquote class="text-slate-800 leading-snug ml-0 mr-1">
-            "I signed up for all the right newsletters, but never had time to read them. SummArena
-            declutters my inbox and keeps me up to date with the key developments in my field."
-          </blockquote>
-          <figcaption class="mt-3 text-sm text-slate-600">
-            <div class="font-medium text-slate-800">Product Manager</div>
-            <div class="text-slate-500">AI startup</div>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- Onboarding divider -->
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 lg:mt-14">
-    <div class="flex items-center justify-center">
-      <span
-        class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1
-               text-xs font-semibold text-slate-700 ring-1 ring-slate-200"
-      >
-        Now onboarding new users
-      </span>
-    </div>
-  </div>
-
-  <!-- Final CTA / Pilot -->
-  <section
-    id="pilot"
-    data-track-view="reached-signup"
-    class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14"
-  >
-    <!-- single card with subtle blue tint -->
-    <div
-      class="rounded-3xl bg-gradient-to-br from-white to-brand-50/50 border border-brand-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)] p-8 lg:p-12"
-    >
-      <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <!-- Left content -->
-        <div class="lg:col-span-7">
-          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
-            Join the Pilot Program for Free
-          </h2>
-          <p class="mt-4 text-slate-700">Be among the first to use our summarizers.</p>
-          <ul
-            class="mt-6 space-y-3 text-slate-700 list-disc list-outside pl-6 marker:text-brand-600 marker:text-base"
-          >
-            <li>Stay ahead with your personalized research digest</li>
-            <li>Help shape the product with your feedback</li>
-            <li>100% free during the pilot, no credit card required</li>
-          </ul>
-          <p class="mt-6 font-medium text-slate-800">Spots are limited. Secure your place today.</p>
-        </div>
-
-        <!-- Right form -->
-        <div class="lg:col-span-5">
-          <!-- keep this a simple white card; no extra border on the outer wrapper -->
-          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft -mx-2 sm:mx-0">
-            <form id="lead-form" class="space-y-3" action="/api/subscribe" method="POST" novalidate>
-              <label for="email" class="sr-only">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                inputmode="email"
-                required
-                placeholder="you@mail.com"
-                class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500"
-              />
-              <input
-                type="text"
-                name="company"
-                tabindex="-1"
-                autocomplete="off"
-                class="hidden"
-                aria-hidden="true"
-              />
-              <button
-                type="submit"
-                id="lead-submit"
-                class="w-full rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-700"
+          <div class="space-y-4 [&_summary::-webkit-details-marker]:hidden">
+            <!-- Q1 -->
+            <details
+              class="group bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden"
+            >
+              <summary
+                class="flex items-center justify-between cursor-pointer p-6 hover:bg-slate-50 transition-colors duration-200"
               >
-                Start free
-              </button>
-              <p id="lead-msg" class="text-xs text-center" aria-live="polite"></p>
-              <p class="text-xs text-slate-500 text-center">No credit card. Unsubscribe anytime.</p>
-            </form>
+                <span class="text-lg font-semibold text-slate-900">What sources are supported?</span
+                >
+                <div
+                  class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 group-open:rotate-45 transition-transform duration-200"
+                >
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 leading-relaxed">
+                SummArena works with arXiv, newsletters, RSS feeds, YouTube, and more. You can also
+                request new sources, and we'll add them based on feedback.
+              </div>
+            </details>
+
+            <!-- Q2 -->
+            <details
+              class="group bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden"
+            >
+              <summary
+                class="flex items-center justify-between cursor-pointer p-6 hover:bg-slate-50 transition-colors duration-200"
+              >
+                <span class="text-lg font-semibold text-slate-900"
+                  >What does a digest look like?</span
+                >
+                <div
+                  class="w-8 h-8 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 group-open:rotate-45 transition-transform duration-200"
+                >
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 leading-relaxed">
+                Each digest is a personalized briefing. It highlights the key updates that matter to
+                you, supported by citations. You control the style and focus.
+              </div>
+            </details>
+
+            <!-- Q3 -->
+            <details
+              class="group bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden"
+            >
+              <summary
+                class="flex items-center justify-between cursor-pointer p-6 hover:bg-slate-50 transition-colors duration-200"
+              >
+                <span class="text-lg font-semibold text-slate-900">Why is it free?</span>
+                <div
+                  class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 group-open:rotate-45 transition-transform duration-200"
+                >
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 leading-relaxed">
+                The pilot program is 100% free. No credit card required. All we ask is your feedback
+                to help us refine the product.
+              </div>
+            </details>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+      <script is:inline>
+        const params = new URLSearchParams(location.search);
+        const form = document.getElementById('lead-form');
+        const msg = document.getElementById('lead-msg');
+        const btn = document.getElementById('lead-submit');
 
-  <!-- FAQ -->
-  <section id="faq" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-24 mt-12">
-    <div class="max-w-3xl mx-auto [&_summary::-webkit-details-marker]:hidden">
-      <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl text-center">
-        Frequently Asked Questions
-      </h2>
-      <div class="mt-2 divide-y divide-slate-200">
-        <!-- Q1 -->
-        <details class="group py-6">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="text-lg font-medium text-slate-900">What sources are supported?</span>
-            <span
-              class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none"
-              >+</span
-            >
-          </summary>
-          <div class="pt-5 text-slate-600">
-            SummArena works with arXiv, newsletters, RSS feeds, YouTube, and more. You can also
-            request new sources, and we’ll add them based on feedback.
-          </div>
-        </details>
+        // Reliable view event
+        (function trackView() {
+          if (window.umami && typeof window.umami.track === 'function') {
+            window.umami.track('view_lp', {
+              utm_source: params.get('utm_source') || '',
+              utm_medium: params.get('utm_medium') || '',
+              utm_campaign: params.get('utm_campaign') || '',
+              referrer: document.referrer || '',
+            });
+          } else setTimeout(trackView, 300);
+        })();
 
-        <!-- Q2 -->
-        <details class="group py-6">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="text-lg font-medium text-slate-900">What does a digest look like?</span>
-            <span
-              class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none"
-              >+</span
-            >
-          </summary>
-          <div class="pt-5 text-slate-600">
-            Each digest is a personalized briefing. It highlights the key updates that matter to
-            you, supported by citations. You control the style and focus.
-          </div>
-        </details>
+        document
+          .getElementById('email')
+          ?.addEventListener('focus', () => window.umami?.track('form_start'));
 
-        <!-- Q3 -->
-        <details class="group py-6">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="text-lg font-medium text-slate-900">Why is it free?</span>
-            <span
-              class="text-2xl leading-none text-slate-400 transition-transform group-open:rotate-45 select-none"
-              >+</span
-            >
-          </summary>
-          <div class="pt-5 text-slate-600">
-            The pilot program is 100% free. No credit card required. All we ask is your feedback to
-            help us refine the product.
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-  <script is:inline>
-    const params = new URLSearchParams(location.search);
-    const form = document.getElementById('lead-form');
-    const msg = document.getElementById('lead-msg');
-    const btn = document.getElementById('lead-submit');
+        form?.addEventListener('submit', async e => {
+          e.preventDefault();
+          btn.disabled = true;
+          btn.textContent = 'Submitting';
+          msg.textContent = '';
+          msg.className = 'text-xs text-center';
 
-    // Reliable view event
-    (function trackView() {
-      if (window.umami && typeof window.umami.track === 'function') {
-        window.umami.track('view_lp', {
-          utm_source: params.get('utm_source') || '',
-          utm_medium: params.get('utm_medium') || '',
-          utm_campaign: params.get('utm_campaign') || '',
-          referrer: document.referrer || '',
-        });
-      } else setTimeout(trackView, 300);
-    })();
-
-    document
-      .getElementById('email')
-      ?.addEventListener('focus', () => window.umami?.track('form_start'));
-
-    form?.addEventListener('submit', async e => {
-      e.preventDefault();
-      btn.disabled = true;
-      btn.textContent = 'Submitting';
-      msg.textContent = '';
-      msg.className = 'text-xs text-center';
-
-      window.umami?.track('form_submit');
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-        const data = await res.json().catch(() => ({}));
-        if (data.ok) {
-          msg.textContent = "You're in. Check the sample below.";
-          msg.className = 'text-xs text-center text-green-600';
-          window.umami?.track('form_success');
-        } else {
-          msg.textContent =
-            data.error === 'already_subscribed'
-              ? "You're already on the list."
-              : 'Please enter a valid email.';
-          msg.className = 'text-xs text-center text-red-600';
-          window.umami?.track('form_error');
-        }
-      } catch {
-        msg.textContent = 'Error. Try again.';
-        msg.className = 'text-xs text-center text-red-600';
-        window.umami?.track('form_error');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Start free';
-      }
-    });
-
-    // Hide mobile CTA when #pilot is visible
-    const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div');
-    const pilot = document.getElementById('pilot');
-    if (bar && pilot && 'IntersectionObserver' in window) {
-      new IntersectionObserver(([e]) => {
-        bar.style.display = e.isIntersecting ? 'none' : '';
-      }).observe(pilot);
-    }
-
-    // click tracking for [data-track]
-    document.addEventListener('click', e => {
-      const el = e.target && e.target.closest?.('[data-track]');
-      const name = el && el.getAttribute && el.getAttribute('data-track');
-      if (name && window.umami?.track) window.umami.track(name);
-    });
-
-    // section view tracking for [data-track-view] (fires once per section)
-    document.querySelectorAll('[data-track-view]').forEach(el => {
-      const name = el.getAttribute('data-track-view');
-      if (!name) return;
-      const io = new IntersectionObserver(
-        entries => {
-          const ent = entries[0];
-          if (ent.isIntersecting) {
-            window.umami?.track?.(name);
-            io.unobserve(el);
+          window.umami?.track('form_submit');
+          try {
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+            const data = await res.json().catch(() => ({}));
+            if (data.ok) {
+              msg.textContent = "You're in. Check the sample below.";
+              msg.className = 'text-xs text-center text-green-600';
+              window.umami?.track('form_success');
+            } else {
+              msg.textContent =
+                data.error === 'already_subscribed'
+                  ? "You're already on the list."
+                  : 'Please enter a valid email.';
+              msg.className = 'text-xs text-center text-red-600';
+              window.umami?.track('form_error');
+            }
+          } catch {
+            msg.textContent = 'Error. Try again.';
+            msg.className = 'text-xs text-center text-red-600';
+            window.umami?.track('form_error');
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Start free';
           }
-        },
-        { threshold: 0.5 }
-      );
-      io.observe(el);
-    });
-  </script>
+        });
 
-  <!-- Mobile persistent bottom bar CTA -->
-  <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-4 md:hidden">
-    <a
-      href="#pilot"
-      data-track="mobile-bottom-cta"
-      class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-    >
-      Start free
-    </a>
-  </div>
-</Layout>
+        // Hide mobile CTA when #pilot is visible
+        const bar = document.querySelector('[data-track="mobile-bottom-cta"]')?.closest('div');
+        const pilot = document.getElementById('pilot');
+        if (bar && pilot && 'IntersectionObserver' in window) {
+          new IntersectionObserver(([e]) => {
+            bar.style.display = e.isIntersecting ? 'none' : '';
+          }).observe(pilot);
+        }
+
+        // click tracking for [data-track]
+        document.addEventListener('click', e => {
+          const el = e.target && e.target.closest?.('[data-track]');
+          const name = el && el.getAttribute && el.getAttribute('data-track');
+          if (name && window.umami?.track) window.umami.track(name);
+        });
+
+        // section view tracking for [data-track-view] (fires once per section)
+        document.querySelectorAll('[data-track-view]').forEach(el => {
+          const name = el.getAttribute('data-track-view');
+          if (!name) return;
+          const io = new IntersectionObserver(
+            entries => {
+              const ent = entries[0];
+              if (ent.isIntersecting) {
+                window.umami?.track?.(name);
+                io.unobserve(el);
+              }
+            },
+            { threshold: 0.5 }
+          );
+          io.observe(el);
+        });
+      </script>
+
+      <!-- Mobile persistent bottom bar CTA -->
+      <div
+        class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-4 md:hidden"
+      >
+        <a
+          href="#pilot"
+          data-track="mobile-bottom-cta"
+          class="w-full inline-flex items-center justify-center rounded-xl border border-transparent bg-brand-600 px-4 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+        >
+          Start free
+        </a>
+      </div>
+    </section>
+  </section></Layout
+>
