@@ -2,6 +2,7 @@ use crate::types::{
     DigestModel, DigestModelSpec, DigestModelMemory, DigestPreferences, DigestOutput,
     InputItem, DigestSelectedItem
 };
+use crate::utils::{extract_keywords, extract_topics, extract_title};
 use interfaces::defs::InputItemReference;
 use tracing::{info, debug};
 
@@ -10,16 +11,16 @@ pub struct RssDigestModel;
 
 impl RssDigestModel {
     /// Analyze preferences to determine what to look for in RSS items
-    fn ponder_preferences(
+    fn compile_preferences(
         _spec: &DigestModelSpec, 
         memory: &DigestModelMemory, 
         preferences: &DigestPreferences
-    ) -> PonderedPreferences {
+    ) -> CompiledPreferences {
         // Extract keywords and topics from preferences
         let keywords = extract_keywords(&preferences.description);
         let topics = extract_topics(&preferences.description, memory);
         
-        PonderedPreferences {
+        CompiledPreferences {
             look_out_for: preferences.description.clone(),
             keywords,
             topics,
@@ -30,11 +31,11 @@ impl RssDigestModel {
     /// Analyze each RSS item for relevance and create focused summary
     fn ponder_relevance_and_summarize(
         _spec: &DigestModelSpec,
-        pondered_preferences: &PonderedPreferences, 
+        compiled_preferences: &CompiledPreferences, 
         input_item: &InputItem
     ) -> ScoredSummary {
-        let relevance_score = calculate_relevance_score(input_item, pondered_preferences);
-        let summary = create_item_summary(input_item, pondered_preferences);
+        let relevance_score = calculate_relevance_score(input_item, compiled_preferences);
+        let summary = create_item_summary(input_item, compiled_preferences);
         
         ScoredSummary {
             summary,
@@ -46,7 +47,7 @@ impl RssDigestModel {
     /// Select the best RSS items based on relevance scores
     fn select_best(
         _spec: &DigestModelSpec,
-        _pondered_preferences: &PonderedPreferences,
+        _compiled_preferences: &CompiledPreferences,
         scored_summaries: &[ScoredSummary]
     ) -> Vec<usize> {
         let mut indexed_summaries: Vec<(usize, &ScoredSummary)> = scored_summaries
@@ -70,7 +71,7 @@ impl RssDigestModel {
     /// Compose final digest from selected summaries
     fn compose_digest(
         _spec: &DigestModelSpec,
-        _pondered_preferences: &PonderedPreferences,
+        _compiled_preferences: &CompiledPreferences,
         best_summaries: &[ScoredSummary]
     ) -> String {
         if best_summaries.is_empty() {
@@ -99,20 +100,20 @@ impl DigestModel for RssDigestModel {
     ) -> DigestOutput {
         info!("Creating RSS digest for {} items", input_items.len());
         
-        let pondered_preferences = Self::ponder_preferences(spec, memory, preferences);
+        let compiled_preferences = Self::compile_preferences(spec, memory, preferences);
         
         let scored_summaries: Vec<ScoredSummary> = input_items
             .iter()
-            .map(|item| Self::ponder_relevance_and_summarize(spec, &pondered_preferences, item))
+            .map(|item| Self::ponder_relevance_and_summarize(spec, &compiled_preferences, item))
             .collect();
             
-        let best_indices = Self::select_best(spec, &pondered_preferences, &scored_summaries);
+        let best_indices = Self::select_best(spec, &compiled_preferences, &scored_summaries);
         let best_summaries: Vec<ScoredSummary> = best_indices
             .iter()
             .map(|&index| scored_summaries[index].clone())
             .collect();
             
-        let digest_text = Self::compose_digest(spec, &pondered_preferences, &best_summaries);
+        let digest_text = Self::compose_digest(spec, &compiled_preferences, &best_summaries);
         
         let selected_items: Vec<DigestSelectedItem> = best_indices
             .iter()
@@ -160,17 +161,17 @@ impl DigestModel for RssDigestModel {
 }
 
 #[derive(Debug, Clone)]
-struct PonderedPreferences {
-    look_out_for: String,
-    keywords: Vec<String>,
-    topics: Vec<String>,
-    memory_context: String,
+pub struct CompiledPreferences {
+    pub look_out_for: String,
+    pub keywords: Vec<String>,
+    pub topics: Vec<String>,
+    pub memory_context: String,
 }
 
 #[derive(Debug, Clone)]
-struct FocusedSummary {
-    summary_text: String,
-    references: Vec<InputItemReference>,
+pub struct FocusedSummary {
+    pub summary_text: String,
+    pub references: Vec<InputItemReference>,
 }
 
 #[derive(Debug, Clone)]
@@ -180,57 +181,9 @@ struct ScoredSummary {
     input_item_uri: String,
 }
 
-/// Extract important keywords from preference description
-fn extract_keywords(description: &str) -> Vec<String> {
-    // Simple keyword extraction - in production, you might use NLP libraries
-    let words: Vec<String> = description
-        .to_lowercase()
-        .split_whitespace()
-        .filter(|word| word.len() > 3)
-        .filter(|word| !is_stop_word(word))
-        .map(|word| word.trim_matches(|c: char| !c.is_alphanumeric()).to_string())
-        .filter(|word| !word.is_empty())
-        .collect();
-    
-    // Remove duplicates
-    let mut unique_words = words;
-    unique_words.sort();
-    unique_words.dedup();
-    
-    unique_words
-}
-
-/// Extract topics from preferences and memory
-fn extract_topics(description: &str, memory: &DigestModelMemory) -> Vec<String> {
-    let mut topics = Vec::new();
-    
-    // Look for explicit topics in preferences
-    if description.contains("technology") || description.contains("tech") {
-        topics.push("technology".to_string());
-    }
-    if description.contains("politics") || description.contains("political") {
-        topics.push("politics".to_string());
-    }
-    if description.contains("business") || description.contains("economy") {
-        topics.push("business".to_string());
-    }
-    if description.contains("science") || description.contains("research") {
-        topics.push("science".to_string());
-    }
-    if description.contains("sports") || description.contains("games") {
-        topics.push("sports".to_string());
-    }
-    
-    // Extract topics from memory context
-    if memory.text.contains("AI") || memory.text.contains("artificial intelligence") {
-        topics.push("artificial-intelligence".to_string());
-    }
-    
-    topics
-}
 
 /// Calculate relevance score for an RSS item
-fn calculate_relevance_score(input_item: &InputItem, preferences: &PonderedPreferences) -> f64 {
+pub fn calculate_relevance_score(input_item: &InputItem, preferences: &CompiledPreferences) -> f64 {
     let text = input_item.text.to_lowercase();
     let mut score: f64 = 0.0;
     
@@ -271,7 +224,7 @@ fn calculate_relevance_score(input_item: &InputItem, preferences: &PonderedPrefe
 }
 
 /// Create a focused summary of an RSS item
-fn create_item_summary(input_item: &InputItem, _preferences: &PonderedPreferences) -> FocusedSummary {
+pub fn create_item_summary(input_item: &InputItem, _preferences: &CompiledPreferences) -> FocusedSummary {
     let text = &input_item.text;
     
     // Extract title
@@ -301,24 +254,3 @@ fn create_item_summary(input_item: &InputItem, _preferences: &PonderedPreference
     }
 }
 
-/// Extract title from RSS item text
-fn extract_title(text: &str) -> String {
-    if let Some(title_start) = text.find("Title: ") {
-        let title_portion = &text[title_start + 7..];
-        if let Some(title_end) = title_portion.find('\n') {
-            title_portion[..title_end].trim().to_string()
-        } else {
-            title_portion.trim().to_string()
-        }
-    } else {
-        "RSS Item".to_string()
-    }
-}
-
-/// Check if a word is a common stop word
-fn is_stop_word(word: &str) -> bool {
-    matches!(
-        word,
-        "the" | "and" | "or" | "but" | "in" | "on" | "at" | "to" | "for" | "of" | "with" | "by" | "a" | "an" | "is" | "are" | "was" | "were" | "be" | "been" | "have" | "has" | "had" | "do" | "does" | "did" | "will" | "would" | "could" | "should" | "may" | "might" | "must" | "can" | "this" | "that" | "these" | "those"
-    )
-}
