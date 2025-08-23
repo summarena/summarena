@@ -11,9 +11,7 @@ pub struct InputItem {
 
 #[derive(Clone, Debug)]
 pub struct InputItemReference {
-    // tbd
-    pub text_start_index: usize,
-    pub text_end_index: usize,
+    pub text: String,
 }
 
 pub struct WatchRest {

@@ -30,7 +30,7 @@ async fn ponder_relevance_and_summarize(spec: &DigestModelSpec, pondered_prefere
     _ = pondered_preferences.look_out_for;
     FocusedSummary {
         summary_text: input_item.text.clone(),
-        references: vec![InputItemReference { text_start_index: 0, text_end_index: input_item.text.len() }],
+        references: vec![InputItemReference { text: input_item.text.clone() }],
     }
 }
 
