@@ -15,13 +15,13 @@ pub mod empty;
 pub mod state;
 
 #[tokio::main]
-async fn main() {
-    state::migrate().await;
+async fn main() -> anyhow::Result<()> {
+    state::migrate().await?;
 
     let live_source_spec = LiveSourceSpec {
         uri: "tag:summarena.pages.dev,2025-08:live_source/dummy".to_owned(),
     };
-    state::create_live_source_spec(&live_source_spec).await;
+    state::create_live_source_spec(&live_source_spec).await?;
 
     let item0_uri = "tag:summarena.pages.dev,2025-08:input_item/dummy/sample_text";
     let item0_text = "Hello, world!";
@@ -34,7 +34,7 @@ async fn main() {
         },
     ];
     for input_item in &input_items {
-        state::ingest(input_item).await;
+        state::ingest(input_item).await?;
     }
 
     let spec = DigestModelSpec {
@@ -47,7 +47,7 @@ async fn main() {
         uri: "tag:summarena.pages.dev,2025-08:digest_preferences/empty".to_owned(),
         description: "".to_owned(),
     };
-    let output = BaselineDigestModel::digest(&spec, &memory_in, &preferences, &input_items).await;
+    let output = BaselineDigestModel::digest(&spec, &memory_in, &preferences, &input_items).await?;
     println!("output: {:#?}", &output);
     let other_output = DigestOutput {
         selected_items: vec![
@@ -62,6 +62,7 @@ async fn main() {
         ],
         text: "They said the usual hello world".to_owned(),
     };
-    let memory_out = BaselineDigestModel::reflect(&spec, &memory_in, &preferences, &input_items, &output, &other_output, true).await;
+    let memory_out = BaselineDigestModel::reflect(&spec, &memory_in, &preferences, &input_items, &output, &other_output, true).await?;
     println!("memory_out: {:#?}", &memory_out);
+    Ok(())
 }

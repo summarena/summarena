@@ -1,3 +1,5 @@
+use anyhow::Result;
+
 pub struct LiveSourceSpec {
     pub uri: String,
 }
@@ -26,7 +28,7 @@ pub trait Ingester {
     ///
     /// When there's nothing to be done for a while, return with a
     /// [`WatchRest`] specifying how long to wait before checking again.
-    fn watch(source: &LiveSourceSpec) -> impl Future<Output = WatchRest>;
+    fn watch(source: &LiveSourceSpec) -> impl Future<Output = Result<WatchRest>>;
 }
 
 pub struct DigestPreferences {
@@ -69,8 +71,8 @@ pub struct DigestOutput {
 // method.
 
 pub trait DigestModel {
-    fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> impl Future<Output = DigestOutput>;
-    fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> impl Future<Output = DigestModelMemory>;
+    fn digest(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem]) -> impl Future<Output = Result<DigestOutput>>;
+    fn reflect(spec: &DigestModelSpec, memory: &DigestModelMemory, preferences: &DigestPreferences, input_items: &[InputItem], self_output: &DigestOutput, opponent_output: &DigestOutput, win: bool) -> impl Future<Output = Result<DigestModelMemory>>;
 }
 
 pub struct DigestAttempt {
