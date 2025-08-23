@@ -37,7 +37,7 @@ CREATE TABLE digest_attempts (
     uri TEXT PRIMARY KEY,
     dataset_uri TEXT NOT NULL,
     model_uri TEXT NOT NULL,
-    output TEXT NOT NULL,  -- JSON: {selected_items: [{input_item_uri: "...", references: [{text_start_index: n, text_end_index: n}, ...]}, ...], text: "..."}
+    output TEXT NOT NULL,  -- JSON: {selected_items: [{input_item_uri: "...", references: [{text: "..."}, ...]}, ...], text: "..."}
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (dataset_uri) REFERENCES digest_datasets(uri),
     FOREIGN KEY (model_uri) REFERENCES digest_model_specs(uri)
