@@ -221,87 +221,85 @@ impl EmailIngester {
 }
 
 impl Ingester for EmailIngester {
-    fn watch(source: &LiveSourceSpec) -> impl Future<Output = WatchRest> {
-        async move {
-            // Extract email address from URI
-            let email_address = match extract_email_address(&source.uri) {
-                Ok(addr) => addr,
-                Err(e) => {
-                    eprintln!("Failed to parse email address from URI '{}': {}", source.uri, e);
-                    return WatchRest {
-                        wait_at_least_ms: 300000, // Wait 5 minutes on parse error
-                    };
-                }
-            };
-            
-            // Connect to database and get credentials
-            let database_url = std::env::var("TEST_DATABASE_URL")
-                .unwrap_or_else(|_| "postgresql://postgres:password@localhost:5432/test_email_ingestion".to_string());
-            let db = match EmailDatabase::new(&database_url).await {
-                Ok(db) => db,
-                Err(e) => {
-                    eprintln!("Failed to connect to database: {}", e);
-                    return WatchRest {
-                        wait_at_least_ms: 60000, // Wait 1 minute on DB error
-                    };
-                }
-            };
-            
-            let credentials = match db.get_credentials(&email_address).await {
-                Ok(Some(creds)) => creds,
-                Ok(None) => {
-                    eprintln!("No credentials found for email address: {}", email_address);
-                    return WatchRest {
-                        wait_at_least_ms: 300000, // Wait 5 minutes if no credentials
-                    };
-                }
-                Err(e) => {
-                    eprintln!("Database error getting credentials for {}: {}", email_address, e);
-                    return WatchRest {
-                        wait_at_least_ms: 60000, // Wait 1 minute on DB error
-                    };
-                }
-            };
-            
-            // Build configuration from URI and credentials
-            let config = match EmailIngesterConfig::from_uri_and_credentials(&source.uri, &credentials).await {
-                Ok(cfg) => cfg,
-                Err(e) => {
-                    eprintln!("Failed to build config from URI '{}': {}", source.uri, e);
-                    return WatchRest {
-                        wait_at_least_ms: 300000, // Wait 5 minutes on config error
-                    };
-                }
-            };
+    async fn watch(source: &LiveSourceSpec) -> WatchRest {
+        // Extract email address from URI
+        let email_address = match extract_email_address(&source.uri) {
+            Ok(addr) => addr,
+            Err(e) => {
+                eprintln!("Failed to parse email address from URI '{}': {}", source.uri, e);
+                return WatchRest {
+                    wait_at_least_ms: 300000, // Wait 5 minutes on parse error
+                };
+            }
+        };
+        
+        // Connect to database and get credentials
+        let database_url = std::env::var("TEST_DATABASE_URL")
+            .unwrap_or_else(|_| "postgresql://postgres:password@localhost:5432/test_email_ingestion".to_string());
+        let db = match EmailDatabase::new(&database_url).await {
+            Ok(db) => db,
+            Err(e) => {
+                eprintln!("Failed to connect to database: {}", e);
+                return WatchRest {
+                    wait_at_least_ms: 60000, // Wait 1 minute on DB error
+                };
+            }
+        };
+        
+        let credentials = match db.get_credentials(&email_address).await {
+            Ok(Some(creds)) => creds,
+            Ok(None) => {
+                eprintln!("No credentials found for email address: {}", email_address);
+                return WatchRest {
+                    wait_at_least_ms: 300000, // Wait 5 minutes if no credentials
+                };
+            }
+            Err(e) => {
+                eprintln!("Database error getting credentials for {}: {}", email_address, e);
+                return WatchRest {
+                    wait_at_least_ms: 60000, // Wait 1 minute on DB error
+                };
+            }
+        };
+        
+        // Build configuration from URI and credentials
+        let config = match EmailIngesterConfig::from_uri_and_credentials(&source.uri, &credentials).await {
+            Ok(cfg) => cfg,
+            Err(e) => {
+                eprintln!("Failed to build config from URI '{}': {}", source.uri, e);
+                return WatchRest {
+                    wait_at_least_ms: 300000, // Wait 5 minutes on config error
+                };
+            }
+        };
 
-            let ingester = EmailIngester::with_config(config);
-            
-            match ingester.fetch_emails(source).await {
-                Ok(emails) => {
-                    let email_count = emails.len();
-                    
-                    // Process each email through the state system
-                    for email in emails {
-                        interfaces::state::ingest(&email).await;
-                    }
-                    
-                    // Update last sync time in database
-                    let now = Utc::now();
-                    if let Err(e) = db.update_last_sync(&email_address, now).await {
-                        eprintln!("Failed to update last sync time for {}: {}", email_address, e);
-                    }
-                    
-                    println!("Successfully ingested {} emails for {}", email_count, email_address);
-                    
-                    WatchRest {
-                        wait_at_least_ms: 30000, // Check again in 30 seconds
-                    }
+        let ingester = EmailIngester::with_config(config);
+        
+        match ingester.fetch_emails(source).await {
+            Ok(emails) => {
+                let email_count = emails.len();
+                
+                // Process each email through the state system
+                for email in emails {
+                    interfaces::state::ingest(&email).await;
                 }
-                Err(e) => {
-                    eprintln!("Failed to fetch emails for {}: {}", email_address, e);
-                    WatchRest {
-                        wait_at_least_ms: 60000, // Wait longer on error
-                    }
+                
+                // Update last sync time in database
+                let now = Utc::now();
+                if let Err(e) = db.update_last_sync(&email_address, now).await {
+                    eprintln!("Failed to update last sync time for {}: {}", email_address, e);
+                }
+                
+                println!("Successfully ingested {} emails for {}", email_count, email_address);
+                
+                WatchRest {
+                    wait_at_least_ms: 30000, // Check again in 30 seconds
+                }
+            }
+            Err(e) => {
+                eprintln!("Failed to fetch emails for {}: {}", email_address, e);
+                WatchRest {
+                    wait_at_least_ms: 60000, // Wait longer on error
                 }
             }
         }
