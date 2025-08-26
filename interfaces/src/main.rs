@@ -55,8 +55,7 @@ async fn main() {
                 input_item_uri: item0_uri.to_owned(),
                 references: vec![
                     InputItemReference {
-                        text_start_index: 0,
-                        text_end_index: item0_text.len(),
+                        text: "It said hello world".to_owned(),
                     },
                 ],
             },
