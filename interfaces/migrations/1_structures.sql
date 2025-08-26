@@ -35,10 +35,12 @@ CREATE TABLE digest_model_specs (
 -- Digest attempts with nested DigestOutput containing DigestSelectedItems with InputItemReferences
 CREATE TABLE digest_attempts (
     uri TEXT PRIMARY KEY,
+    preferences_uri TEXT NOT NULL,
     dataset_uri TEXT NOT NULL,
     model_uri TEXT NOT NULL,
     output TEXT NOT NULL,  -- JSON: {selected_items: [{input_item_uri: "...", references: [{text: "..."}, ...]}, ...], text: "..."}
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (preferences_uri) REFERENCES digest_preferences(uri),
     FOREIGN KEY (dataset_uri) REFERENCES digest_datasets(uri),
     FOREIGN KEY (model_uri) REFERENCES digest_model_specs(uri)
 );

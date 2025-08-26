@@ -77,6 +77,7 @@ pub trait DigestModel {
 
 pub struct DigestAttempt {
     pub uri: String,
+    pub preferences_uri: String,
     pub dataset_uri: String,
     pub model_uri: String,
     pub output: DigestOutput,
