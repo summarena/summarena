@@ -112,19 +112,20 @@ pub struct ParsedEntry {
 }
 
 // Integration with the interfaces crate
-impl From<&FeedEntry> for InputItem {
-    fn from(entry: &FeedEntry) -> Self {
+impl FeedEntry {
+    pub fn to_input_item(&self, live_source_uri: &str) -> InputItem {
         let text = format!(
             "Title: {}\n\nDescription: {}\n\nContent: {}",
-            entry.title,
-            entry.description.as_deref().unwrap_or(""),
-            entry.content.as_deref().unwrap_or("")
+            self.title,
+            self.description.as_deref().unwrap_or(""),
+            self.content.as_deref().unwrap_or("")
         );
         
-        Self {
-            uri: entry.url.clone(),
+        InputItem {
+            uri: self.url.clone(),
+            live_source_uri: live_source_uri.to_string(),
             text,
-            vision: Vec::new(), // RSS entries typically don't have image data
+            vision: None, // RSS entries typically don't have image data
         }
     }
 }

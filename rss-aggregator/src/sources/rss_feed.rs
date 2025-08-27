@@ -125,7 +125,9 @@ impl PullFeed for RssFeedSource {
         
         // Convert entries to InputItems
         let feed_entries = parser.convert_to_feed_entries(&parsed_feed, self.feed_id);
-        let input_items: Vec<InputItem> = feed_entries.iter().map(|entry| entry.into()).collect();
+        let input_items: Vec<InputItem> = feed_entries.iter()
+            .map(|entry| entry.to_input_item(&self.url))
+            .collect();
         
         info!("Successfully pulled {} items from RSS feed {}", input_items.len(), self.url);
         Ok(input_items)
