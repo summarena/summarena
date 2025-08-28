@@ -1,7 +1,6 @@
 use interfaces::defs::{LiveSourceSpec, Ingester, InputItem, WatchRest};
 use anyhow::Result;
 use chrono::{DateTime, Utc};
-use std::future::Future;
 use url::Url;
 use crate::database::{EmailDatabase, EmailCredential};
 
@@ -221,57 +220,27 @@ impl EmailIngester {
 }
 
 impl Ingester for EmailIngester {
-    async fn watch(source: &LiveSourceSpec) -> WatchRest {
+    async fn watch(source: &LiveSourceSpec) -> Result<WatchRest> {
         // Extract email address from URI
-        let email_address = match extract_email_address(&source.uri) {
-            Ok(addr) => addr,
-            Err(e) => {
-                eprintln!("Failed to parse email address from URI '{}': {}", source.uri, e);
-                return WatchRest {
-                    wait_at_least_ms: 300000, // Wait 5 minutes on parse error
-                };
-            }
-        };
+        let email_address = extract_email_address(&source.uri)?;
         
         // Connect to database and get credentials
         let database_url = std::env::var("TEST_DATABASE_URL")
             .unwrap_or_else(|_| "postgresql://postgres:password@localhost:5432/test_email_ingestion".to_string());
-        let db = match EmailDatabase::new(&database_url).await {
-            Ok(db) => db,
-            Err(e) => {
-                eprintln!("Failed to connect to database: {}", e);
-                return WatchRest {
-                    wait_at_least_ms: 60000, // Wait 1 minute on DB error
-                };
-            }
-        };
+        let db = EmailDatabase::new(&database_url).await?;
         
-        let credentials = match db.get_credentials(&email_address).await {
-            Ok(Some(creds)) => creds,
-            Ok(None) => {
+        let credentials = match db.get_credentials(&email_address).await? {
+            Some(creds) => creds,
+            None => {
                 eprintln!("No credentials found for email address: {}", email_address);
-                return WatchRest {
+                return Ok(WatchRest {
                     wait_at_least_ms: 300000, // Wait 5 minutes if no credentials
-                };
-            }
-            Err(e) => {
-                eprintln!("Database error getting credentials for {}: {}", email_address, e);
-                return WatchRest {
-                    wait_at_least_ms: 60000, // Wait 1 minute on DB error
-                };
+                });
             }
         };
         
         // Build configuration from URI and credentials
-        let config = match EmailIngesterConfig::from_uri_and_credentials(&source.uri, &credentials).await {
-            Ok(cfg) => cfg,
-            Err(e) => {
-                eprintln!("Failed to build config from URI '{}': {}", source.uri, e);
-                return WatchRest {
-                    wait_at_least_ms: 300000, // Wait 5 minutes on config error
-                };
-            }
-        };
+        let config = EmailIngesterConfig::from_uri_and_credentials(&source.uri, &credentials).await?;
 
         let ingester = EmailIngester::with_config(config);
         
@@ -281,7 +250,9 @@ impl Ingester for EmailIngester {
                 
                 // Process each email through the state system
                 for email in emails {
-                    interfaces::state::ingest(&email).await;
+                    if let Err(e) = interfaces::state::ingest(&email).await {
+                        eprintln!("Failed to ingest email {}: {}", email.uri, e);
+                    }
                 }
                 
                 // Update last sync time in database
@@ -292,15 +263,16 @@ impl Ingester for EmailIngester {
                 
                 println!("Successfully ingested {} emails for {}", email_count, email_address);
                 
-                WatchRest {
+                Ok(WatchRest {
                     wait_at_least_ms: 30000, // Check again in 30 seconds
-                }
+                })
             }
             Err(e) => {
                 eprintln!("Failed to fetch emails for {}: {}", email_address, e);
-                WatchRest {
-                    wait_at_least_ms: 60000, // Wait longer on error
-                }
+                
+                // For fetch errors, we could either return the error or return a wait time
+                // Let's return the error to allow caller to determine retry logic  
+                Err(e)
             }
         }
     }

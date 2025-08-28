@@ -54,10 +54,11 @@ async fn test_email_ingestion_with_real_imap() -> Result<()> {
     let watch_result = EmailIngester::watch(&source).await;
     
     // Verify that watch succeeded (should return 30000ms for success)
+    let watch_rest = watch_result.expect("EmailIngester::watch() should succeed");
     assert_eq!(
-        watch_result.wait_at_least_ms, 30000,
+        watch_rest.wait_at_least_ms, 30000,
         "Expected successful watch to return 30 second wait time. Got {}ms which indicates an error occurred.",
-        watch_result.wait_at_least_ms
+        watch_rest.wait_at_least_ms
     );
     println!("✓ EmailIngester::watch() completed successfully");
 
@@ -99,10 +100,19 @@ async fn test_email_ingestion_with_real_imap() -> Result<()> {
     };
     
     let error_watch_result = EmailIngester::watch(&invalid_source).await;
-    assert_eq!(
-        error_watch_result.wait_at_least_ms, 300000,
-        "Expected error case to return 5 minute wait time"
-    );
+    match error_watch_result {
+        Ok(watch_rest) => {
+            // If it returns OK, it should be the "no credentials" case with 300000ms wait
+            assert_eq!(
+                watch_rest.wait_at_least_ms, 300000,
+                "Expected no-credentials case to return 5 minute wait time"
+            );
+        }
+        Err(_) => {
+            // Error is also acceptable for invalid connection
+            println!("✓ Error returned for invalid connection (also acceptable)");
+        }
+    }
     println!("✓ Error handling working correctly for invalid credentials");
 
     // Step 8: Test that the system works with empty mailbox (which is the default state)

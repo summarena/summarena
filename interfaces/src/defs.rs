@@ -1,4 +1,5 @@
 use anyhow::Result;
+use std::future::Future;
 
 pub struct LiveSourceSpec {
     pub uri: String,
