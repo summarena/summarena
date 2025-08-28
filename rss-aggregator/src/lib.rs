@@ -5,6 +5,7 @@ pub mod traits;
 pub mod sources;
 pub mod rss_utils;
 pub mod ingester;
+pub mod database;
 
 // Re-export core types
 pub use types::*;

@@ -110,19 +110,24 @@ async fn gmail_manual_integration_test() -> Result<()> {
     println!("⏱️  Gmail connection took {:.2} seconds", elapsed.as_secs_f64());
 
     // Verify successful result
-    if watch_result.wait_at_least_ms == 30000 {
-        println!("✅ Gmail integration successful!");
-        println!("   EmailIngester::watch() returned 30 second wait time (success indicator)");
-    } else if watch_result.wait_at_least_ms == 60000 {
-        println!("❌ Gmail connection failed (60 second wait time indicates error)");
-        println!("\n🔧 Common issues:");
-        println!("   - Check if IMAP is enabled in Gmail settings");
-        println!("   - Verify App Password if using 2FA");
-        println!("   - Ensure GMAIL_EMAIL is correct full email address");
-        println!("   - Check that Gmail account is accessible");
-        return Err(anyhow::anyhow!("Gmail connection failed - check logs above"));
-    } else {
-        println!("⚠️  Unexpected wait time: {}ms", watch_result.wait_at_least_ms);
+    match watch_result {
+        Ok(watch_rest) => {
+            if watch_rest.wait_at_least_ms == 30000 {
+                println!("✅ Gmail integration successful!");
+                println!("   EmailIngester::watch() returned 30 second wait time (success indicator)");
+            } else {
+                println!("⚠️  Unexpected wait time: {}ms", watch_rest.wait_at_least_ms);
+            }
+        }
+        Err(e) => {
+            println!("❌ Gmail connection failed with error: {}", e);
+            println!("\n🔧 Common issues:");
+            println!("   - Check if IMAP is enabled in Gmail settings");
+            println!("   - Verify App Password if using 2FA");
+            println!("   - Ensure GMAIL_EMAIL is correct full email address");
+            println!("   - Check that Gmail account is accessible");
+            return Err(anyhow::anyhow!("Gmail connection failed: {}", e));
+        }
     }
 
     // Verify database state was updated
