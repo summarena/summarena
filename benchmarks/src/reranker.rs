@@ -26,19 +26,13 @@ struct VoyageRerankResult {
 pub struct VoyageReranker {
     client: reqwest::Client,
     api_key: String,
-    quiet: bool,
 }
 
 impl VoyageReranker {
     pub fn new(api_key: String) -> Self {
-        Self::new_with_quiet(api_key, false)
-    }
-
-    pub fn new_with_quiet(api_key: String, quiet: bool) -> Self {
         Self {
             client: reqwest::Client::new(),
             api_key,
-            quiet,
         }
     }
 
@@ -211,7 +205,7 @@ impl VoyageReranker {
 
         // Reorder documents according to rankings
         let mut reordered_docs = Vec::new();
-        for (doc_index, score) in sorted_rankings {
+        for (doc_index, _score) in sorted_rankings {
             if doc_index < query_data.relevant_docs.len() {
                 let doc = query_data.relevant_docs[doc_index].clone();
                 // Doc scoring suppressed
@@ -255,7 +249,7 @@ impl VoyageReranker {
 
         // Reorder documents based on ranking results
         let mut reordered_docs = Vec::new();
-        for (index, score) in rankings {
+        for (index, _score) in rankings {
             if index < query_data.all_docs.len() {
                 let doc = &query_data.all_docs[index];
                 // Doc scoring suppressed
@@ -336,7 +330,7 @@ impl VoyageReranker {
 
         // Reorder documents based on ranking results
         let mut reordered_docs = Vec::new();
-        for (index, score) in rankings {
+        for (index, _score) in rankings {
             if index < query_data.candidates.len() {
                 let doc = &query_data.candidates[index];
                 // Doc scoring suppressed

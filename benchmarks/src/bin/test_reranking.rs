@@ -97,7 +97,7 @@ async fn main() -> Result<()> {
     // Check for API key
     let api_key = std::env::var("VOYAGE_API_KEY")
         .expect("VOYAGE_API_KEY environment variable must be set for reranking");
-    let reranker = VoyageReranker::new_with_quiet(api_key, args.quiet);
+    let reranker = VoyageReranker::new(api_key);
 
     // Load predefined dataset with first-stage candidates (MAIR-style)
     let queries = load_dataset_by_name(&args.dataset).await?;
@@ -173,7 +173,7 @@ async fn main() -> Result<()> {
                     &query_data.relevance_map,
                     10,
                 );
-                let original_ndcg = calculate_ndcg_at_k_with_relevance_map(
+                let _original_ndcg = calculate_ndcg_at_k_with_relevance_map(
                     &query_data.candidates,
                     &query_data.relevance_map,
                     10,
@@ -183,7 +183,7 @@ async fn main() -> Result<()> {
                 
                 plain_reranked_ndcg
             }
-            Err(e) => {
+            Err(_e) => {
                 // Error suppressed
                 // Fallback to original ordering
                 calculate_ndcg_at_k_with_relevance_map(
@@ -230,7 +230,7 @@ async fn main() -> Result<()> {
         // Collect personalized results for this query
         let mut personalized_results = Vec::new();
         
-        for (pref_idx, preferences) in test_preferences.iter().enumerate() {
+        for (_pref_idx, preferences) in test_preferences.iter().enumerate() {
             // Test info suppressed
 
             match reranker
@@ -255,7 +255,7 @@ async fn main() -> Result<()> {
 
                     // Personalized results suppressed
                 }
-                Err(e) => {
+                Err(_e) => {
                     // Error suppressed
                 }
             }
