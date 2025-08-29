@@ -50,10 +50,6 @@ struct Args {
     #[arg(long, default_value = "100")]
     candidate_limit: usize,
 
-    /// Use LLM to generate personas relevant to each query (requires OPENAI_API_KEY)
-    #[arg(long)]
-    generate_personas: bool,
-
     /// Only print final comparison results (quiet mode)
     #[arg(short, long)]
     quiet: bool,
@@ -201,19 +197,16 @@ async fn main() -> Result<()> {
         // Small delay to avoid rate limiting
         tokio::time::sleep(tokio::time::Duration::from_millis(500)).await;
 
-        // Test different preferences
+        // Always generate personas using LLM
         let test_preferences = if let Some(ref custom_persona) = args.persona {
             // Custom persona provided via CLI
             vec![
                 vec![], // No preferences (baseline)
                 vec![custom_persona.clone()],
             ]
-        } else if args.generate_personas {
-            // Generate personas using LLM
+        } else {
+            // Generate personas using LLM for this specific query
             let reranker = &reranker;
-            let q_head = &query_data.query.query;
-            let q_head = &q_head[..std::cmp::min(60, q_head.len())];
-            // Persona generation info suppressed
             match reranker
                 .generate_personas(&query_data.query.query, &query_data.query.instruction)
                 .await
@@ -224,23 +217,11 @@ async fn main() -> Result<()> {
                     prefs
                 }
                 Err(e) => {
-                    // Error suppressed
-                    vec![
-                        vec![], // baseline
-                        vec!["Academic researcher; values peer-reviewed, methodologically rigorous sources".to_string()],
-                        vec!["Industry professional; prefers practical, implementation-focused content".to_string()],
-                        vec!["Policy maker; needs comprehensive, policy-relevant information".to_string()],
-                    ]
+                    eprintln!("Failed to generate personas: {}", e);
+                    eprintln!("Skipping this query due to persona generation failure.");
+                    continue; // Skip this query if persona generation fails
                 }
             }
-        } else {
-            // Default hardcoded personas
-            vec![
-                vec![], // baseline
-                vec!["Academic researcher; values peer-reviewed, methodologically rigorous sources".to_string()],
-                vec!["Industry professional; prefers practical, implementation-focused content".to_string()],
-                vec!["Policy maker; needs comprehensive, policy-relevant information".to_string()],
-            ]
         };
 
         // Skip the empty preferences test since we already did baseline
