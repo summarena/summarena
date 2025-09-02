@@ -4,6 +4,11 @@ This directory contains automation scripts to generate summaries.
 
 ## Overview
 
+### Prerequisites
+
+* Playwright installed
+* Running Chrome window with a signed in profile
+
 ### Input
 Possible input sources:
 1. **local PDF/MD files**: Uploads from local storage
