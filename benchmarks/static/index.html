@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Ranking Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .query-selector {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .query-info {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .query-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .preference-info {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .preference-text {
+            font-style: italic;
+            color: #e65100;
+            font-weight: 500;
+            margin: 8px 0;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .documents-pool, .ranking-area {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .ranking-area.drag-over {
+            background: #ebf3fd;
+            border: 2px solid #3498db;
+        }
+
+        .section-header {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .documents-container, .ranking-container {
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .ranking-area .ranking-container {
+            position: relative;
+        }
+
+        .ranking-drop-zone {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            margin: -20px -20px 20px -20px;
+            padding: 20px;
+        }
+
+        .document-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .document-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .document-item::before {
+            content: "👁️ Click to view full content";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 11px;
+            color: #6c757d;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .document-item:hover::before {
+            opacity: 1;
+        }
+
+        .document-item {
+            position: relative;
+        }
+
+        .document-item.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+
+        .document-id {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+
+        .document-content {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #495057;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+
+        .ranking-item:hover {
+            background: #fff1b3;
+            transform: translateX(5px);
+        }
+
+        .rank-number {
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .drop-zone {
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            padding: 40px;
+            min-height: 120px;
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .drop-zone.drag-over {
+            border-color: #3498db;
+            background: #ebf3fd;
+            color: #3498db;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .progress {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: calc(90vh - 140px);
+            overflow-y: auto;
+        }
+
+        .modal-document-id {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .modal-document-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                max-height: 85%;
+            }
+
+            .modal-body {
+                padding: 20px;
+                max-height: calc(85vh - 120px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Document Ranking Interface</h1>
+            <div id="datasetInfo" style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                Dataset: <span id="datasetName">Loading...</span>
+            </div>
+            <p>Drag documents from the left panel to the right panel to rank them in order of relevance.</p>
+            
+            <div class="query-selector">
+                <label for="querySelect">Select Query:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button id="prevQuery" class="btn btn-secondary" style="padding: 8px 12px; margin: 0;" disabled>◀ Previous</button>
+                    <select id="querySelect">
+                        <option value="">Loading queries...</option>
+                    </select>
+                    <button id="nextQuery" class="btn btn-secondary" style="padding: 8px 12px; margin: 0;" disabled>Next ▶</button>
+                </div>
+            </div>
+            
+            <div id="queryInfo" class="query-info" style="display: none;">
+                <div class="query-text" id="queryText"></div>
+                <div id="preferenceInfo" class="preference-info" style="display: none;">
+                    <strong>Personalization Preference:</strong>
+                    <div id="preferenceText" class="preference-text"></div>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Rank documents based on how well they match this user preference.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="documents-pool">
+                <div class="section-header">Available Documents</div>
+                <div class="documents-container">
+                    <div id="documentsPool" class="empty-state">
+                        Select a query to see available documents
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-area">
+                <div class="section-header">Your Ranking (Drag documents here)</div>
+                <div class="ranking-container">
+                    <div class="ranking-drop-zone">
+                        <div class="drop-zone" id="dropZone">
+                            <p>Drag documents here to rank them</p>
+                            <p style="font-size: 12px; margin-top: 5px;">Most relevant at the top</p>
+                        </div>
+                    </div>
+                    <div id="rankingList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="saveRanking">Save Ranking</button>
+            <button class="btn btn-secondary" id="clearRanking">Clear All</button>
+            <div class="progress">
+                <span id="progressText">Select a query to begin</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Modal -->
+    <div id="documentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Document Details</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-document-id" id="modalDocId">Document ID: </div>
+                <div class="modal-document-content" id="modalDocContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuery = null;
+        let currentDocuments = [];
+        let ranking = [];
+        let availableQueries = [];
+        let currentQueryIndex = -1;
+        let currentDataset = 'Unknown';
+
+        // Function to detect dataset from API responses
+        function detectDataset() {
+            // Try to detect dataset from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataset = urlParams.get('dataset');
+            if (dataset) {
+                currentDataset = dataset.toUpperCase();
+                document.getElementById('datasetName').textContent = currentDataset;
+                return;
+            }
+            
+            // If no URL param, we'll try to detect it from the first query ID pattern
+            // This is a fallback method
+            if (availableQueries.length > 0) {
+                const firstQid = availableQueries[0];
+                // Many datasets have recognizable query ID patterns
+                if (firstQid.includes('fiqa')) {
+                    currentDataset = 'FIQA';
+                } else if (firstQid.includes('msmarco')) {
+                    currentDataset = 'MSMARCO';
+                } else if (firstQid.includes('scidocs')) {
+                    currentDataset = 'SCIDOCS';
+                } else {
+                    currentDataset = 'Custom Dataset';
+                }
+                document.getElementById('datasetName').textContent = currentDataset;
+            }
+        }
+
+        // Modal functions
+        function showDocumentModal(docId) {
+            const doc = currentDocuments.find(d => d.id === docId);
+            if (!doc) return;
+            
+            document.getElementById('modalDocId').textContent = `Document ID: ${doc.id}`;
+            document.getElementById('modalDocContent').textContent = doc.content;
+            document.getElementById('documentModal').style.display = 'block';
+        }
+
+        function closeDocumentModal() {
+            document.getElementById('documentModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('documentModal');
+            if (e.target === modal) {
+                closeDocumentModal();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDocumentModal();
+            } else if (e.key === 'ArrowLeft' && e.ctrlKey) {
+                navigateToQuery(-1);
+            } else if (e.key === 'ArrowRight' && e.ctrlKey) {
+                navigateToQuery(1);
+            }
+        });
+
+        // Load queries on page load
+        async function loadQueries() {
+            try {
+                const response = await fetch('/api/queries');
+                const queries = await response.json();
+                availableQueries = queries;
+                
+                const select = document.getElementById('querySelect');
+                select.innerHTML = '<option value="">Select a query...</option>';
+                
+                queries.forEach(qid => {
+                    const option = document.createElement('option');
+                    option.value = qid;
+                    option.textContent = `Query ${qid}`;
+                    select.appendChild(option);
+                });
+                
+                // Detect and display dataset name
+                detectDataset();
+                
+                updateNavigationButtons();
+            } catch (error) {
+                console.error('Error loading queries:', error);
+            }
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevQuery');
+            const nextBtn = document.getElementById('nextQuery');
+            
+            prevBtn.disabled = currentQueryIndex <= 0;
+            nextBtn.disabled = currentQueryIndex >= availableQueries.length - 1;
+        }
+
+        function navigateToQuery(direction) {
+            if (availableQueries.length === 0) return;
+            
+            let newIndex = currentQueryIndex + direction;
+            if (newIndex < 0) newIndex = 0;
+            if (newIndex >= availableQueries.length) newIndex = availableQueries.length - 1;
+            
+            if (newIndex !== currentQueryIndex) {
+                currentQueryIndex = newIndex;
+                const qid = availableQueries[currentQueryIndex];
+                
+                // Update select dropdown
+                document.getElementById('querySelect').value = qid;
+                
+                // Load the new query
+                loadQuery(qid);
+                updateNavigationButtons();
+            }
+        }
+
+        // Load documents for selected query
+        async function loadQuery(qid) {
+            if (!qid) {
+                document.getElementById('queryInfo').style.display = 'none';
+                document.getElementById('documentsPool').innerHTML = '<div class="empty-state">Select a query to see available documents</div>';
+                currentQueryIndex = -1;
+                updateNavigationButtons();
+                return;
+            }
+
+            // Update current query index
+            currentQueryIndex = availableQueries.indexOf(qid);
+            updateNavigationButtons();
+
+            try {
+                const response = await fetch(`/api/query/${qid}`);
+                const data = await response.json();
+                
+                currentQuery = data;
+                currentDocuments = data.documents;
+                ranking = [];
+                
+                // Show query info
+                document.getElementById('queryText').textContent = data.query;
+                document.getElementById('queryInfo').style.display = 'block';
+                
+                // Show preference if available
+                if (data.preference) {
+                    document.getElementById('preferenceText').textContent = data.preference;
+                    document.getElementById('preferenceInfo').style.display = 'block';
+                } else {
+                    document.getElementById('preferenceInfo').style.display = 'none';
+                }
+                
+                // Populate documents pool
+                renderDocumentsPool();
+                renderRanking();
+                updateProgress();
+                
+                // Try to load existing ranking
+                loadExistingRanking(qid);
+                
+            } catch (error) {
+                console.error('Error loading query:', error);
+            }
+        }
+
+        function renderDocumentsPool() {
+            const pool = document.getElementById('documentsPool');
+            const availableDocs = currentDocuments.filter(doc => 
+                !ranking.find(r => r.doc_id === doc.id)
+            );
+            
+            if (availableDocs.length === 0) {
+                pool.innerHTML = '<div class="empty-state">All documents have been ranked</div>';
+                return;
+            }
+            
+            pool.innerHTML = '';
+            availableDocs.forEach(doc => {
+                const div = document.createElement('div');
+                div.className = 'document-item';
+                div.draggable = true;
+                div.dataset.docId = doc.id;
+                
+                div.innerHTML = `
+                    <div class="document-id">ID: ${doc.id}</div>
+                    <div class="document-content">${doc.content.substring(0, 600)}${doc.content.length > 600 ? '...' : ''}</div>
+                `;
+                
+                div.addEventListener('dragstart', handleDragStart);
+                div.addEventListener('dragend', handleDragEnd);
+                div.addEventListener('click', (e) => {
+                    if (!e.target.closest('.document-item').classList.contains('dragging')) {
+                        showDocumentModal(doc.id);
+                    }
+                });
+                
+                pool.appendChild(div);
+            });
+        }
+
+        function renderRanking() {
+            const list = document.getElementById('rankingList');
+            
+            if (ranking.length === 0) {
+                list.innerHTML = '';
+                return;
+            }
+            
+            list.innerHTML = '';
+            ranking.forEach((item, index) => {
+                const doc = currentDocuments.find(d => d.id === item.doc_id);
+                if (!doc) return;
+                
+                const div = document.createElement('div');
+                div.className = 'ranking-item';
+                div.draggable = true;
+                div.dataset.docId = doc.id;
+                div.dataset.rank = index;
+                
+                div.innerHTML = `
+                    <div class="rank-number">${index + 1}</div>
+                    <div>
+                        <div class="document-id">ID: ${doc.id}</div>
+                        <div class="document-content">${doc.content.substring(0, 400)}${doc.content.length > 400 ? '...' : ''}</div>
+                    </div>
+                `;
+                
+                div.addEventListener('dragstart', handleRankingDragStart);
+                div.addEventListener('dragend', handleDragEnd);
+                div.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    div.style.borderTop = '3px solid #3498db';
+                });
+                div.addEventListener('dragleave', (e) => {
+                    if (!div.contains(e.relatedTarget)) {
+                        div.style.borderTop = '';
+                    }
+                });
+                div.addEventListener('click', (e) => {
+                    // Check if clicking on the rank number area vs document content
+                    const rankNumber = e.target.closest('.rank-number');
+                    if (rankNumber) {
+                        removeFromRanking(item.doc_id);
+                    } else if (!e.target.closest('.ranking-item').classList.contains('dragging')) {
+                        showDocumentModal(item.doc_id);
+                    }
+                });
+                
+                list.appendChild(div);
+            });
+        }
+
+        function handleDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.dataset.docId);
+            e.dataTransfer.setData('source', 'pool');
+        }
+
+        function handleRankingDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.dataset.docId);
+            e.dataTransfer.setData('source', 'ranking');
+            e.dataTransfer.setData('rank', e.target.dataset.rank);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            // Clear any border indicators
+            document.querySelectorAll('.ranking-item').forEach(item => {
+                item.style.borderTop = '';
+            });
+        }
+
+        function addToRanking(docId, position = ranking.length) {
+            if (ranking.find(r => r.doc_id === docId)) return;
+            
+            ranking.splice(position, 0, {
+                doc_id: docId,
+                rank: position + 1,
+                relevance_score: null
+            });
+            
+            // Update ranks
+            ranking.forEach((item, index) => {
+                item.rank = index + 1;
+            });
+            
+            renderDocumentsPool();
+            renderRanking();
+            updateProgress();
+        }
+
+        function removeFromRanking(docId) {
+            ranking = ranking.filter(r => r.doc_id !== docId);
+            
+            // Update ranks
+            ranking.forEach((item, index) => {
+                item.rank = index + 1;
+            });
+            
+            renderDocumentsPool();
+            renderRanking();
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = currentDocuments.length;
+            const ranked = ranking.length;
+            document.getElementById('progressText').textContent = 
+                `Progress: ${ranked}/${total} documents ranked`;
+        }
+
+        async function saveRanking() {
+            if (!currentQuery || ranking.length === 0) {
+                alert('Please rank some documents first');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/rankings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        qid: currentQuery.qid,
+                        rankings: ranking
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Ranking saved successfully!');
+                } else {
+                    alert('Error saving ranking');
+                }
+            } catch (error) {
+                console.error('Error saving ranking:', error);
+                alert('Error saving ranking');
+            }
+        }
+
+        async function loadExistingRanking(qid) {
+            try {
+                const response = await fetch(`/api/rankings/${qid}`);
+                const existingRanking = await response.json();
+                
+                if (existingRanking) {
+                    ranking = existingRanking.sort((a, b) => a.rank - b.rank);
+                    renderDocumentsPool();
+                    renderRanking();
+                    updateProgress();
+                }
+            } catch (error) {
+                console.error('Error loading existing ranking:', error);
+            }
+        }
+
+        function clearRanking() {
+            ranking = [];
+            renderDocumentsPool();
+            renderRanking();
+            updateProgress();
+        }
+
+        // Event listeners
+        document.getElementById('querySelect').addEventListener('change', (e) => {
+            loadQuery(e.target.value);
+        });
+
+        document.getElementById('prevQuery').addEventListener('click', () => {
+            navigateToQuery(-1);
+        });
+
+        document.getElementById('nextQuery').addEventListener('click', () => {
+            navigateToQuery(1);
+        });
+
+        document.getElementById('saveRanking').addEventListener('click', saveRanking);
+        document.getElementById('clearRanking').addEventListener('click', clearRanking);
+
+        // Modal close button
+        document.getElementById('modalClose').addEventListener('click', closeDocumentModal);
+
+        // Drop zone events
+        const dropZone = document.getElementById('dropZone');
+        const rankingContainer = document.querySelector('.ranking-container');
+        const rankingArea = document.querySelector('.ranking-area');
+
+        [dropZone, rankingContainer, rankingArea].forEach(element => {
+            element.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+                rankingArea.classList.add('drag-over');
+            });
+
+            element.addEventListener('dragleave', (e) => {
+                if (!rankingArea.contains(e.relatedTarget)) {
+                    dropZone.classList.remove('drag-over');
+                    rankingArea.classList.remove('drag-over');
+                }
+            });
+
+            element.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+                rankingArea.classList.remove('drag-over');
+                
+                const docId = e.dataTransfer.getData('text/plain');
+                const source = e.dataTransfer.getData('source');
+                const sourceRank = e.dataTransfer.getData('rank');
+                
+                if (source === 'pool') {
+                    addToRanking(docId);
+                } else if (source === 'ranking') {
+                    // Handle reordering within ranking
+                    const dropTarget = e.target.closest('.ranking-item');
+                    if (dropTarget && dropTarget.dataset.docId !== docId) {
+                        const targetRank = parseInt(dropTarget.dataset.rank);
+                        const currentRank = parseInt(sourceRank);
+                        
+                        // Remove from current position
+                        const item = ranking.splice(currentRank, 1)[0];
+                        
+                        // Insert at new position
+                        ranking.splice(targetRank, 0, item);
+                        
+                        // Update ranks
+                        ranking.forEach((item, index) => {
+                            item.rank = index + 1;
+                        });
+                        
+                        renderRanking();
+                        updateProgress();
+                    }
+                }
+            });
+        });
+
+        // Initialize
+        loadQueries();
+    </script>
+</body>
+</html>
