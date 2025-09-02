@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "summarizer"
+version = "0.1.0"
+description = "Summarizer module"
+authors = ["summarena"]
+packages = [{include = "summarizer", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+python-dotenv = "^1.1.1"
+playwright = "^1.55.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
