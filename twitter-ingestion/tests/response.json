@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "author_id": "535136727",
+      "created_at": "2025-08-06T18:49:51.000Z",
+      "edit_history_tweet_ids": [
+        "1953166647994532286"
+      ],
+      "id": "1953166647994532286",
+      "public_metrics": {
+        "bookmark_count": 0,
+        "impression_count": 1343,
+        "like_count": 10,
+        "quote_count": 0,
+        "reply_count": 0,
+        "retweet_count": 0
+      },
+      "text": "Special thanks to our amazing sponsors @amazon @AMD @okta @auth0 @blocks @Cisco @mlfoundry @GroqInc @LambdaAPI @linuxfoundation @MayfieldFund @McKinsey @MLCommons @SamsungNext @schmidtsciences @Get_Writer @AlphaSenseInc https://t.co/nwmo1199ye"
+    },
+    {
+      "author_id": "535136727",
+      "created_at": "2025-08-06T18:49:50.000Z",
+      "edit_history_tweet_ids": [
+        "1953166644588757143"
+      ],
+      "id": "1953166644588757143",
+      "public_metrics": {
+        "bookmark_count": 1,
+        "impression_count": 4806,
+        "like_count": 6,
+        "quote_count": 1,
+        "reply_count": 1,
+        "retweet_count": 0
+      },
+      "text": "and @sinharanjan @IBM; @dedutta @nutanix; @papimenon @outshiftbycisco; @SGRodriques @FutureHouseSF; @lecong @Stanford; @yuqirose @UCSanDiego; @anurive @OracleHealth; @mishtabart @salesforce; @jrenauardevol @ucsc; @ManlingLi_ @NorthwesternU; @johnpdickerson @MozillaAI; https://t.co/7LwhHWjsZm"
+    },
+    {
+      "author_id": "535136727",
+      "created_at": "2025-08-06T18:49:49.000Z",
+      "edit_history_tweet_ids": [
+        "1953166640868389321"
+      ],
+      "id": "1953166640868389321",
+      "public_metrics": {
+        "bookmark_count": 0,
+        "impression_count": 1356,
+        "like_count": 5,
+        "quote_count": 1,
+        "reply_count": 1,
+        "retweet_count": 0
+      },
+      "text": "Big shoutout to our esteemed speakers @vkhosla @khoslaventures; Bill Dally @nvdia; @istoica05 @matei_zaharia @databricks; @svlevine @physical_int; @merettm @sherwinwu @openai; @jainarvind @glean; @karthik_r_n @SierraPlatform; @may_habib @Get_Writer; @pirroh @Replit; @Chi_Wang_ Ed https://t.co/u1BDSlUXWV"
+    },
+    {
+      "author_id": "535136727",
+      "created_at": "2025-08-06T18:49:49.000Z",
+      "edit_history_tweet_ids": [
+        "1953166637802422365"
+      ],
+      "id": "1953166637802422365",
+      "public_metrics": {
+        "bookmark_count": 0,
+        "impression_count": 468,
+        "like_count": 4,
+        "quote_count": 0,
+        "reply_count": 1,
+        "retweet_count": 0
+      },
+      "text": "From thought-provoking keynotes to dynamic panels, every session was filled with insight, sparked collaboration, and opened up new possibilities. The conversations ignited here will shape the future of agentic AI for years to come. https://t.co/41uPftKtjX"
+    },
+    {
+      "author_id": "535136727",
+      "created_at": "2025-08-06T18:49:48.000Z",
+      "edit_history_tweet_ids": [
+        "1953166634883137621"
+      ],
+      "id": "1953166634883137621",
+      "public_metrics": {
+        "bookmark_count": 19,
+        "impression_count": 9804,
+        "like_count": 115,
+        "quote_count": 6,
+        "reply_count": 7,
+        "retweet_count": 20
+      },
+      "text": "Still buzzing from the incredible #AgenticAI Summit at @UCBerkeley on 8/2 — 2,000+ joined in person, 30,000+ tuned in online. ⚡🌍\nThe energy was electric—visionaries, builders &amp; researchers shaping the future of agentic AI!\nMissed it? Watch the recordings: https://t.co/i6ebRRPgmT"
+    }
+  ],
+  "meta": {
+    "newest_id": "1953166647994532286",
+    "next_token": "7140dibdnow9c7btw4e1r210ttbdjwf55gtc6feiif229",
+    "oldest_id": "1953166634883137621",
+    "result_count": 5
+  }
+}
