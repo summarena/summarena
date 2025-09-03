@@ -1,0 +1,1244 @@
+[
+  {
+    "qid": "2348",
+    "query": "Why can't you just have someone invest for you and split the profits (and losses) with him?",
+    "human_ndcg_at_3": 0.6959902414088245,
+    "human_ndcg_at_5": 0.8338938147602477,
+    "human_ndcg_at_10": 0.8269662493001315,
+    "human_kendall_tau": 0.2571428571428571,
+    "mair_ndcg_at_3": 0.08811900628560498,
+    "mair_ndcg_at_5": 0.28909159070039797,
+    "mair_ndcg_at_10": 0.29339799129307154,
+    "mair_kendall_tau": -0.009523809523809525,
+    "human_ranking_order": [
+      "447619",
+      "247486",
+      "211867",
+      "381757",
+      "211622",
+      "352271",
+      "268261",
+      "265874",
+      "306430",
+      "543714",
+      "134864",
+      "146441",
+      "410166",
+      "474234",
+      "566573"
+    ],
+    "mair_ranking_order": [
+      "211867",
+      "247486",
+      "381757",
+      "447619",
+      "566573",
+      "410166",
+      "211622",
+      "474234",
+      "306430",
+      "268261",
+      "352271",
+      "543714",
+      "146441",
+      "265874",
+      "134864"
+    ],
+    "voyage_ranking_order": [
+      "447619",
+      "134864",
+      "306430",
+      "247486",
+      "381757",
+      "268261",
+      "543714",
+      "146441",
+      "410166",
+      "474234",
+      "211867",
+      "265874",
+      "352271",
+      "211622",
+      "566573"
+    ]
+  },
+  {
+    "qid": "504",
+    "query": "Have plenty of cash flow but bad credit",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 1.0,
+    "mair_ndcg_at_5": 1.0,
+    "mair_ndcg_at_10": 1.0,
+    "mair_kendall_tau": 1.0,
+    "human_ranking_order": [
+      "500755",
+      "344203",
+      "498751"
+    ],
+    "mair_ranking_order": [
+      "500755",
+      "344203",
+      "498751"
+    ],
+    "voyage_ranking_order": [
+      "500755",
+      "344203",
+      "498751"
+    ]
+  },
+  {
+    "qid": "10267",
+    "query": "How should I prepare for the next financial crisis?",
+    "human_ndcg_at_3": 0.2531831350332425,
+    "human_ndcg_at_5": 0.5726661423082254,
+    "human_ndcg_at_10": 0.5726661423082254,
+    "human_kendall_tau": -0.6,
+    "mair_ndcg_at_3": 0.5017480052495427,
+    "mair_ndcg_at_5": 0.6841587433051929,
+    "mair_ndcg_at_10": 0.6841587433051929,
+    "mair_kendall_tau": -0.2,
+    "human_ranking_order": [
+      "424511",
+      "328556",
+      "457108",
+      "460398",
+      "17652"
+    ],
+    "mair_ranking_order": [
+      "17652",
+      "457108",
+      "424511",
+      "328556",
+      "460398"
+    ],
+    "voyage_ranking_order": [
+      "460398",
+      "17652",
+      "328556",
+      "457108",
+      "424511"
+    ]
+  },
+  {
+    "qid": "2580",
+    "query": "Stock market vs. baseball card trading analogy",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.9721212198129313,
+    "mair_ndcg_at_5": 0.9721212198129313,
+    "mair_ndcg_at_10": 0.9721212198129313,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "344118",
+      "11988",
+      "503934"
+    ],
+    "mair_ranking_order": [
+      "344118",
+      "503934",
+      "11988"
+    ],
+    "voyage_ranking_order": [
+      "344118",
+      "11988",
+      "503934"
+    ]
+  },
+  {
+    "qid": "3404",
+    "query": "In US, is it a good idea to hire a tax consultant for doing taxes?",
+    "human_ndcg_at_3": 0.24279243117520896,
+    "human_ndcg_at_5": 0.521579534483846,
+    "human_ndcg_at_10": 0.5769202603819702,
+    "human_kendall_tau": -0.23809523809523808,
+    "mair_ndcg_at_3": 0.46123171389878354,
+    "mair_ndcg_at_5": 0.4870366276130459,
+    "mair_ndcg_at_10": 0.6050659246324828,
+    "mair_kendall_tau": 0.047619047619047616,
+    "human_ranking_order": [
+      "498834",
+      "160301",
+      "395483",
+      "488574",
+      "442110",
+      "556976",
+      "277583"
+    ],
+    "mair_ranking_order": [
+      "442110",
+      "556976",
+      "160301",
+      "488574",
+      "498834",
+      "395483",
+      "277583"
+    ],
+    "voyage_ranking_order": [
+      "277583",
+      "160301",
+      "442110",
+      "488574",
+      "498834",
+      "556976",
+      "395483"
+    ]
+  },
+  {
+    "qid": "744",
+    "query": "What options are available for a home loan with poor credit but a good rental history?",
+    "human_ndcg_at_3": 0.9721212198129313,
+    "human_ndcg_at_5": 0.9721212198129313,
+    "human_ndcg_at_10": 0.9721212198129313,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.9721212198129313,
+    "mair_ndcg_at_5": 0.9721212198129313,
+    "mair_ndcg_at_10": 0.9721212198129313,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "490443",
+      "566480",
+      "78176"
+    ],
+    "mair_ranking_order": [
+      "490443",
+      "566480",
+      "78176"
+    ],
+    "voyage_ranking_order": [
+      "490443",
+      "78176",
+      "566480"
+    ]
+  },
+  {
+    "qid": "10812",
+    "query": "Is is possible to dispute IRS underpayment penalties?",
+    "human_ndcg_at_3": 0.6197949549288114,
+    "human_ndcg_at_5": 0.7485147261820462,
+    "human_ndcg_at_10": 0.7485147261820462,
+    "human_kendall_tau": 0.0,
+    "mair_ndcg_at_3": 0.7131452381480272,
+    "mair_ndcg_at_5": 0.7189324940540128,
+    "mair_ndcg_at_10": 0.7189324940540128,
+    "mair_kendall_tau": 0.0,
+    "human_ranking_order": [
+      "46737",
+      "342756",
+      "314455",
+      "451935"
+    ],
+    "mair_ranking_order": [
+      "451935",
+      "46737",
+      "314455",
+      "342756"
+    ],
+    "voyage_ranking_order": [
+      "314455",
+      "46737",
+      "451935",
+      "342756"
+    ]
+  },
+  {
+    "qid": "6131",
+    "query": "Is it ever a good idea to close credit cards?",
+    "human_ndcg_at_3": 0.5273228852629213,
+    "human_ndcg_at_5": 0.6579657657637783,
+    "human_ndcg_at_10": 0.7048461920980218,
+    "human_kendall_tau": 0.3939393939393939,
+    "mair_ndcg_at_3": 0.5252883018224016,
+    "mair_ndcg_at_5": 0.5239260544470863,
+    "mair_ndcg_at_10": 0.6457108040267707,
+    "mair_kendall_tau": 0.2727272727272727,
+    "human_ranking_order": [
+      "326094",
+      "381720",
+      "252534",
+      "368806",
+      "235452",
+      "416679",
+      "2460",
+      "218088",
+      "334111",
+      "365263",
+      "170204",
+      "258465"
+    ],
+    "mair_ranking_order": [
+      "326094",
+      "365263",
+      "218088",
+      "252534",
+      "381720",
+      "235452",
+      "170204",
+      "416679",
+      "334111",
+      "2460",
+      "368806",
+      "258465"
+    ],
+    "voyage_ranking_order": [
+      "368806",
+      "326094",
+      "218088",
+      "381720",
+      "235452",
+      "334111",
+      "252534",
+      "258465",
+      "365263",
+      "170204",
+      "416679",
+      "2460"
+    ]
+  },
+  {
+    "qid": "3934",
+    "query": "Should market based health insurance premiums be factored into 6 months emergency fund savings?",
+    "human_ndcg_at_3": 0.9749614511466147,
+    "human_ndcg_at_5": 0.9754666004730318,
+    "human_ndcg_at_10": 0.9754666004730318,
+    "human_kendall_tau": 0.6666666666666666,
+    "mair_ndcg_at_3": 0.532160033941963,
+    "mair_ndcg_at_5": 0.6626478278376576,
+    "mair_ndcg_at_10": 0.6626478278376576,
+    "mair_kendall_tau": -0.3333333333333333,
+    "human_ranking_order": [
+      "209604",
+      "457034",
+      "201769",
+      "122952"
+    ],
+    "mair_ranking_order": [
+      "457034",
+      "122952",
+      "209604",
+      "201769"
+    ],
+    "voyage_ranking_order": [
+      "209604",
+      "201769",
+      "457034",
+      "122952"
+    ]
+  },
+  {
+    "qid": "1819",
+    "query": "Found an old un-cashed paycheck. How long is it good for? What to do if it's expired?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 0.991789538209149,
+    "human_ndcg_at_10": 0.9993520347775385,
+    "human_kendall_tau": 0.8666666666666667,
+    "mair_ndcg_at_3": 0.1154000128836666,
+    "mair_ndcg_at_5": 0.5254768780511593,
+    "mair_ndcg_at_10": 0.5498585650422895,
+    "mair_kendall_tau": -0.4666666666666667,
+    "human_ranking_order": [
+      "220691",
+      "250285",
+      "212713",
+      "376499",
+      "267362",
+      "66058"
+    ],
+    "mair_ranking_order": [
+      "376499",
+      "66058",
+      "212713",
+      "267362",
+      "250285",
+      "220691"
+    ],
+    "voyage_ranking_order": [
+      "220691",
+      "250285",
+      "212713",
+      "376499",
+      "66058",
+      "267362"
+    ]
+  },
+  {
+    "qid": "1306",
+    "query": "I made an investment with a company that contacted me, was it safe?",
+    "human_ndcg_at_3": 0.6676040819041402,
+    "human_ndcg_at_5": 0.7146598531416503,
+    "human_ndcg_at_10": 0.7146598531416503,
+    "human_kendall_tau": 0.0,
+    "mair_ndcg_at_3": 0.8190147957939357,
+    "mair_ndcg_at_5": 0.9437153337836448,
+    "mair_ndcg_at_10": 0.9437153337836448,
+    "mair_kendall_tau": 0.0,
+    "human_ranking_order": [
+      "167684",
+      "204075",
+      "484437",
+      "594206"
+    ],
+    "mair_ranking_order": [
+      "594206",
+      "484437",
+      "204075",
+      "167684"
+    ],
+    "voyage_ranking_order": [
+      "594206",
+      "167684",
+      "204075",
+      "484437"
+    ]
+  },
+  {
+    "qid": "3148",
+    "query": "Can a car company refuse to give me a copy of my contract or balance details?",
+    "human_ndcg_at_3": 0.8169536926234068,
+    "human_ndcg_at_5": 0.9538675894270467,
+    "human_ndcg_at_10": 0.9538675894270467,
+    "human_kendall_tau": 0.4,
+    "mair_ndcg_at_3": 0.23639345724225874,
+    "mair_ndcg_at_5": 0.5564940400852528,
+    "mair_ndcg_at_10": 0.5564940400852528,
+    "mair_kendall_tau": -0.8,
+    "human_ranking_order": [
+      "172855",
+      "438000",
+      "92888",
+      "178127",
+      "584305"
+    ],
+    "mair_ranking_order": [
+      "178127",
+      "584305",
+      "438000",
+      "92888",
+      "172855"
+    ],
+    "voyage_ranking_order": [
+      "172855",
+      "92888",
+      "584305",
+      "438000",
+      "178127"
+    ]
+  },
+  {
+    "qid": "1441",
+    "query": "What's the difference between Market Cap and NAV?",
+    "human_ndcg_at_3": 0.6175269841973696,
+    "human_ndcg_at_5": 0.665593054087714,
+    "human_ndcg_at_10": 0.665593054087714,
+    "human_kendall_tau": -0.3333333333333333,
+    "mair_ndcg_at_3": 0.30563367349201165,
+    "mair_ndcg_at_5": 0.60209052070894,
+    "mair_ndcg_at_10": 0.60209052070894,
+    "mair_kendall_tau": -1.0,
+    "human_ranking_order": [
+      "414940",
+      "416727",
+      "178",
+      "471123"
+    ],
+    "mair_ranking_order": [
+      "178",
+      "414940",
+      "416727",
+      "471123"
+    ],
+    "voyage_ranking_order": [
+      "471123",
+      "416727",
+      "414940",
+      "178"
+    ]
+  },
+  {
+    "qid": "9174",
+    "query": "Which U.S. online discount broker is the best value for money?",
+    "human_ndcg_at_3": 0.47576503097723144,
+    "human_ndcg_at_5": 0.7304460031250662,
+    "human_ndcg_at_10": 0.7304460031250662,
+    "human_kendall_tau": 0.2,
+    "mair_ndcg_at_3": 0.6382234699080127,
+    "mair_ndcg_at_5": 0.7513182670780586,
+    "mair_ndcg_at_10": 0.7513182670780586,
+    "mair_kendall_tau": 0.2,
+    "human_ranking_order": [
+      "535317",
+      "160218",
+      "431652",
+      "544576",
+      "405217"
+    ],
+    "mair_ranking_order": [
+      "431652",
+      "535317",
+      "160218",
+      "544576",
+      "405217"
+    ],
+    "voyage_ranking_order": [
+      "160218",
+      "431652",
+      "544576",
+      "405217",
+      "535317"
+    ]
+  },
+  {
+    "qid": "1530",
+    "query": "What is the proper way to report additional income for taxes (specifically, Android development)?",
+    "human_ndcg_at_3": 0.7363636171343382,
+    "human_ndcg_at_5": 0.7363636171343382,
+    "human_ndcg_at_10": 0.7363636171343382,
+    "human_kendall_tau": -0.3333333333333333,
+    "mair_ndcg_at_3": 1.0,
+    "mair_ndcg_at_5": 1.0,
+    "mair_ndcg_at_10": 1.0,
+    "mair_kendall_tau": 1.0,
+    "human_ranking_order": [
+      "313361",
+      "219425",
+      "28764"
+    ],
+    "mair_ranking_order": [
+      "28764",
+      "313361",
+      "219425"
+    ],
+    "voyage_ranking_order": [
+      "28764",
+      "313361",
+      "219425"
+    ]
+  },
+  {
+    "qid": "1736",
+    "query": "How can people have such high credit card debts?",
+    "human_ndcg_at_3": 0.5244939160259543,
+    "human_ndcg_at_5": 0.70606799009421,
+    "human_ndcg_at_10": 0.70606799009421,
+    "human_kendall_tau": 0.0,
+    "mair_ndcg_at_3": 0.7746989345664829,
+    "mair_ndcg_at_5": 0.7829861950601512,
+    "mair_ndcg_at_10": 0.7829861950601512,
+    "mair_kendall_tau": 0.6,
+    "human_ranking_order": [
+      "399406",
+      "562896",
+      "443419",
+      "25543",
+      "396933"
+    ],
+    "mair_ranking_order": [
+      "399406",
+      "396933",
+      "25543",
+      "562896",
+      "443419"
+    ],
+    "voyage_ranking_order": [
+      "25543",
+      "399406",
+      "396933",
+      "562896",
+      "443419"
+    ]
+  },
+  {
+    "qid": "3789",
+    "query": "How to work around the Owner Occupancy Affidavit to buy another home in less than a year?",
+    "human_ndcg_at_3": 0.532160033941963,
+    "human_ndcg_at_5": 0.6626478278376576,
+    "human_ndcg_at_10": 0.6626478278376576,
+    "human_kendall_tau": -0.3333333333333333,
+    "mair_ndcg_at_3": 0.7837249432452995,
+    "mair_ndcg_at_5": 0.788088263175707,
+    "mair_ndcg_at_10": 0.788088263175707,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "459724",
+      "571131",
+      "274573",
+      "492856"
+    ],
+    "mair_ranking_order": [
+      "459724",
+      "274573",
+      "492856",
+      "571131"
+    ],
+    "voyage_ranking_order": [
+      "274573",
+      "492856",
+      "459724",
+      "571131"
+    ]
+  },
+  {
+    "qid": "4465",
+    "query": "How to donate to charity that will make a difference?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.6806060567602009,
+    "mair_ndcg_at_5": 0.6806060567602009,
+    "mair_ndcg_at_10": 0.6806060567602009,
+    "mair_kendall_tau": -1.0,
+    "human_ranking_order": [
+      "299242",
+      "344041",
+      "376575"
+    ],
+    "mair_ranking_order": [
+      "376575",
+      "344041",
+      "299242"
+    ],
+    "voyage_ranking_order": [
+      "299242",
+      "344041",
+      "376575"
+    ]
+  },
+  {
+    "qid": "2593",
+    "query": "Am I “cheating the system” by opening up a tiny account with a credit union and then immediately applying for a huge loan?",
+    "human_ndcg_at_3": 0.6806060567602009,
+    "human_ndcg_at_5": 0.6806060567602009,
+    "human_ndcg_at_10": 0.6806060567602009,
+    "human_kendall_tau": -1.0,
+    "mair_ndcg_at_3": 0.7591919243197319,
+    "mair_ndcg_at_5": 0.7591919243197319,
+    "mair_ndcg_at_10": 0.7591919243197319,
+    "mair_kendall_tau": -0.3333333333333333,
+    "human_ranking_order": [
+      "147343",
+      "528132",
+      "231614"
+    ],
+    "mair_ranking_order": [
+      "147343",
+      "231614",
+      "528132"
+    ],
+    "voyage_ranking_order": [
+      "231614",
+      "528132",
+      "147343"
+    ]
+  },
+  {
+    "qid": "7124",
+    "query": "How come we can find stocks with a Price-to-Book ratio less than 1?",
+    "human_ndcg_at_3": 0.7837249432452995,
+    "human_ndcg_at_5": 0.788088263175707,
+    "human_ndcg_at_10": 0.788088263175707,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.3409235260406478,
+    "mair_ndcg_at_5": 0.6366684052697871,
+    "mair_ndcg_at_10": 0.6366684052697871,
+    "mair_kendall_tau": -0.6666666666666666,
+    "human_ranking_order": [
+      "154725",
+      "558617",
+      "526110",
+      "74615"
+    ],
+    "mair_ranking_order": [
+      "74615",
+      "154725",
+      "558617",
+      "526110"
+    ],
+    "voyage_ranking_order": [
+      "558617",
+      "526110",
+      "154725",
+      "74615"
+    ]
+  },
+  {
+    "qid": "3822",
+    "query": "How to change a large quantity of U.S. dollars into Euros?",
+    "human_ndcg_at_3": 0.7837249432452995,
+    "human_ndcg_at_5": 0.788088263175707,
+    "human_ndcg_at_10": 0.788088263175707,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.9749614511466147,
+    "mair_ndcg_at_5": 0.9754666004730318,
+    "mair_ndcg_at_10": 0.9754666004730318,
+    "mair_kendall_tau": 0.6666666666666666,
+    "human_ranking_order": [
+      "385090",
+      "305907",
+      "418900",
+      "308837"
+    ],
+    "mair_ranking_order": [
+      "305907",
+      "385090",
+      "418900",
+      "308837"
+    ],
+    "voyage_ranking_order": [
+      "305907",
+      "418900",
+      "385090",
+      "308837"
+    ]
+  },
+  {
+    "qid": "6122",
+    "query": "Better to rent condo to daughter or put her on title?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.9721212198129313,
+    "mair_ndcg_at_5": 0.9721212198129313,
+    "mair_ndcg_at_10": 0.9721212198129313,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "496166",
+      "44344",
+      "169824"
+    ],
+    "mair_ranking_order": [
+      "496166",
+      "169824",
+      "44344"
+    ],
+    "voyage_ranking_order": [
+      "496166",
+      "44344",
+      "169824"
+    ]
+  },
+  {
+    "qid": "6562",
+    "query": "Cheapest way to “wire” money in an Australian bank account to a person in England, while I'm in Laos?",
+    "human_ndcg_at_3": 0.9749614511466147,
+    "human_ndcg_at_5": 0.9754666004730318,
+    "human_ndcg_at_10": 0.9754666004730318,
+    "human_kendall_tau": 0.6666666666666666,
+    "mair_ndcg_at_3": 0.7837249432452995,
+    "mair_ndcg_at_5": 0.788088263175707,
+    "mair_ndcg_at_10": 0.788088263175707,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "582414",
+      "135675",
+      "561344",
+      "501157"
+    ],
+    "mair_ranking_order": [
+      "135675",
+      "582414",
+      "561344",
+      "501157"
+    ],
+    "voyage_ranking_order": [
+      "582414",
+      "561344",
+      "135675",
+      "501157"
+    ]
+  },
+  {
+    "qid": "5511",
+    "query": "Pay off car loan entirely or leave $1 until the end of the loan period?",
+    "human_ndcg_at_3": 0.048372820677911876,
+    "human_ndcg_at_5": 0.05081872801850714,
+    "human_ndcg_at_10": 0.4316581838763693,
+    "human_kendall_tau": -0.37777777777777777,
+    "mair_ndcg_at_3": 0.1840790211151056,
+    "mair_ndcg_at_5": 0.500462312858526,
+    "mair_ndcg_at_10": 0.5416403914503712,
+    "mair_kendall_tau": 0.1111111111111111,
+    "human_ranking_order": [
+      "478426",
+      "560325",
+      "12746",
+      "278699",
+      "51873",
+      "114303",
+      "529123",
+      "383193",
+      "169893",
+      "107898"
+    ],
+    "mair_ranking_order": [
+      "169893",
+      "107898",
+      "529123",
+      "560325",
+      "478426",
+      "383193",
+      "114303",
+      "278699",
+      "12746",
+      "51873"
+    ],
+    "voyage_ranking_order": [
+      "114303",
+      "51873",
+      "107898",
+      "529123",
+      "169893",
+      "278699",
+      "560325",
+      "383193",
+      "478426",
+      "12746"
+    ]
+  },
+  {
+    "qid": "3888",
+    "query": "Why I can't view my debit card pre-authorized amounts?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 1.0,
+    "mair_ndcg_at_5": 1.0,
+    "mair_ndcg_at_10": 1.0,
+    "mair_kendall_tau": 1.0,
+    "human_ranking_order": [
+      "307083",
+      "319213",
+      "239632"
+    ],
+    "mair_ranking_order": [
+      "307083",
+      "319213",
+      "239632"
+    ],
+    "voyage_ranking_order": [
+      "307083",
+      "319213",
+      "239632"
+    ]
+  },
+  {
+    "qid": "7513",
+    "query": "Where are Bogleheadian World ETFs or Index funds?",
+    "human_ndcg_at_3": 0.7591919243197319,
+    "human_ndcg_at_5": 0.7591919243197319,
+    "human_ndcg_at_10": 0.7591919243197319,
+    "human_kendall_tau": -0.3333333333333333,
+    "mair_ndcg_at_3": 0.7363636171343382,
+    "mair_ndcg_at_5": 0.7363636171343382,
+    "mair_ndcg_at_10": 0.7363636171343382,
+    "mair_kendall_tau": -0.3333333333333333,
+    "human_ranking_order": [
+      "273861",
+      "567362",
+      "115372"
+    ],
+    "mair_ranking_order": [
+      "115372",
+      "273861",
+      "567362"
+    ],
+    "voyage_ranking_order": [
+      "567362",
+      "115372",
+      "273861"
+    ]
+  },
+  {
+    "qid": "3446",
+    "query": "What's the difference between Term and Whole Life insurance?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.5905736060245896,
+    "mair_ndcg_at_5": 0.6603280610354416,
+    "mair_ndcg_at_10": 0.6603280610354416,
+    "mair_kendall_tau": 0.0,
+    "human_ranking_order": [
+      "323498",
+      "211839",
+      "366685",
+      "511386",
+      "236899"
+    ],
+    "mair_ranking_order": [
+      "366685",
+      "211839",
+      "511386",
+      "236899",
+      "323498"
+    ],
+    "voyage_ranking_order": [
+      "323498",
+      "211839",
+      "366685",
+      "511386",
+      "236899"
+    ]
+  },
+  {
+    "qid": "6525",
+    "query": "Does it make sense to trade my GOOGL shares for GOOG and pocket the difference?",
+    "human_ndcg_at_3": 0.9721212198129313,
+    "human_ndcg_at_5": 0.9721212198129313,
+    "human_ndcg_at_10": 0.9721212198129313,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.7591919243197319,
+    "mair_ndcg_at_5": 0.7591919243197319,
+    "mair_ndcg_at_10": 0.7591919243197319,
+    "mair_kendall_tau": -0.3333333333333333,
+    "human_ranking_order": [
+      "98150",
+      "181985",
+      "106541"
+    ],
+    "mair_ranking_order": [
+      "181985",
+      "98150",
+      "106541"
+    ],
+    "voyage_ranking_order": [
+      "98150",
+      "106541",
+      "181985"
+    ]
+  },
+  {
+    "qid": "3530",
+    "query": "How to exclude stock from mutual fund",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.8428282648809379,
+    "mair_ndcg_at_5": 0.8428282648809379,
+    "mair_ndcg_at_10": 0.8428282648809379,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "184299",
+      "189190",
+      "239998"
+    ],
+    "mair_ranking_order": [
+      "189190",
+      "184299",
+      "239998"
+    ],
+    "voyage_ranking_order": [
+      "184299",
+      "189190",
+      "239998"
+    ]
+  },
+  {
+    "qid": "10639",
+    "query": "Short term parking of a large inheritance?",
+    "human_ndcg_at_3": 0.8169536926234068,
+    "human_ndcg_at_5": 0.9538675894270467,
+    "human_ndcg_at_10": 0.9538675894270467,
+    "human_kendall_tau": 0.4,
+    "mair_ndcg_at_3": 0.5244939160259543,
+    "mair_ndcg_at_5": 0.70606799009421,
+    "mair_ndcg_at_10": 0.70606799009421,
+    "mair_kendall_tau": 0.0,
+    "human_ranking_order": [
+      "163353",
+      "495774",
+      "431799",
+      "278453",
+      "187039"
+    ],
+    "mair_ranking_order": [
+      "431799",
+      "495774",
+      "278453",
+      "163353",
+      "187039"
+    ],
+    "voyage_ranking_order": [
+      "163353",
+      "431799",
+      "187039",
+      "495774",
+      "278453"
+    ]
+  },
+  {
+    "qid": "5422",
+    "query": "What are some good books for learning stocks, bonds, derivatives e.t.c for beginner with a math background?",
+    "human_ndcg_at_3": 0.30563367349201165,
+    "human_ndcg_at_5": 0.60209052070894,
+    "human_ndcg_at_10": 0.60209052070894,
+    "human_kendall_tau": -1.0,
+    "mair_ndcg_at_3": 0.8110314628301265,
+    "mair_ndcg_at_5": 0.8551936061146438,
+    "mair_ndcg_at_10": 0.8551936061146438,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "151973",
+      "13513",
+      "273906",
+      "79517"
+    ],
+    "mair_ranking_order": [
+      "273906",
+      "79517",
+      "151973",
+      "13513"
+    ],
+    "voyage_ranking_order": [
+      "79517",
+      "273906",
+      "13513",
+      "151973"
+    ]
+  },
+  {
+    "qid": "5255",
+    "query": "Thrift Saving Plan (TSP) Share Price Charts",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 1.0,
+    "mair_ndcg_at_5": 1.0,
+    "mair_ndcg_at_10": 1.0,
+    "mair_kendall_tau": 1.0,
+    "human_ranking_order": [
+      "75112",
+      "330453",
+      "412830"
+    ],
+    "mair_ranking_order": [
+      "75112",
+      "330453",
+      "412830"
+    ],
+    "voyage_ranking_order": [
+      "75112",
+      "330453",
+      "412830"
+    ]
+  },
+  {
+    "qid": "9391",
+    "query": "Should I replace bonds in a passive investment strategy",
+    "human_ndcg_at_3": 0.9521908730246712,
+    "human_ndcg_at_5": 0.9935051443580323,
+    "human_ndcg_at_10": 0.9935051443580323,
+    "human_kendall_tau": 0.6666666666666666,
+    "mair_ndcg_at_3": 0.7632223358547978,
+    "mair_ndcg_at_5": 0.7679992931079491,
+    "mair_ndcg_at_10": 0.7679992931079491,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "248158",
+      "136515",
+      "503637",
+      "283202"
+    ],
+    "mair_ranking_order": [
+      "136515",
+      "283202",
+      "248158",
+      "503637"
+    ],
+    "voyage_ranking_order": [
+      "248158",
+      "136515",
+      "283202",
+      "503637"
+    ]
+  },
+  {
+    "qid": "7206",
+    "query": "Who Bought A Large Number Of Shares?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.9721212198129313,
+    "mair_ndcg_at_5": 0.9721212198129313,
+    "mair_ndcg_at_10": 0.9721212198129313,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "441155",
+      "553066",
+      "532211"
+    ],
+    "mair_ranking_order": [
+      "441155",
+      "532211",
+      "553066"
+    ],
+    "voyage_ranking_order": [
+      "441155",
+      "553066",
+      "532211"
+    ]
+  },
+  {
+    "qid": "9617",
+    "query": "What differentiates index funds and ETFs?",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 1.0,
+    "mair_ndcg_at_5": 1.0,
+    "mair_ndcg_at_10": 1.0,
+    "mair_kendall_tau": 1.0,
+    "human_ranking_order": [
+      "408524",
+      "364735",
+      "314008"
+    ],
+    "mair_ranking_order": [
+      "408524",
+      "364735",
+      "314008"
+    ],
+    "voyage_ranking_order": [
+      "408524",
+      "364735",
+      "314008"
+    ]
+  },
+  {
+    "qid": "6041",
+    "query": "Most effective Fundamental Analysis indicators for market entry",
+    "human_ndcg_at_3": 0.7632223358547978,
+    "human_ndcg_at_5": 0.7679992931079491,
+    "human_ndcg_at_10": 0.7679992931079491,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.4365417799913054,
+    "mair_ndcg_at_5": 0.7303575739184495,
+    "mair_ndcg_at_10": 0.7303575739184495,
+    "mair_kendall_tau": -0.3333333333333333,
+    "human_ranking_order": [
+      "81655",
+      "241308",
+      "425020",
+      "111091"
+    ],
+    "mair_ranking_order": [
+      "111091",
+      "425020",
+      "241308",
+      "81655"
+    ],
+    "voyage_ranking_order": [
+      "425020",
+      "81655",
+      "241308",
+      "111091"
+    ]
+  },
+  {
+    "qid": "7633",
+    "query": "Can a trade happen “in between” the bid and ask price?",
+    "human_ndcg_at_3": 0.8110314628301265,
+    "human_ndcg_at_5": 0.8551936061146438,
+    "human_ndcg_at_10": 0.8551936061146438,
+    "human_kendall_tau": 0.3333333333333333,
+    "mair_ndcg_at_3": 0.9749614511466147,
+    "mair_ndcg_at_5": 0.9754666004730318,
+    "mair_ndcg_at_10": 0.9754666004730318,
+    "mair_kendall_tau": 0.6666666666666666,
+    "human_ranking_order": [
+      "122996",
+      "494727",
+      "197839",
+      "442048"
+    ],
+    "mair_ranking_order": [
+      "494727",
+      "442048",
+      "122996",
+      "197839"
+    ],
+    "voyage_ranking_order": [
+      "494727",
+      "122996",
+      "442048",
+      "197839"
+    ]
+  },
+  {
+    "qid": "10109",
+    "query": "Why does Charles Schwab have a Mandatory Settlement Period after selling stocks?",
+    "human_ndcg_at_3": 0.378145664368163,
+    "human_ndcg_at_5": 0.4564340368166052,
+    "human_ndcg_at_10": 0.6745127400816564,
+    "human_kendall_tau": -0.047619047619047616,
+    "mair_ndcg_at_3": 0.8233744642062922,
+    "mair_ndcg_at_5": 0.9277053950223992,
+    "mair_ndcg_at_10": 0.9524333998418384,
+    "mair_kendall_tau": 0.42857142857142855,
+    "human_ranking_order": [
+      "156029",
+      "28314",
+      "566591",
+      "506374",
+      "93231",
+      "406974",
+      "499849"
+    ],
+    "mair_ranking_order": [
+      "28314",
+      "506374",
+      "93231",
+      "156029",
+      "406974",
+      "499849",
+      "566591"
+    ],
+    "voyage_ranking_order": [
+      "28314",
+      "93231",
+      "406974",
+      "506374",
+      "566591",
+      "499849",
+      "156029"
+    ]
+  },
+  {
+    "qid": "7345",
+    "query": "What do these numbers mean? (futures)",
+    "human_ndcg_at_3": 1.0,
+    "human_ndcg_at_5": 1.0,
+    "human_ndcg_at_10": 1.0,
+    "human_kendall_tau": 1.0,
+    "mair_ndcg_at_3": 0.9721212198129313,
+    "mair_ndcg_at_5": 0.9721212198129313,
+    "mair_ndcg_at_10": 0.9721212198129313,
+    "mair_kendall_tau": 0.3333333333333333,
+    "human_ranking_order": [
+      "508821",
+      "527080",
+      "237645"
+    ],
+    "mair_ranking_order": [
+      "508821",
+      "237645",
+      "527080"
+    ],
+    "voyage_ranking_order": [
+      "508821",
+      "527080",
+      "237645"
+    ]
+  }
+]
